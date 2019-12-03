@@ -38,6 +38,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "flow-bin": "^0.112.0",
     "gatsby-plugin-eslint": "^2.0.8",
+    "gatsby-plugin-remove-trailing-slashes": "^2.1.15",
     "postcss-preset-env": "^6.7.0",
     "postcss-simple-vars": "^5.0.2",
     "prettier": "^1.19.1",
