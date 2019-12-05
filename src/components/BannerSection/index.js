@@ -7,7 +7,7 @@ import Wrapper from '../Wrapper';
 
 function BannerSection({ data }) {
   return (
-    <section className="Banner">
+    <section className="Banner" id="banner">
       <h1 className="Banner-title">
         {data.bannerHeading.firstLine}
         <strong>{data.bannerHeading.secondLine}</strong>
@@ -22,7 +22,7 @@ function BannerSection({ data }) {
         <Button href="/recipes">{data.bannerBtnRecipes}</Button>
       </Wrapper>
 
-      {/* <ScrollDown url={} mouseSrc={} arrowSrc={}/> */}
+      <ScrollDown url="#company" />
     </section>
   );
 }

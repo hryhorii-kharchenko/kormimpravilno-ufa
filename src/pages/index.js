@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 
@@ -12,46 +12,94 @@ import PopularSection from '../components/PopularSection';
 import RecipeSection from '../components/RecipeSection';
 import InstaSection from '../components/InstaSection';
 
-function IndexPage({ data }) {
-  const page = data.wpgraphql.page.main_page;
-  const { posts } = data.wpgraphql;
-  const { products } = data.wpgraphql;
+class IndexPage extends Component {
+  constructor(props) {
+    super(props);
 
-  function getSectionEntries(sectionName) {
-    return Object.fromEntries(
-      Object.entries(page).filter(field => field[0].includes(sectionName))
-    );
+    this.state = {
+      page: props.data.wpgraphql.mainPage.main_page,
+      universal: props.data.wpgraphql.universalPage.universal_page,
+      posts: props.data.wpgraphql.posts,
+      products: props.data.wpgraphql.products,
+      // cart: [{ id: 123, amount: 1 }],
+    };
+
+    this.recipeOnClickHandler = this.recipeOnClickHandler.bind(this);
+    this.addNewItemToCart = this.addNewItemToCart.bind(this);
   }
 
-  const banner = getSectionEntries('banner');
-  const company = getSectionEntries('company');
-  const how = getSectionEntries('how');
-  const popular = getSectionEntries('popular');
-  const recipe = getSectionEntries('recipe');
-  const instagram = getSectionEntries('instagram');
+  addNewItemToCart(id, amount) {
+    // this.setState(state => {
+    //   const index = state.cart.indexOf(item => item.id === id);
 
-  return (
-    <Layout>
-      <SEO title="Главная" />
+    //   if (index !== -1) {
+    //     const newCart = [...state.cart];
+    //     newCart[id].amount += amount;
 
-      <BannerSection data={banner} />
-      <CompanySection data={company} />
-      <HowSection data={how} />
-      <PopularSection data={popular} products={products} />
-      <RecipeSection data={recipe} recipes={posts} />
-      <InstaSection data={instagram} />
-    </Layout>
-  );
+    //     return {
+    //       cart: newCart,
+    //     };
+    //   }
+
+    //   return {
+    //     cart: [...state.cart, { id, amount }],
+    //   };
+    // });
+    return this.null + id + amount;
+  }
+
+  recipeOnClickHandler(id) {
+    this.addNewItemToCart(id);
+  }
+
+  render() {
+    function getSectionEntriesFromPage(sectionName, sourceObject) {
+      return Object.fromEntries(
+        Object.entries(sourceObject).filter(field =>
+          field[0].includes(sectionName)
+        )
+      );
+    }
+
+    const { page, universal, posts, products } = this.state;
+
+    const banner = getSectionEntriesFromPage('banner', page);
+    const company = getSectionEntriesFromPage('company', page);
+    const how = getSectionEntriesFromPage('how', page);
+    const popular = getSectionEntriesFromPage('popular', page);
+    const recipe = getSectionEntriesFromPage('recipe', page);
+    const instagram = getSectionEntriesFromPage('instagram', page);
+
+    return (
+      <Layout data={universal}>
+        <SEO title="Главная" />
+
+        <BannerSection data={banner} />
+        <CompanySection data={company} />
+        <HowSection data={how} />
+        <PopularSection
+          data={popular}
+          products={products}
+          onClick={this.recipeOnClickHandler}
+        />
+        <RecipeSection data={recipe} recipes={posts} />
+        <InstaSection data={instagram} />
+      </Layout>
+    );
+  }
 }
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
     wpgraphql: PropTypes.shape({
-      page: PropTypes.shape({
-        main_page: PropTypes.shape(),
+      mainPage: PropTypes.shape({
+        main_page: PropTypes.shape,
+      }),
+      universalPage: PropTypes.shape({
+        universal_page: PropTypes.shape,
       }),
       posts: PropTypes.shape(),
-      products: PropTypes.shape(),
+      products: PropTypes.shape,
     }),
   }).isRequired,
 };
@@ -61,7 +109,7 @@ export default IndexPage;
 export const query = graphql`
   query indexQuery {
     wpgraphql {
-      page(id: "cGFnZToxNw==") {
+      mainPage: page(id: "cGFnZToxNw==") {
         id
         main_page {
           bannerBtnRecipes
@@ -107,20 +155,32 @@ export const query = graphql`
           fieldGroupName
         }
       }
+      universalPage: page(id: "cGFnZToyMDg=") {
+        universal_page {
+          copyright
+          inn
+          instaLink
+          orgn
+          ooo
+          phone
+        }
+      }
       posts {
         nodes {
           recipe_post {
             recipeName
             description
-            ingredients
-            preparation
-            similar {
-              first
-              second
-              third
-            }
+            // ingredients
+            // preparation
+            // similar {
+            //   first
+            //   second
+            //   third
+            // }
           }
-          postId
+          // id
+          // postId
+          slug
         }
       }
       products {
@@ -129,13 +189,13 @@ export const query = graphql`
             productName
             composition
             weight
-            cooking
-            nutrition
-            similar {
-              first
-              second
-              third
-            }
+            // cooking
+            // nutrition
+            // similar {
+            //   first
+            //   second
+            //   third
+            // }
           }
           ... on SimpleProduct {
             price

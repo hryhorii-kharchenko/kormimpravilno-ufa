@@ -27,6 +27,7 @@ function Wrapper({
 }
 
 Wrapper.propTypes = {
+  children: PropTypes.shape.isRequired,
   maxWidth: PropTypes.string,
   justifyContent: PropTypes.string,
   alignItems: PropTypes.string,

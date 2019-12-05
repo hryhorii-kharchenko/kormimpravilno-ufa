@@ -1,26 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Logo from '../Logo';
 import Wrapper from '../Wrapper';
 
-function Footer() {
+function Footer({ copyright, ooo, inn, orgn }) {
   return (
     <footer className="Footer">
-      {/* <Logo src={} isAlt={true} /> */}
+      <Logo isAlt />
 
       <Wrapper>
-        <p className="Footer-info">КОРМИМ ПРАВИЛЬНО ©</p>
+        <p className="Footer-info">{copyright}</p>
         <p className="Footer-info">
           <strong>ООО</strong>
-          Дейли Мил
+          {ooo}
         </p>
         <p className="Footer-info">
           <strong>ИНН</strong>
-          0278932180
+          {inn}
         </p>
         <p className="Footer-info">
           <strong>ОРГН</strong>
-          1170280046562
+          {orgn}
         </p>
       </Wrapper>
 
@@ -33,5 +34,12 @@ function Footer() {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  copyright: PropTypes.string.isRequired,
+  ooo: PropTypes.string.isRequired,
+  inn: PropTypes.string.isRequired,
+  orgn: PropTypes.string.isRequired,
+};
 
 export default Footer;

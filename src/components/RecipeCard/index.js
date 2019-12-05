@@ -25,6 +25,7 @@ RecipeCard.propTypes = {
   heading: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
+  // id: PropTypes.string.isRequired,
 };
 
 export default RecipeCard;

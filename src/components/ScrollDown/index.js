@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 
-function ScrollDown({ url, mouseSrc, arrowSrc }) {
+function ScrollDown({ url }) {
   return (
-    <a href={url} className="ScrollDown">
+    <Link href={url} className="ScrollDown">
       <img src={mouseSrc} alt="Прокрутите вниз" className="ScrollDown-mouse" />
       <img src={arrowSrc} alt="" className="ScrollDown-arrow" />
-    </a>
+    </Link>
   );
 }
 
 ScrollDown.propTypes = {
   url: PropTypes.string.isRequired,
-  mouseSrc: PropTypes.string.isRequired,
-  arrowSrc: PropTypes.string.isRequired,
 };
 
 export default ScrollDown;

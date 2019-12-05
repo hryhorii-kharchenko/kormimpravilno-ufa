@@ -11,7 +11,7 @@ function HowSection({ data }) {
     .map(field => field[1]);
 
   return (
-    <section className="How">
+    <section className="How" id="how">
       <SectionHeading text={data.howHeading} />
 
       <Chain elements={chainElems} />

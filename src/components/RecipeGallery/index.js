@@ -6,10 +6,11 @@ import RecipeCard from '../RecipeCard';
 function RecipeGallery({ recipes }) {
   const gallery = recipes.map(recipe => (
     <RecipeCard
-      imgSrc={recipe.imgSrc}
-      heading={recipe.heading}
+      // imgSrc={recipe.imgSrc}
+      heading={recipe.recipeName}
       description={recipe.description}
-      link={recipe.link}
+      link={recipe.slug}
+      // id={recipe.id}
     />
   ));
 
@@ -19,7 +20,7 @@ function RecipeGallery({ recipes }) {
 RecipeGallery.propTypes = {
   recipes: PropTypes.arrayOf(
     PropTypes.shape({
-      imgSrc: PropTypes.string,
+      // imgSrc: PropTypes.string,
       heading: PropTypes.string,
       description: PropTypes.string,
       link: PropTypes.string,

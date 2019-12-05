@@ -7,7 +7,7 @@ import BoxedQuote from '../BoxedQuote';
 
 function CompanySection({ data }) {
   return (
-    <section className="Company">
+    <section className="Company" id="company">
       <SectionHeading text={data.companyHeading} />
       <SectionSubheading text={data.companySubheading} />
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
-function Logo({ src, isAlt }) {
+function Logo({ isAlt }) {
   return (
     <Link to="/" className="Logo">
       <img

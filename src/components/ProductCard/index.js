@@ -11,7 +11,8 @@ function ProductCard({
   composition,
   weigth,
   price,
-  itemId,
+  id,
+  onClick,
 }) {
   return (
     <article className="ProductCard">
@@ -32,7 +33,7 @@ function ProductCard({
       <footer className="ProductCard-footer">
         <Wrapper>
           <p className="ProductCard-price">{price}</p>
-          <Button isAction isTextBlack>
+          <Button isAction isTextBlack onClick={() => onClick(id)}>
             <img src={btnIconSrc} alt="" className="ProductCard-cart-btn-img" />
             В корзину
           </Button>
@@ -49,7 +50,8 @@ ProductCard.propTypes = {
   composition: PropTypes.string.isRequired,
   weigth: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  itemId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

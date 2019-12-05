@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from '../ProductCard';
 
-function ProductGallery({ products }) {
+function ProductGallery({ products, onClick }) {
   const gallery = products.map(product => (
     <ProductCard
-      imgSrc={product.imgSrc}
-      btnIconSrc={product.btnIconSrc}
-      heading={product.heading}
+      // imgSrc={product.imgSrc}
+      // btnIconSrc={product.btnIconSrc}
+      heading={product.productName}
       composition={product.composition}
       weigth={product.weigth}
       price={product.price}
-      itemId={product.itemId}
+      id={product.id}
+      onClick={onClick}
     />
   ));
 
@@ -22,15 +23,16 @@ function ProductGallery({ products }) {
 ProductGallery.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      imgSrc: PropTypes.string,
-      btnIconSrc: PropTypes.string,
-      heading: PropTypes.string,
+      // imgSrc: PropTypes.string,
+      // btnIconSrc: PropTypes.string,
+      productName: PropTypes.string,
       composition: PropTypes.string,
       weigth: PropTypes.string,
       price: PropTypes.string,
-      itemId: PropTypes.string,
+      id: PropTypes.string,
     })
   ).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ProductGallery;
