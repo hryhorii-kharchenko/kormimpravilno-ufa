@@ -1,20 +1,21 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
 
 import classes from './Button.module.css';
 
 function Button({
-  childen,
-  href = '#',
-  target = '_self',
-  parentClasses = null,
-  onClick = null,
-  isTextBlack = false,
-  isWide = false,
-  isCircle = false,
-  isFilled = false,
-  isExternal = false,
-  isAction = false,
+  children,
+  href,
+  target,
+  parentClasses,
+  onClick,
+  isTextBlack,
+  isWide,
+  isCircle,
+  isFilled,
+  isExternal,
+  isAction,
 }) {
   const btnClasses = [classes.Button];
   let element;
@@ -47,24 +48,51 @@ function Button({
         onClick={onClick}
         className={btnClasses.join(' ')}
       >
-        {childen}
+        {children}
       </a>
     );
   } else if (isAction) {
     element = (
       <button onClick={onClick} type="button" className={btnClasses.join(' ')}>
-        {childen}
+        {children}
       </button>
     );
   } else {
     element = (
       <Link to={href} className={btnClasses.join(' ')}>
-        {childen}
+        {children}
       </Link>
     );
   }
 
-  return { element };
+  return element;
 }
+
+Button.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
+  href: PropTypes.string,
+  target: PropTypes.string,
+  parentClasses: PropTypes.string,
+  onClick: PropTypes.func,
+  isTextBlack: PropTypes.bool,
+  isWide: PropTypes.bool,
+  isCircle: PropTypes.bool,
+  isFilled: PropTypes.bool,
+  isExternal: PropTypes.bool,
+  isAction: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  href: '#',
+  target: '_self',
+  parentClasses: null,
+  onClick: null,
+  isTextBlack: false,
+  isWide: false,
+  isCircle: false,
+  isFilled: false,
+  isExternal: false,
+  isAction: false,
+};
 
 export default Button;

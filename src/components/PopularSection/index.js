@@ -18,7 +18,7 @@ PopularSection.propTypes = {
   data: PropTypes.shape({
     popularHeading: PropTypes.string,
   }).isRequired,
-  products: PropTypes.shape.isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

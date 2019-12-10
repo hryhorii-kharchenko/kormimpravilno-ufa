@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 function CityPicker({ cities }) {
   const citiesMapped = cities.map(city => (
-    <option value={city.name.toLowercase()}>{city.name.toLowercase()}</option>
+    <option value={city.toLowerCase()} key={city}>
+      {city}
+    </option>
   ));
 
   return (

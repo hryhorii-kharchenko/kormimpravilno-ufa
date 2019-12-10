@@ -1,5 +1,13 @@
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
 
+if (process.NODE_ENV === 'development') {
+  exports.onCreateWebpackConfig = ({ actions }) => {
+    actions.setWebpackConfig({
+      devtool: 'eval-source-map',
+    });
+  };
+}
+
 exports.createResolvers = ({
   actions,
   cache,

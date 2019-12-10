@@ -19,8 +19,8 @@ class IndexPage extends Component {
     this.state = {
       page: props.data.wpgraphql.mainPage.main_page,
       universal: props.data.wpgraphql.universalPage.universal_page,
-      posts: props.data.wpgraphql.posts,
-      products: props.data.wpgraphql.products,
+      posts: props.data.wpgraphql.posts.nodes,
+      products: props.data.wpgraphql.products.nodes,
       // cart: [{ id: 123, amount: 1 }],
     };
 
@@ -93,13 +93,13 @@ IndexPage.propTypes = {
   data: PropTypes.shape({
     wpgraphql: PropTypes.shape({
       mainPage: PropTypes.shape({
-        main_page: PropTypes.shape,
+        main_page: PropTypes.shape(),
       }),
       universalPage: PropTypes.shape({
-        universal_page: PropTypes.shape,
+        universal_page: PropTypes.shape(),
       }),
       posts: PropTypes.shape(),
-      products: PropTypes.shape,
+      products: PropTypes.shape(),
     }),
   }).isRequired,
 };
@@ -167,20 +167,28 @@ export const query = graphql`
       }
       posts {
         nodes {
+          id
           recipe_post {
             recipeName
             description
-            // ingredients
-            // preparation
-            // similar {
-            //   first
-            //   second
-            //   third
-            // }
           }
-          // id
-          // postId
           slug
+          featuredImage {
+            sourceUrl
+            mediaItemId
+            modified
+            imageFile {
+              childImageSharp {
+                fluid(maxWidth: 386) {
+                  base64
+                  aspectRatio
+                  src
+                  srcSet
+                  sizes
+                }
+              }
+            }
+          }
         }
       }
       products {
@@ -189,21 +197,132 @@ export const query = graphql`
             productName
             composition
             weight
-            // cooking
-            // nutrition
-            // similar {
-            //   first
-            //   second
-            //   third
-            // }
           }
-          ... on SimpleProduct {
+          ... on WPGraphQL_SimpleProduct {
+            id
             price
             productId
-            id
+            image {
+              sourceUrl
+              mediaItemId
+              modified
+              imageFile {
+                childImageSharp {
+                  fluid(maxWidth: 386) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
   }
 `;
+
+// export const query = graphql`
+//   query indexQuery {
+//     wpgraphql {
+//       mainPage: page(id: "cGFnZToxNw==") {
+//         id
+//         main_page {
+//           bannerBtnRecipes
+//           bannerBtnStore
+//           bannerHeading {
+//             fieldGroupName
+//             firstLine
+//             secondLine
+//           }
+//           bannerSubheading
+//           companyBtnSignup
+//           companyHeading
+//           companySubheading
+//           companyQuote
+//           howHeading
+//           howQuote
+//           howChainFirst {
+//             text
+//             heading
+//             fieldGroupName
+//           }
+//           howChainSecond {
+//             text
+//             heading
+//             fieldGroupName
+//           }
+//           howChainThird {
+//             text
+//             heading
+//             fieldGroupName
+//           }
+//           howChainFourth {
+//             text
+//             heading
+//             fieldGroupName
+//           }
+//           instagramHeading
+//           instagramSubheading
+//           popularBtnStore
+//           popularHeading
+//           recipesHeading
+//           recipesSubheading
+//           fieldGroupName
+//         }
+//       }
+//       universalPage: page(id: "cGFnZToyMDg=") {
+//         universal_page {
+//           copyright
+//           inn
+//           instaLink
+//           orgn
+//           ooo
+//           phone
+//         }
+//       }
+//       posts {
+//         nodes {
+//           recipe_post {
+//             recipeName
+//             description
+//             // ingredients
+//             // preparation
+//             // similar {
+//             //   first
+//             //   second
+//             //   third
+//             // }
+//           }
+//           // id
+//           // postId
+//           slug
+//         }
+//       }
+//       products {
+//         nodes {
+//           product_post {
+//             productName
+//             composition
+//             weight
+//             // cooking
+//             // nutrition
+//             // similar {
+//             //   first
+//             //   second
+//             //   third
+//             // }
+//           }
+//           ... on SimpleProduct {
+//             price
+//             productId
+//             id
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

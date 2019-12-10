@@ -6,12 +6,12 @@ import ProductCard from '../ProductCard';
 function ProductGallery({ products, onClick }) {
   const gallery = products.map(product => (
     <ProductCard
-      // imgSrc={product.imgSrc}
-      // btnIconSrc={product.btnIconSrc}
-      heading={product.productName}
-      composition={product.composition}
-      weigth={product.weigth}
+      avatar={product.image.imageFile.childImageSharp.fluid}
+      heading={product.product_post.productName}
+      composition={product.product_post.composition}
+      weight={product.product_post.weight}
       price={product.price}
+      key={product.id}
       id={product.id}
       onClick={onClick}
     />
@@ -23,11 +23,10 @@ function ProductGallery({ products, onClick }) {
 ProductGallery.propTypes = {
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      // imgSrc: PropTypes.string,
-      // btnIconSrc: PropTypes.string,
+      avatar: PropTypes.shape,
       productName: PropTypes.string,
       composition: PropTypes.string,
-      weigth: PropTypes.string,
+      weight: PropTypes.string,
       price: PropTypes.string,
       id: PropTypes.string,
     })

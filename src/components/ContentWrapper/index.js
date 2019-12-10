@@ -8,7 +8,7 @@ function ContentWrapper({ children }) {
 }
 
 ContentWrapper.propTypes = {
-  children: PropTypes.shape.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
 };
 
 export default ContentWrapper;

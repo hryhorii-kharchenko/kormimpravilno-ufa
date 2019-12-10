@@ -21,7 +21,7 @@ RecipeSection.propTypes = {
     recipesHeading: PropTypes.string.isRequired,
     recipesSubheading: PropTypes.string.isRequired,
   }).isRequired,
-  recipes: PropTypes.shape.isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default RecipeSection;

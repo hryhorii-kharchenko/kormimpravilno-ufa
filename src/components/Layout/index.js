@@ -22,7 +22,7 @@ function Layout({ data, children }) {
 }
 
 Layout.propTypes = {
-  data: PropTypes.shape.isRequired,
+  data: PropTypes.shape().isRequired,
   children: PropTypes.node.isRequired,
 };
 

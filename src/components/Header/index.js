@@ -9,12 +9,14 @@ import Wrapper from '../Wrapper';
 import CityPicker from '../CityPicker';
 import Button from '../Button';
 
+import instaIcon from '../../images/svg/insta.svg';
+
 function Header({ phone, instaLink }) {
   const menuItems = [
     { title: 'Главная', url: '/' },
-    { title: 'Магазин', url: 'shop' },
-    { title: 'Доставка и оплата', url: 'delivery' },
-    { title: 'О нас', url: 'about' },
+    { title: 'Магазин', url: '/shop' },
+    { title: 'Доставка и оплата', url: '/delivery' },
+    { title: 'О нас', url: '/about' },
   ];
   const cities = ['Москва', 'Казань', 'Екатеринбург', 'Санкт-Петербург'];
 
@@ -33,7 +35,7 @@ function Header({ phone, instaLink }) {
           </Button>
 
           <Button href={instaLink} target="_blank" isCircle isExternal>
-            <img className="InstaBtn-icon" src={iconUrl} alt="Instagram" />
+            <img className="InstaBtn-icon" src={instaIcon} alt="Instagram" />
           </Button>
         </Wrapper>
       </header>

@@ -14,7 +14,7 @@ const typography = new Typography({
       styles: ['400', '400i', '700', '800'],
     },
   ],
-  overrideStyles: ({ adjustFontSizeTo, rhythm }, options, styles) => ({
+  overrideStyles: ({ adjustFontSizeTo }) => ({
     h1: {
       ...adjustFontSizeTo('40px'),
       fontWeight: '800',

@@ -1,12 +1,13 @@
 import React from 'react';
+import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 
 import UnderlinedLink from '../UnderlinedLink';
 
-function RecipeCard({ imgSrc, heading, description, link }) {
+function RecipeCard({ avatar, heading, description, link }) {
   return (
     <article className="RecipeCard">
-      <img src={imgSrc} alt={heading} className="RecipeCard-avatar" />
+      <Img fluid={avatar} alt={heading} className="RecipeCard-avatar" />
 
       <header className="RecipeCard-header">
         <h3 className="RecipeCard-heading">{heading}</h3>
@@ -21,7 +22,7 @@ function RecipeCard({ imgSrc, heading, description, link }) {
 }
 
 RecipeCard.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
+  avatar: PropTypes.shape().isRequired,
   heading: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
