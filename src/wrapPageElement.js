@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CartProvider from './components/CartProvider';
-import CatalogProvider from './components/CatalogProvider';
+import ShopProvider from './components/ShopProvider';
 
-const wrap = ({ element }) => (
-  <CartProvider>
-    <CatalogProvider>{element}</CatalogProvider>
-  </CartProvider>
-);
+const wrap = ({ element }) => <ShopProvider>{element}</ShopProvider>;
 
 wrap.propTypes = {
   element: PropTypes.element.isRequired,

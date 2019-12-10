@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import SectionHeading from '../SectionHeading';
 import SectionSubheading from '../SectionSubheading';
 import RecipeGallery from '../RecipeGallery';
+import ContentWrapper from '../ContentWrapper';
 
 function RecipeSection({ data, recipes }) {
   return (
     <section className="RecipeSection" id="recipes">
-      <SectionHeading text={data.recipesHeading} />
-      <SectionSubheading text={data.recipesSubheading} />
+      <ContentWrapper>
+        <SectionHeading text={data.recipesHeading} />
+        <SectionSubheading text={data.recipesSubheading} />
 
-      <RecipeGallery recipes={recipes} />
+        <RecipeGallery recipes={recipes} />
+      </ContentWrapper>
     </section>
   );
 }

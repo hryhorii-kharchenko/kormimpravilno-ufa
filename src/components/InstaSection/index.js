@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 
 import SectionHeading from '../SectionHeading';
 import SectionSubheading from '../SectionSubheading';
+import ContentWrapper from '../ContentWrapper';
 // import InstaGallery from '../InstaGallery/InstaGallery';
 
 function InstaSection({ data }) {
   return (
     <section className="InstaSection" id="insta">
-      <SectionHeading text={data.instagramHeading} />
-      <SectionSubheading text={data.instagramSubheading} />
+      <ContentWrapper>
+        <SectionHeading text={data.instagramHeading} />
+        <SectionSubheading text={data.instagramSubheading} />
 
-      {/* <InstaGallery feed={} /> */}
+        {/* <InstaGallery feed={} /> */}
+      </ContentWrapper>
     </section>
   );
 }

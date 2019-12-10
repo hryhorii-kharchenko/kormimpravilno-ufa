@@ -3,13 +3,16 @@ import PropTypes from 'prop-types';
 
 import SectionHeading from '../SectionHeading';
 import ProductGallery from '../ProductGallery';
+import ContentWrapper from '../ContentWrapper';
 
 function PopularSection({ data, products, onClick }) {
   return (
     <section className="PopularSection">
-      <SectionHeading text={data.popularHeading} />
+      <ContentWrapper>
+        <SectionHeading text={data.popularHeading} />
 
-      <ProductGallery products={products} onClick={onClick} />
+        <ProductGallery products={products} onClick={onClick} />
+      </ContentWrapper>
     </section>
   );
 }

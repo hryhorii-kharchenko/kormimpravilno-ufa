@@ -4,25 +4,32 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import ScrollDown from '../ScrollDown';
 import Wrapper from '../Wrapper';
+import ContentWrapper from '../ContentWrapper';
+
+import classes from './BannerSection.module.css';
 
 function BannerSection({ data }) {
   return (
-    <section className="Banner" id="banner">
-      <h1 className="Banner-title">
-        {data.bannerHeading.firstLine}
-        <strong>{data.bannerHeading.secondLine}</strong>
-      </h1>
+    <section className={classes.Banner} id="banner">
+      <ContentWrapper>
+        <h1 className={classes.title}>
+          {data.bannerHeading.firstLine}
+          <strong className={classes.secondLine}>
+            {data.bannerHeading.secondLine}
+          </strong>
+        </h1>
 
-      <p className="Banner-subtitle">{data.bannerSubheading}</p>
+        <p className={classes.subtitle}>{data.bannerSubheading}</p>
 
-      <Wrapper>
-        <Button href="/shop" isFilled>
-          {data.bannerBtnStore}
-        </Button>
-        <Button href="/recipes">{data.bannerBtnRecipes}</Button>
-      </Wrapper>
+        <Wrapper>
+          <Button href="/shop" isFilled>
+            {data.bannerBtnStore}
+          </Button>
+          <Button href="/recipes">{data.bannerBtnRecipes}</Button>
+        </Wrapper>
 
-      <ScrollDown url="#company" />
+        <ScrollDown url="#company" />
+      </ContentWrapper>
     </section>
   );
 }

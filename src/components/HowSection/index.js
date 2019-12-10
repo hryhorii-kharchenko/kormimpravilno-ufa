@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import SectionHeading from '../SectionHeading';
 import Chain from '../Chain';
 import BlockQuote from '../BlockQuote';
+import ContentWrapper from '../ContentWrapper';
 
 function HowSection({ data }) {
   const chainElems = Object.entries(data)
@@ -12,11 +13,13 @@ function HowSection({ data }) {
 
   return (
     <section className="How" id="how">
-      <SectionHeading text={data.howHeading} />
+      <ContentWrapper>
+        <SectionHeading text={data.howHeading} />
 
-      <Chain elements={chainElems} />
+        <Chain elements={chainElems} />
 
-      <BlockQuote text={data.howQuote} />
+        <BlockQuote text={data.howQuote} />
+      </ContentWrapper>
     </section>
   );
 }
