@@ -48,7 +48,7 @@ function IndexPage({
     >
       <SEO title="Главная" />
 
-      <BannerSection data={banner} />
+      <BannerSection data={banner} bgImg={data.bannerBg} />
       <CompanySection data={company} />
       <HowSection data={how} />
       <PopularSection
@@ -64,6 +64,7 @@ function IndexPage({
 
 IndexPage.propTypes = {
   data: PropTypes.shape({
+    bannerBg: PropTypes.shape.isRequired,
     wpgraphql: PropTypes.shape({
       mainPage: PropTypes.shape({
         main_page: PropTypes.shape(),
@@ -86,6 +87,13 @@ export default IndexPage;
 
 export const query = graphql`
   query indexQuery {
+    bannerBg: file(relativePath: { eq: "bg-banner.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
     wpgraphql {
       mainPage: page(id: "cGFnZToxNw==") {
         id

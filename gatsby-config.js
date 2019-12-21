@@ -34,11 +34,19 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-typography',
+      resolve: `gatsby-plugin-prefetch-google-fonts`,
       options: {
-        pathToConfigModule: 'src/utils/typography',
+        fonts: [
+          {
+            family: 'Montserrat',
+            variants: ['400', '400i', '700', '800'],
+            subsets: ['latin', 'cyrillic'],
+          },
+        ],
       },
     },
+    'gatsby-background-image-es5',
+    'gatsby-plugin-react-css-modules',
     `gatsby-plugin-postcss`,
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',

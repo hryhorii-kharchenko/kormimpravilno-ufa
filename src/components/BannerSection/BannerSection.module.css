@@ -1,12 +1,19 @@
 .Banner {
 }
 
-.title {
-}
-
-.secondLine {
-  display: block;
-}
-
 .subtitle {
+  margin: 14px 0px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.17;
+  color: $white;
+}
+
+.bannerBtn {
+  width: 160px;
+  margin-right: 15px;
+}
+
+.bannerBtn:last-child {
+  margin-right: initial;
 }

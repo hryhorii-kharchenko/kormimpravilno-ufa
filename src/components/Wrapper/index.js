@@ -2,47 +2,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Wrapper({
+  className,
+  display,
   children,
   maxWidth,
   justifyContent,
   alignItems,
   alignContent,
-  wrap,
-  direction,
+  flexWrap,
+  flexDirection,
 }) {
   const styles = {
+    className,
+    display,
     maxWidth,
     justifyContent,
     alignItems,
     alignContent,
-    wrap,
-    direction,
+    flexWrap,
+    flexDirection,
   };
 
   return (
-    <div className="Wrapper" style={styles}>
+    <div style={styles} className={className}>
       {children}
     </div>
   );
 }
 
 Wrapper.propTypes = {
+  className: PropTypes.string,
+  display: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
   maxWidth: PropTypes.string,
   justifyContent: PropTypes.string,
   alignItems: PropTypes.string,
   alignContent: PropTypes.string,
-  wrap: PropTypes.string,
-  direction: PropTypes.string,
+  flexWrap: PropTypes.string,
+  flexDirection: PropTypes.string,
 };
 
 Wrapper.defaultProps = {
-  maxWidth: '300px',
+  className: PropTypes.string,
+  display: 'flex',
+  maxWidth: 'initial',
   justifyContent: 'center',
   alignItems: 'center',
   alignContent: 'center',
-  wrap: 'no-wrap',
-  direction: 'row',
+  flexWrap: 'nowrap',
+  flexDirection: 'row',
 };
 
 export default Wrapper;

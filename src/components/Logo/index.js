@@ -3,7 +3,10 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 
+import './Logo.module.css';
+
 function Logo({ isAlt }) {
+  const styleName = isAlt ? 'Logo-alt' : 'Logo';
   const data = useStaticQuery(graphql`
     query {
       logo: file(relativePath: { eq: "logo.jpg" }) {
@@ -24,7 +27,7 @@ function Logo({ isAlt }) {
   `);
 
   return (
-    <Link to="/" className="Logo">
+    <Link to="/" styleName={styleName}>
       <Img
         fixed={
           isAlt
@@ -32,7 +35,6 @@ function Logo({ isAlt }) {
             : data.logo.childImageSharp.fixed
         }
         alt="Кормим правильно"
-        className={isAlt ? 'Logo-img-alt' : 'Logo-img'}
       />
     </Link>
   );

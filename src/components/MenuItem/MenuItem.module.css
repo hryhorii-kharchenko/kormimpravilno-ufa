@@ -1,0 +1,16 @@
+.MenuItem {
+  margin-right: 20px;
+  list-style-type: none;
+}
+
+.MenuItem:last-child {
+  margin-right: initial;
+}
+
+.link {
+  font-size: 14px;
+  line-height: 1.36;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $black;
+}

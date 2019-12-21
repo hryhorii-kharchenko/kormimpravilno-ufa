@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
-import classes from './Button.module.css';
+import './Button.module.css';
 
 function Button({
   children,
   href,
   target,
-  parentClasses,
+  className,
   onClick,
   isTextBlack,
   isWide,
@@ -17,27 +17,23 @@ function Button({
   isExternal,
   isAction,
 }) {
-  const btnClasses = [classes.Button];
+  const btnStyles = ['Button'];
   let element;
 
-  if (parentClasses) {
-    btnClasses.push(...parentClasses);
-  }
-
   if (isTextBlack) {
-    btnClasses.push(classes['black-text']);
+    btnStyles.push('blackText');
   }
 
   if (isWide) {
-    btnClasses.push(classes.wide);
+    btnStyles.push('wide');
   }
 
   if (isCircle) {
-    btnClasses.push([classes.circle, classes['grey-border']]);
+    btnStyles.push('circle', 'grayBorder');
   }
 
   if (isFilled) {
-    btnClasses.push(classes.filled);
+    btnStyles.push('filled');
   }
 
   if (isExternal) {
@@ -46,20 +42,26 @@ function Button({
         href={href}
         target={target}
         onClick={onClick}
-        className={btnClasses.join(' ')}
+        styleName={btnStyles.join(' ')}
+        className={className}
       >
         {children}
       </a>
     );
   } else if (isAction) {
     element = (
-      <button onClick={onClick} type="button" className={btnClasses.join(' ')}>
+      <button
+        onClick={onClick}
+        type="button"
+        styleName={btnStyles.join(' ')}
+        className={className}
+      >
         {children}
       </button>
     );
   } else {
     element = (
-      <Link to={href} className={btnClasses.join(' ')}>
+      <Link to={href} styleName={btnStyles.join(' ')} className={className}>
         {children}
       </Link>
     );
@@ -72,7 +74,7 @@ Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
   href: PropTypes.string,
   target: PropTypes.string,
-  parentClasses: PropTypes.string,
+  className: PropTypes.string,
   onClick: PropTypes.func,
   isTextBlack: PropTypes.bool,
   isWide: PropTypes.bool,
@@ -85,7 +87,8 @@ Button.propTypes = {
 Button.defaultProps = {
   href: '#',
   target: '_self',
-  parentClasses: null,
+  width: null,
+  className: null,
   onClick: null,
   isTextBlack: false,
   isWide: false,

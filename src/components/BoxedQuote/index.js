@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 
+import './BoxedQuote.module.css';
+
 function BoxedQuote({ text, btnText }) {
   return (
-    <blockquote className="BoxedQuote">
-      <p className="BoxedQuote-text">{text}</p>
+    <blockquote styleName="BoxedQuote">
+      <p styleName="text">{text}</p>
 
-      <Button isAction isWide isFilled parentClasses="BoxedQuote-button">
+      <Button isAction isWide isFilled styleName="button">
         {btnText}
       </Button>
     </blockquote>

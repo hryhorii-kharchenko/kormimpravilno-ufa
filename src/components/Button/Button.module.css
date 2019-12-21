@@ -1,0 +1,34 @@
+.Button {
+  height: 45px;
+  border: 2px solid $main;
+  border-radius: 22.5px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  box-sizing: border-box;
+  background-color: transparent;
+
+  color: $white;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.blackText {
+  color: $black;
+}
+.wide {
+}
+.circle {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+}
+.grayBorder {
+  border-color: $borderGray;
+}
+.filled {
+  background-color: $main;
+}

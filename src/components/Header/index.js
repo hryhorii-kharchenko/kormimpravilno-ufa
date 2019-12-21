@@ -9,6 +9,7 @@ import Wrapper from '../Wrapper';
 import CityPicker from '../CityPicker';
 import Button from '../Button';
 
+import './Header.module.css';
 import instaIcon from '../../images/svg/insta.svg';
 
 function Header({ phone, instaLink }) {
@@ -18,24 +19,33 @@ function Header({ phone, instaLink }) {
     { title: 'Доставка и оплата', url: '/delivery' },
     { title: 'О нас', url: '/about' },
   ];
-  const cities = ['Москва', 'Казань', 'Екатеринбург', 'Санкт-Петербург'];
+  const cityOptions = [
+    { value: '/moscow', label: 'Москва' },
+    { value: '/kazan', label: 'Казань' },
+    { value: '/ekaterinburg', label: 'Екатеринбург' },
+    { value: '/peterburg', label: 'Санкт-Петербург' },
+  ];
 
   return (
-    <Headroom>
-      <header>
+    <Headroom wrapperStyle={{ padding: '20px' }}>
+      <header styleName="header">
         <Menu items={menuItems} />
 
         <Logo />
 
-        <Wrapper>
-          <CityPicker cities={cities} />
+        <Wrapper justifyContent="flex-end" styleName="Wrapper">
+          <CityPicker options={cityOptions} current="Москва" />
 
-          <Button href={`tel:${phone}`} isTextBlack isExternal>
+          <Button href={`tel:${phone}`} isTextBlack isExternal styleName="phone-btn">
             {phone}
           </Button>
 
           <Button href={instaLink} target="_blank" isCircle isExternal>
-            <img className="InstaBtn-icon" src={instaIcon} alt="Instagram" />
+            <img styleName="insta-img" src={instaIcon} alt="Instagram" />
+          </Button>
+
+          <Button onClick={() => alert(1)} isCircle isAction>
+            <img styleName="insta-img" src={instaIcon} alt="Instagram" />
           </Button>
         </Wrapper>
       </header>

@@ -1,0 +1,33 @@
+.dropdown {
+  font-size: 13px;
+  line-height: 1.46;
+  color: $black;
+  text-transform: uppercase;
+}
+
+.dropbtn {
+  margin-left: 5px;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.current {
+  border-bottom: 1px dotted $main;
+  font-weight: bold;
+  color: $main;
+}
+
+.arrow {
+  width: 10px;
+  height: auto;
+  margin-left: 4px;
+}
+
+.options {
+  display: none;
+}
+
+.link {
+}

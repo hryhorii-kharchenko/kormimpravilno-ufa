@@ -1,0 +1,25 @@
+.header {
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.Wrapper > * {
+  margin-left: 15px;
+}
+
+.Wrapper > *:first-child {
+  margin-left: initial;
+}
+
+.phone-btn {
+  width: 168px;
+  line-height: 40px;
+}
+
+.insta-img {
+  width: 16px;
+}

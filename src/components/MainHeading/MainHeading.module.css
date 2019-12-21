@@ -1,0 +1,26 @@
+.MainHeading {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.decoration {
+  width: 3px;
+  min-height: 79px;
+  height: 100%;
+  margin-right: 15px;
+  background-color: $main;
+  display: inline-block;
+}
+
+.title {
+  margin: 0px 0px 0px 0px;
+  color: $white;
+  font-size: 40px;
+  font-weight: normal;
+  line-height: 1.23;
+}
+
+.secondLine {
+  display: block;
+}

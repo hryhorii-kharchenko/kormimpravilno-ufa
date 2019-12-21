@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import classes from './ContentWrapper.module.css';
+import './ContentWrapper.module.css';
 
 function ContentWrapper({ children }) {
-  return <div className={classes.ContentWrapper}>{children}</div>;
+  return <div styleName="ContentWrapper">{children}</div>;
 }
 
 ContentWrapper.propTypes = {
