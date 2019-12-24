@@ -1,10 +1,12 @@
 .header {
-  height: 45px;
+  height: 85px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
   box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .Wrapper > * {
@@ -22,4 +24,8 @@
 
 .insta-img {
   width: 16px;
+}
+
+.cart-img {
+  width: 14px;
 }

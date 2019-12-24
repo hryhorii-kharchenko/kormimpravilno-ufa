@@ -1,8 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './SectionHeading.module.css';
+
 function SectionHeading({ text }) {
-  return <h2 className="SectionHeading">{text}</h2>;
+  return (
+    <div styleName="SectionHeading">
+      <h2 styleName="heading">{text}</h2>
+      <div styleName="decoration" />
+    </div>
+  );
 }
 
 SectionHeading.propTypes = {

@@ -11,6 +11,7 @@ import Button from '../Button';
 
 import './Header.module.css';
 import instaIcon from '../../images/svg/insta.svg';
+import cartIcon from '../../images/svg/cart.svg';
 
 function Header({ phone, instaLink }) {
   const menuItems = [
@@ -27,7 +28,7 @@ function Header({ phone, instaLink }) {
   ];
 
   return (
-    <Headroom wrapperStyle={{ padding: '20px' }}>
+    <Headroom style={{ zIndex: 100 }}>
       <header styleName="header">
         <Menu items={menuItems} />
 
@@ -36,7 +37,12 @@ function Header({ phone, instaLink }) {
         <Wrapper justifyContent="flex-end" styleName="Wrapper">
           <CityPicker options={cityOptions} current="Москва" />
 
-          <Button href={`tel:${phone}`} isTextBlack isExternal styleName="phone-btn">
+          <Button
+            href={`tel:${phone}`}
+            isTextBlack
+            isExternal
+            styleName="phone-btn"
+          >
             {phone}
           </Button>
 
@@ -45,7 +51,7 @@ function Header({ phone, instaLink }) {
           </Button>
 
           <Button onClick={() => alert(1)} isCircle isAction>
-            <img styleName="insta-img" src={instaIcon} alt="Instagram" />
+            <img styleName="cart-img" src={cartIcon} alt="Корзина" />
           </Button>
         </Wrapper>
       </header>

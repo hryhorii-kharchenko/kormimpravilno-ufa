@@ -1,0 +1,43 @@
+.BlockQuote {
+  max-width: 915px;
+  margin: 76px auto 0px;
+  padding: 20px 0px 0px 101px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.text {
+  max-width: 698px;
+  margin: 0;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.footer {
+  margin: 20px 0px 0px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.author {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.author-decoration {
+  width: 60px;
+  height: 1px;
+  margin-right: 14px;
+  background-color: $main;
+}
+
+.decoration {
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  z-index: -1;
+}

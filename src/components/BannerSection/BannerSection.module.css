@@ -1,4 +1,19 @@
 .Banner {
+  height: 75vh;
+  padding: 0px 0px 55px;
+}
+
+.banner-wrapper {
+  min-height: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.content-wrapper {
+  margin: 0px 0px 0px 43px;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
 }
 
 .subtitle {

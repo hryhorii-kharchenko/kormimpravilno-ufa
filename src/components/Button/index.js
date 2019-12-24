@@ -11,7 +11,6 @@ function Button({
   className,
   onClick,
   isTextBlack,
-  isWide,
   isCircle,
   isFilled,
   isExternal,
@@ -22,10 +21,6 @@ function Button({
 
   if (isTextBlack) {
     btnStyles.push('blackText');
-  }
-
-  if (isWide) {
-    btnStyles.push('wide');
   }
 
   if (isCircle) {
@@ -77,7 +72,6 @@ Button.propTypes = {
   className: PropTypes.string,
   onClick: PropTypes.func,
   isTextBlack: PropTypes.bool,
-  isWide: PropTypes.bool,
   isCircle: PropTypes.bool,
   isFilled: PropTypes.bool,
   isExternal: PropTypes.bool,
@@ -91,7 +85,6 @@ Button.defaultProps = {
   className: null,
   onClick: null,
   isTextBlack: false,
-  isWide: false,
   isCircle: false,
   isFilled: false,
   isExternal: false,

@@ -6,13 +6,15 @@ import Chain from '../Chain';
 import BlockQuote from '../BlockQuote';
 import ContentWrapper from '../ContentWrapper';
 
+import './HowSection.module.css';
+
 function HowSection({ data }) {
   const chainElems = Object.entries(data)
     .filter(field => field[0].includes('Chain'))
     .map(field => field[1]);
 
   return (
-    <section className="How" id="how">
+    <section styleName="HowSection" id="how">
       <ContentWrapper>
         <SectionHeading text={data.howHeading} />
 

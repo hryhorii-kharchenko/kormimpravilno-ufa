@@ -6,12 +6,17 @@ import SectionSubheading from '../SectionSubheading';
 import BoxedQuote from '../BoxedQuote';
 import ContentWrapper from '../ContentWrapper';
 
+import './CompanySection.module.css';
+
 function CompanySection({ data }) {
   return (
-    <section className="Company" id="company">
+    <section styleName="CompanySection" id="company">
       <ContentWrapper>
         <SectionHeading text={data.companyHeading} />
-        <SectionSubheading text={data.companySubheading} />
+        <SectionSubheading
+          text={data.companySubheading}
+          styleName="subheading"
+        />
 
         <BoxedQuote text={data.companyQuote} btnText={data.companyBtnSignup} />
       </ContentWrapper>

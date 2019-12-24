@@ -5,7 +5,6 @@ import BackgroundImg from 'gatsby-background-image-es5';
 import Button from '../Button';
 import ScrollDown from '../ScrollDown';
 import Wrapper from '../Wrapper';
-import ContentWrapper from '../ContentWrapper';
 import MainHeading from '../MainHeading';
 
 import './BannerSection.module.css';
@@ -21,25 +20,27 @@ function BannerSection({ data, bgImg }) {
       styleName="Banner"
       id="banner"
     >
-      <ContentWrapper>
-        <MainHeading
-          firstLine={data.bannerHeading.firstLine}
-          secondLine={data.bannerHeading.secondLine}
-        />
+      <div styleName="banner-wrapper">
+        <div styleName="content-wrapper">
+          <MainHeading
+            firstLine={data.bannerHeading.firstLine}
+            secondLine={data.bannerHeading.secondLine}
+          />
 
-        <p styleName="subtitle">{data.bannerSubheading}</p>
+          <p styleName="subtitle">{data.bannerSubheading}</p>
 
-        <Wrapper justifyContent="flex-start">
-          <Button href="/shop" isFilled styleName="bannerBtn">
-            {data.bannerBtnStore}
-          </Button>
-          <Button href="/recipes" styleName="bannerBtn">
-            {data.bannerBtnRecipes}
-          </Button>
-        </Wrapper>
+          <Wrapper justifyContent="flex-start">
+            <Button href="/shop" isFilled styleName="bannerBtn">
+              {data.bannerBtnStore}
+            </Button>
+            <Button href="/recipes" styleName="bannerBtn">
+              {data.bannerBtnRecipes}
+            </Button>
+          </Wrapper>
+        </div>
+      </div>
 
-        <ScrollDown url="/#company" />
-      </ContentWrapper>
+      <ScrollDown url="/#company" />
     </BackgroundImg>
   );
 }
@@ -54,7 +55,11 @@ BannerSection.propTypes = {
     bannerBtnStore: PropTypes.string,
     bannerBtnRecipes: PropTypes.string,
   }).isRequired,
-  bgImg: PropTypes.shape.isRequired,
+  bgImg: PropTypes.shape({
+    childImageSharp: PropTypes.shape({
+      fluid: PropTypes.shape(),
+    }),
+  }).isRequired,
 };
 
 export default BannerSection;

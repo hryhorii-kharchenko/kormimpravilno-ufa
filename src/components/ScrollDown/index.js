@@ -7,7 +7,7 @@ import mouseIcon from '../../images/svg/scroll-down.svg';
 
 function ScrollDown({ url }) {
   return (
-    <Link to={url} className="ScrollDown">
+    <Link to={url} styleName="ScrollDown">
       <img src={mouseIcon} alt="Прокрутите вниз" styleName="mouse" />
     </Link>
   );

@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './BlockQuote.module.css';
+import leafImg from '../../images/svg/leaf.svg';
+
 function BlockQuote({ text }) {
   return (
-    <blockquote className="BlockQuote">
-      <p className="BlockQuote-text">{text}</p>
-      <footer className="BlockQuote-footer">
-        <h3 className="BlockQuote-author">Kormim Pravilno</h3>
+    <blockquote styleName="BlockQuote">
+      <p styleName="text">{text}</p>
+      <footer styleName="footer">
+        <div styleName="author-decoration" />
+        <h3 styleName="author">Kormim Pravilno</h3>
       </footer>
+
+      <img src={leafImg} alt="" styleName="decoration" />
     </blockquote>
   );
 }

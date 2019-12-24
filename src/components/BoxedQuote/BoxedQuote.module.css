@@ -1,9 +1,36 @@
 .BoxedQuote {
+  max-width: 840px;
+  margin: 40px auto 0px;
+  padding: 50px 40px 0px;
+  background-image: url('./box.svg');
+  background-position: top;
+  background-size: 100% 167px;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .text {
+  margin: 0px auto 40px;
+  font-size: 18px;
+  line-height: 1.44;
+  text-align: center;
 }
 
 .button {
+  margin: 0px auto;
   width: 268px;
+  z-index: 10;
+}
+
+.button-wrapper {
+  width: 284px;
+  margin: 0 auto;
+  background-color: $white;
+}
+
+.decoration {
+  top: 32px;
+  left: 26px;
+  position: absolute;
 }

@@ -4,18 +4,32 @@ import PropTypes from 'prop-types';
 import SectionHeading from '../SectionHeading';
 import ProductGallery from '../ProductGallery';
 import ContentWrapper from '../ContentWrapper';
+import Button from '../Button';
 
-function PopularSection({ data, products, onClick }) {
+import './PopularSection.module.css';
+
+function PopularSection({ data, products, onClick, shopBtnText }) {
   return (
-    <section className="PopularSection">
+    <section styleName="PopularSection">
       <ContentWrapper>
         <SectionHeading text={data.popularHeading} />
 
         <ProductGallery products={products} onClick={onClick} />
+        <div styleName="btn-wrapper">
+          <div styleName="line" />
+          <Button href="/shop" isFilled styleName="shop-btn">
+            {shopBtnText}
+          </Button>
+          <div styleName="line" />
+        </div>
       </ContentWrapper>
     </section>
   );
 }
+
+PopularSection.defaultProps = {
+  shopBtnText: 'Магазин',
+};
 
 PopularSection.propTypes = {
   data: PropTypes.shape({
@@ -23,6 +37,7 @@ PopularSection.propTypes = {
   }).isRequired,
   products: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onClick: PropTypes.func.isRequired,
+  shopBtnText: PropTypes.string,
 };
 
 export default PopularSection;

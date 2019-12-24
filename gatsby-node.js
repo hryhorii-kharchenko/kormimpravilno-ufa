@@ -8,6 +8,21 @@ if (process.NODE_ENV === 'development') {
   };
 }
 
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === 'develop-html' || stage === 'build-html') {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /vminpoly/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+};
+
 exports.createResolvers = ({
   actions,
   cache,

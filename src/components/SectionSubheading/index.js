@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SectionSubheading({ text }) {
-  return <p className="SectionSubheading">{text}</p>;
+import './SectionSubheading.module.css';
+
+function SectionSubheading({ text, className }) {
+  return (
+    <p styleName="SectionSubheading" className={className}>
+      {text}
+    </p>
+  );
 }
+
+SectionSubheading.defaultProps = {
+  className: '',
+};
 
 SectionSubheading.propTypes = {
   text: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default SectionSubheading;

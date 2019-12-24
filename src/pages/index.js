@@ -55,6 +55,7 @@ function IndexPage({
         data={popular}
         products={catalog}
         onClick={addToCartBtnHandler}
+        shopBtnText={banner.bannerBtnStore}
       />
       <RecipeSection data={recipe} recipes={posts} />
       <InstaSection data={instagram} />
@@ -165,7 +166,7 @@ export const query = graphql`
             modified
             imageFile {
               childImageSharp {
-                fluid(maxWidth: 386) {
+                fluid(maxWidth: 386, maxHeight: 350) {
                   base64
                   aspectRatio
                   src

@@ -43,7 +43,7 @@ Wrapper.propTypes = {
 };
 
 Wrapper.defaultProps = {
-  className: PropTypes.string,
+  className: '',
   display: 'flex',
   maxWidth: 'initial',
   justifyContent: 'center',

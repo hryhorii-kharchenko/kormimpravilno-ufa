@@ -1,0 +1,8 @@
+.Chain {
+  max-width: 675px;
+  margin: 25px auto 0px;
+  background-image: url('./dotted-line.svg');
+  background-repeat: repeat-y;
+  background-size: 1px auto;
+  background-position: center top 10px;
+}

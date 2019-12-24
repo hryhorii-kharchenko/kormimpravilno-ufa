@@ -6,9 +6,11 @@ import SectionSubheading from '../SectionSubheading';
 import RecipeGallery from '../RecipeGallery';
 import ContentWrapper from '../ContentWrapper';
 
+import './RecipeSection.module.css';
+
 function RecipeSection({ data, recipes }) {
   return (
-    <section className="RecipeSection" id="recipes">
+    <section styleName="RecipeSection" id="recipes">
       <ContentWrapper>
         <SectionHeading text={data.recipesHeading} />
         <SectionSubheading text={data.recipesSubheading} />

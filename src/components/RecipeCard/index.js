@@ -4,19 +4,23 @@ import PropTypes from 'prop-types';
 
 import UnderlinedLink from '../UnderlinedLink';
 
+import './RecipeCard.module.css';
+
 function RecipeCard({ avatar, heading, description, link }) {
   return (
-    <article className="RecipeCard">
-      <Img fluid={avatar} alt={heading} className="RecipeCard-avatar" />
+    <article styleName="RecipeCard">
+      <Img fluid={avatar} alt={heading} styleName="avatar" />
 
-      <header className="RecipeCard-header">
-        <h3 className="RecipeCard-heading">{heading}</h3>
-        <p className="RecipeCard-description">{description}</p>
-      </header>
+      <div styleName="content-wrapper">
+        <header styleName="header">
+          <h3 styleName="heading">{heading}</h3>
+          <p styleName="description">{description}</p>
+        </header>
 
-      <footer className="RecipeCard-footer">
-        <UnderlinedLink text="Перейти к рецепту" href={link} />
-      </footer>
+        <footer styleName="footer">
+          <UnderlinedLink text="Перейти к рецепту" href={link} />
+        </footer>
+      </div>
     </article>
   );
 }

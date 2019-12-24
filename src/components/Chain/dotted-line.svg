@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1" height="520" viewBox="0 0 1 520">
+    <defs>
+        <path id="a" d="M683 1309h1v520h-1z"/>
+        <mask id="b" width="1" height="520" x="0" y="0" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+    </defs>
+    <use fill="none" fill-rule="nonzero" stroke="#BEBEBE" stroke-dasharray="1,1" stroke-width="2" mask="url(#b)" transform="translate(-683 -1309)" xlink:href="#a"/>
+</svg>

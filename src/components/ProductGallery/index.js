@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import ProductCard from '../ProductCard';
 
+import './ProductGallery.module.css';
+
 function ProductGallery({ products, onClick }) {
   const gallery = products.map(product => (
     <ProductCard
@@ -17,7 +19,7 @@ function ProductGallery({ products, onClick }) {
     />
   ));
 
-  return <section className="ProductGallery">{gallery}</section>;
+  return <section styleName="ProductGallery">{gallery}</section>;
 }
 
 ProductGallery.propTypes = {

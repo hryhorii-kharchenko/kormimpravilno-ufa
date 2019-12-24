@@ -1,0 +1,28 @@
+.UnderlinedLink {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: $black;
+}
+
+.arrow {
+  width: 7px;
+  height: 11px;
+  margin-left: 8px;
+}
+
+.underline {
+  width: 40px;
+  height: 2px;
+  bottom: -4px;
+  position: absolute;
+  background-color: $main;
+}

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import RecipeCard from '../RecipeCard';
 
+import './RecipeGallery.module.css';
+
 function RecipeGallery({ recipes }) {
   const gallery = recipes.map(recipe => (
     <RecipeCard
@@ -15,7 +17,7 @@ function RecipeGallery({ recipes }) {
     />
   ));
 
-  return <section className="RecipeGallery">{gallery}</section>;
+  return <section styleName="RecipeGallery">{gallery}</section>;
 }
 
 RecipeGallery.propTypes = {

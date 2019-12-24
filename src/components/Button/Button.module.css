@@ -2,7 +2,7 @@
   height: 45px;
   border: 2px solid $main;
   border-radius: 22.5px;
-  line-height: 40px;
+  line-height: 43px;
   text-align: center;
   cursor: pointer;
   display: block;
@@ -15,20 +15,23 @@
   text-transform: uppercase;
   text-decoration: none;
 }
+
 .blackText {
   color: $black;
 }
-.wide {
-}
+
 .circle {
   width: 40px;
   height: 40px;
   line-height: 40px;
   border-radius: 50%;
 }
+
 .grayBorder {
   border-color: $borderGray;
 }
+
 .filled {
   background-color: $main;
+  box-shadow: 0 6px 14px 0 rgba(55, 168, 54, 0.38);
 }
