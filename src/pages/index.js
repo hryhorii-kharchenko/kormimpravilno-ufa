@@ -43,6 +43,8 @@ function IndexPage({
     <Layout
       data={universal}
       cart={cart}
+      catalog={catalog}
+      addToCartBtnHandler={addToCartBtnHandler}
       cartRemoveOneItemHandler={cartRemoveOneItemHandler}
       cartRemoveAllItemsHandler={cartRemoveAllItemsHandler}
     >

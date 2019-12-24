@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
-function ShopPage({
+function RecipesPage({
   data,
   catalog,
   cart,
@@ -32,12 +32,12 @@ function ShopPage({
       cartRemoveOneItemHandler={cartRemoveOneItemHandler}
       cartRemoveAllItemsHandler={cartRemoveAllItemsHandler}
     >
-      <SEO title="Магазин" />
+      <SEO title="Рецепты" />
     </Layout>
   );
 }
 
-ShopPage.propTypes = {
+RecipesPage.propTypes = {
   data: PropTypes.shape().isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
@@ -46,7 +46,7 @@ ShopPage.propTypes = {
   cartRemoveAllItemsHandler: PropTypes.func.isRequired,
 };
 
-export default ShopPage;
+export default RecipesPage;
 
 export const query = graphql`
   query indexQuery {
@@ -66,6 +66,32 @@ export const query = graphql`
           orgn
           ooo
           phone
+        }
+      }
+      posts {
+        nodes {
+          id
+          recipe_post {
+            recipeName
+            description
+          }
+          slug
+          featuredImage {
+            sourceUrl
+            mediaItemId
+            modified
+            imageFile {
+              childImageSharp {
+                fluid(maxWidth: 385, maxHeight: 217) {
+                  base64
+                  aspectRatio
+                  src
+                  srcSet
+                  sizes
+                }
+              }
+            }
+          }
         }
       }
     }
