@@ -15,7 +15,7 @@ function RecipeSection({ data, recipes }) {
         <SectionHeading text={data.recipesHeading} />
         <SectionSubheading text={data.recipesSubheading} />
 
-        <RecipeGallery recipes={recipes} />
+        <RecipeGallery recipes={recipes} isSlider />
       </ContentWrapper>
     </section>
   );

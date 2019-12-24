@@ -4,34 +4,39 @@ import PropTypes from 'prop-types';
 import Logo from '../Logo';
 import Wrapper from '../Wrapper';
 
+import './Footer.module.css';
+
 function Footer({ copyright, ooo, inn, orgn }) {
   return (
-    <footer className="Footer">
-      <Logo isAlt />
+    <>
+      <div styleName="line" />
+      <footer styleName="Footer">
+        <Logo isAlt />
 
-      <Wrapper>
-        <p className="Footer-info">{copyright}</p>
-        <p className="Footer-info">
-          <strong>ООО</strong>
-          {ooo}
-        </p>
-        <p className="Footer-info">
-          <strong>ИНН</strong>
-          {inn}
-        </p>
-        <p className="Footer-info">
-          <strong>ОРГН</strong>
-          {orgn}
-        </p>
-      </Wrapper>
+        <Wrapper styleName="wrapper">
+          <p styleName="info">{copyright}</p>
+          <p styleName="info">
+            <strong>ООО </strong>
+            {ooo}
+          </p>
+          <p styleName="info">
+            <strong>ИНН </strong>
+            {inn}
+          </p>
+          <p styleName="info">
+            <strong>ОРГН </strong>
+            {orgn}
+          </p>
+        </Wrapper>
 
-      <p className="Footer-creator">
-        Создание сайта -
-        <a href="https://yevdokimov.pro" className="Footer-creator-link">
-          Yevdokimov
-        </a>
-      </p>
-    </footer>
+        <p styleName="creator">
+          Создание сайта -
+          <a href="https://yevdokimov.pro" styleName="creator-link">
+            Yevdokimov
+          </a>
+        </p>
+      </footer>
+    </>
   );
 }
 

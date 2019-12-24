@@ -6,9 +6,11 @@ import SectionSubheading from '../SectionSubheading';
 import ContentWrapper from '../ContentWrapper';
 // import InstaGallery from '../InstaGallery/InstaGallery';
 
+import './InstaSection.module.css';
+
 function InstaSection({ data }) {
   return (
-    <section className="InstaSection" id="insta">
+    <section styleName="InstaSection" id="insta">
       <ContentWrapper>
         <SectionHeading text={data.instagramHeading} />
         <SectionSubheading text={data.instagramSubheading} />

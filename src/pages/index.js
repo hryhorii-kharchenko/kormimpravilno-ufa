@@ -166,7 +166,7 @@ export const query = graphql`
             modified
             imageFile {
               childImageSharp {
-                fluid(maxWidth: 386, maxHeight: 350) {
+                fluid(maxWidth: 385, maxHeight: 217) {
                   base64
                   aspectRatio
                   src

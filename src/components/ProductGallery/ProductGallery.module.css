@@ -1,2 +1,10 @@
 .ProductGallery {
 }
+
+.Slider {
+  margin: 0 -20px;
+}
+
+.product-wrapper {
+  margin: 0 20px;
+}

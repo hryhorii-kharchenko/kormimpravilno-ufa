@@ -98,7 +98,7 @@ class ShopProvider extends Component {
                       modified
                       imageFile {
                         childImageSharp {
-                          fluid(maxWidth: 386) {
+                          fluid(maxWidth: 385, maxHeight: 350) {
                             base64
                             aspectRatio
                             src

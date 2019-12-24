@@ -1,2 +1,10 @@
 .RecipeGallery {
 }
+
+.Slider {
+  margin: 0 -20px;
+}
+
+.recipe-wrapper {
+  margin: 0 20px;
+}

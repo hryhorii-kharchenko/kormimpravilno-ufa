@@ -11,6 +11,7 @@
 
 .content-wrapper {
   padding: 17px 18px 20px 18px;
+  box-sizing: border-box;
 }
 
 .header {
@@ -60,7 +61,7 @@
   width: 182px;
 }
 
-.cart-btn-img {
+img.cart-btn-img {
   width: 17px;
   height: 18px;
   margin-right: 12px;
