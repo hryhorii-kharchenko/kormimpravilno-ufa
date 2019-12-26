@@ -49,7 +49,7 @@ ShopPage.propTypes = {
 export default ShopPage;
 
 export const query = graphql`
-  query indexQuery {
+  query shopQuery {
     bannerBg: file(relativePath: { eq: "bg-banner.jpg" }) {
       childImageSharp {
         fluid(quality: 90, maxWidth: 1920) {

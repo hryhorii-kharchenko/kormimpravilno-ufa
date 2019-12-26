@@ -6,6 +6,7 @@ import Button from '../Button';
 
 import './ProductCard.module.css';
 import cartIcon from '../../images/svg/cart.svg';
+import { Link } from 'gatsby';
 
 function ProductCard({
   avatar,
@@ -14,6 +15,7 @@ function ProductCard({
   weight,
   price,
   id,
+  slug,
   onClick,
 }) {
   return (
@@ -59,6 +61,7 @@ ProductCard.propTypes = {
   weight: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

@@ -1,0 +1,49 @@
+.WhereDeliverySection {
+  margin: 0px 0px 142px;
+  padding: 90px 0px 0px;
+  position: relative;
+  z-index: 0;
+}
+
+.WhereDeliverySection::after {
+  content: url(./bg-wave-3.svg);
+  top: -5px;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-wrapper {
+  max-width: 493px;
+  min-width: 300px;
+  width: 100%;
+  height: 100%;
+  margin-right: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+
+.text {
+  margin: -3px 0px 0px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.img-wrapper {
+  max-width: 601px;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+}

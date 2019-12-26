@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
+import SecondaryBanner from '../components/SecondaryBanner';
+import HowDeliverySection from '../components/HowDeliverySection';
+import OrderDeliverySection from '../components/OrderDeliverySection';
+import ConfirmationDeliverySection from '../components/ConfirmationDeliverySection';
+import PaymentDeliverySection from '../components/PaymentDeliverySection';
+import PriceDeliverySection from '../components/PriceDeliverySection';
+import WhereDeliverySection from '../components/WhereDeliverySection';
 
 function DeliveryPage({
   data,
@@ -12,6 +19,7 @@ function DeliveryPage({
   addToCartBtnHandler,
   cartRemoveOneItemHandler,
   cartRemoveAllItemsHandler,
+  location,
 }) {
   function getSectionEntriesFromPage(sectionName, sourceObject) {
     return Object.fromEntries(
@@ -22,6 +30,17 @@ function DeliveryPage({
   }
 
   const universal = data.wpgraphql.universalPage.universal_page;
+  const page = data.wpgraphql.deliveryPage.delivery_page;
+  const bannerBgFluid = data.bannerBg.childImageSharp.fluid;
+  const { pageTitle } = page;
+  const { pathname } = location;
+
+  const how = getSectionEntriesFromPage('how', page);
+  const order = getSectionEntriesFromPage('order', page);
+  const confirmation = getSectionEntriesFromPage('confirmation', page);
+  const payment = getSectionEntriesFromPage('payment', page);
+  const price = getSectionEntriesFromPage('price', page);
+  const where = getSectionEntriesFromPage('where', page);
 
   return (
     <Layout
@@ -33,6 +52,19 @@ function DeliveryPage({
       cartRemoveAllItemsHandler={cartRemoveAllItemsHandler}
     >
       <SEO title="Доставка и оплата" />
+
+      <SecondaryBanner
+        pageTitle={pageTitle}
+        pageShortTitle="Доставка и оплата"
+        pathname={pathname}
+        fluid={bannerBgFluid}
+      />
+      <HowDeliverySection data={how} />
+      <OrderDeliverySection data={order} />
+      <ConfirmationDeliverySection data={confirmation} />
+      <PaymentDeliverySection data={payment} />
+      <PriceDeliverySection data={price} />
+      <WhereDeliverySection data={where} />
     </Layout>
   );
 }
@@ -44,13 +76,16 @@ DeliveryPage.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneItemHandler: PropTypes.func.isRequired,
   cartRemoveAllItemsHandler: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 };
 
 export default DeliveryPage;
 
 export const query = graphql`
-  query indexQuery {
-    bannerBg: file(relativePath: { eq: "bg-banner.jpg" }) {
+  query deliveryQuery {
+    bannerBg: file(relativePath: { eq: "bg-delivery.jpg" }) {
       childImageSharp {
         fluid(quality: 90, maxWidth: 1920) {
           ...GatsbyImageSharpFluid_withWebp
@@ -66,6 +101,66 @@ export const query = graphql`
           orgn
           ooo
           phone
+        }
+      }
+      deliveryPage: page(id: "cGFnZToyMQ==") {
+        delivery_page {
+          confirmationHeading
+          confirmationWysiwyg
+          howHeading
+          howWysiwyg
+          orderHeading
+          orderWysiwyg
+          pageTitle
+          paymentHeading
+          paymentInstruction
+          paymentSubheading
+          paymentText
+          priceHeading
+          priceSubheading
+          priceWysiwyg
+          whereHeading
+          whereWysiwyg
+          orderImg {
+            sourceUrl
+            mediaItemId
+            modified
+            imageFile {
+              childImageSharp {
+                fluid(quality: 90, maxWidth: 601) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+          paymentImg {
+            sourceUrl
+            mediaItemId
+            modified
+            imageFile {
+              childImageSharp {
+                fluid(quality: 90, maxWidth: 601) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+          paymentWays1 {
+            heading
+            wysiwyg
+          }
+          whereImg {
+            sourceUrl
+            mediaItemId
+            modified
+            imageFile {
+              childImageSharp {
+                fluid(quality: 90, maxWidth: 601) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -12,14 +12,14 @@ function Logo({ isAlt }) {
       logo: file(relativePath: { eq: "logo.jpg" }) {
         childImageSharp {
           fixed(width: 235, height: 26) {
-            ...GatsbyImageSharpFixed
+            ...GatsbyImageSharpFixed_withWebp
           }
         }
       }
       logoAlt: file(relativePath: { eq: "logo-alt.jpg" }) {
         childImageSharp {
           fixed(width: 102, height: 47) {
-            ...GatsbyImageSharpFixed
+            ...GatsbyImageSharpFixed_withWebp
           }
         }
       }

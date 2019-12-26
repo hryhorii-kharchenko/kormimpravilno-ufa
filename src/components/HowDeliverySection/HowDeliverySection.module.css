@@ -1,0 +1,34 @@
+.HowDeliverySection {
+  margin: 20px auto 0px;
+  padding: 70px 0px 0px;
+  max-width: 557px;
+}
+
+.text {
+  margin: -5px auto 0px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.btn-wrapper {
+  margin: 35px auto 0px;
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  max-width: 160px;
+  min-width: 160px;
+  width: 100%;
+  margin: 0 20px;
+}
+
+.line {
+  max-width: 100px;
+  width: 100%;
+  height: 1px;
+  background-color: #dbdbdb;
+}

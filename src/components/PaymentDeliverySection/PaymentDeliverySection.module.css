@@ -1,0 +1,118 @@
+.PaymentDeliverySection {
+  margin: 20px 0px 0px;
+  padding: 70px 0px 0px;
+}
+
+.first-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-ways-wrapper {
+  max-width: 564px;
+  min-width: 300px;
+  width: 100%;
+  margin-right: 30px;
+}
+
+.payment-ways-description {
+  margin: -10px 0px 0px;
+  max-width: 500px;
+}
+
+.payment-ways-subheading {
+  margin: 27px 0px 0px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.17;
+}
+
+.payment-way-heading {
+  margin: 7px 0px 0px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: bold;
+  color: $main;
+}
+
+.payment-way-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $black;
+}
+
+.logos-wrapper {
+  max-width: 620px;
+  margin: -20px -20px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.logo {
+  max-width: 290px;
+  min-width: 200px;
+  width: 100%;
+  height: 130px;
+  margin: 20px 20px 0px 0px;
+  border-radius: 6px;
+  box-shadow: 0 8px 23px 0 rgba(0, 0, 0, 0.06);
+  background-color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 200px;
+}
+
+.logo-img {
+}
+
+.logo-mir-img {
+}
+
+.logo-visa-img {
+}
+
+.logo-mc-img {
+}
+
+.logo-jcb-img {
+}
+
+.second-row {
+  margin: 100px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img-wrapper {
+  max-width: 601px;
+  min-width: 300px;
+  width: 100%;
+  height: 100%;
+  margin-right: 30px;
+}
+
+.image {
+  width: 100%;
+}
+
+.text-wrapper {
+  max-width: 554px;
+  min-width: 300px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.instruction {
+  font-size: 14px;
+  line-height: 1.5;
+  color: $black;
+}

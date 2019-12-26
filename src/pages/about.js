@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
+import SecondaryBanner from '../components/SecondaryBanner';
+import WeAboutSection from '../components/WeAboutSection';
+import ContactsAboutSection from '../components/ContactsAboutSection';
 
 function AboutPage({
   data,
@@ -12,6 +15,7 @@ function AboutPage({
   addToCartBtnHandler,
   cartRemoveOneItemHandler,
   cartRemoveAllItemsHandler,
+  location,
 }) {
   function getSectionEntriesFromPage(sectionName, sourceObject) {
     return Object.fromEntries(
@@ -22,6 +26,13 @@ function AboutPage({
   }
 
   const universal = data.wpgraphql.universalPage.universal_page;
+  const page = data.wpgraphql.aboutPage.about_page;
+  const bannerBgFluid = data.bannerBg.childImageSharp.fluid;
+  const { pageTitle } = page;
+  const { pathname } = location;
+
+  const we = getSectionEntriesFromPage('we', page);
+  const contacts = getSectionEntriesFromPage('contacts', page);
 
   return (
     <Layout
@@ -33,6 +44,14 @@ function AboutPage({
       cartRemoveAllItemsHandler={cartRemoveAllItemsHandler}
     >
       <SEO title="О нас" />
+
+      <SecondaryBanner
+        pageTitle={pageTitle}
+        pathname={pathname}
+        fluid={bannerBgFluid}
+      />
+      <WeAboutSection data={we} />
+      <ContactsAboutSection data={contacts} />
     </Layout>
   );
 }
@@ -44,13 +63,16 @@ AboutPage.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneItemHandler: PropTypes.func.isRequired,
   cartRemoveAllItemsHandler: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 };
 
 export default AboutPage;
 
 export const query = graphql`
-  query indexQuery {
-    bannerBg: file(relativePath: { eq: "bg-banner.jpg" }) {
+  query aboutQuery {
+    bannerBg: file(relativePath: { eq: "bg-about.jpg" }) {
       childImageSharp {
         fluid(quality: 90, maxWidth: 1920) {
           ...GatsbyImageSharpFluid_withWebp
@@ -66,6 +88,36 @@ export const query = graphql`
           orgn
           ooo
           phone
+        }
+      }
+      aboutPage: page(id: "cGFnZToyMw==") {
+        about_page {
+          contactsAddress
+          contactsAgreement
+          contactsEmail
+          contactsHeading
+          contactsOferta
+          contactsPhone
+          contactsSubheading
+          pageTitle
+          weText
+          weTitle
+          weImg {
+            sourceUrl
+            mediaItemId
+            modified
+            imageFile {
+              childImageSharp {
+                fluid(quality: 90, maxWidth: 548) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+          }
+          weQuote {
+            author
+            text
+          }
         }
       }
     }

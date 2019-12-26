@@ -1,0 +1,21 @@
+.ConfirmationDeliverySection {
+  padding: 111px 0px 90px;
+  position: relative;
+  overflow: visible;
+}
+
+.ConfirmationDeliverySection::after {
+  content: url(./bg-wave-2.svg);
+  top: -11px;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.text {
+  max-width: 673px;
+  margin: -3px auto 0px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}

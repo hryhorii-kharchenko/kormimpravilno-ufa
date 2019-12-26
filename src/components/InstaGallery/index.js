@@ -5,7 +5,7 @@ import InstaCard from '../InstaCard';
 
 function InstaGallery({ feed }) {
   const gallery = feed.map(post => (
-    <InstaCard imgSrc={post.imgSrc} link={post.link} />
+    <InstaCard imgSrc={post.imgSrc} link={post.link} key={post.link} />
   ));
 
   return <section className="InstaGallery">{gallery}</section>;

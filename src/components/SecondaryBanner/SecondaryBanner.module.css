@@ -1,0 +1,88 @@
+.SecondaryBanner {
+  width: 100%;
+  min-height: 252px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 20px auto 25px; */
+}
+
+.SecondaryBanner > div {
+  top: -10px;
+}
+
+.SecondaryBanner.aligned-left {
+  margin: 0;
+  padding: 52px 0px 58px;
+}
+
+.breadcrumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aligned-left .breadcrumbs {
+  justify-content: flex-start;
+}
+
+.main-link {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.36;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $white;
+}
+
+.dot {
+  margin: 0 12px;
+  width: 6px;
+  height: 6px;
+  background-color: $white;
+  border-radius: 50%;
+}
+
+.secondary-link {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.36;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $white;
+  opacity: 0.6;
+}
+
+.heading-wrapper {
+  max-width: 450px;
+  margin: 12px auto 0px;
+}
+
+.aligned-left .heading-wrapper {
+  margin: 12px 0px 0px;
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: $white;
+}
+
+.aligned-left .heading {
+  text-align: left;
+}
+
+.line {
+  margin: 15px auto 0px;
+  width: 100px;
+  height: 4px;
+  background-color: $main;
+  background-image: linear-gradient(86deg, #41914c -38%, #69e579 139%);
+}
+
+.aligned-left .line {
+  margin: 15px 0px 0px;
+}
