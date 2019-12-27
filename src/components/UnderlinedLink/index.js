@@ -4,26 +4,24 @@ import PropTypes from 'prop-types';
 import './UnderlinedLink.module.css';
 import arrowImg from '../../images/svg/arrow-next.svg';
 
-function UnderlinedLink({ text, href = '#', target = '_self' }) {
+function UnderlinedLink({ text, className }) {
   return (
-    <a href={href} target={target} styleName="UnderlinedLink">
+    <div styleName="UnderlinedLink" className={className}>
       <p styleName="text">{text}</p>
       <img src={arrowImg} alt="" styleName="arrow" />
 
       <div styleName="underline" />
-    </a>
+    </div>
   );
 }
 
-UnderlinedLink.propTypes = {
-  text: PropTypes.string.isRequired,
-  href: PropTypes.string,
-  target: PropTypes.string,
+UnderlinedLink.defaultProps = {
+  className: '',
 };
 
-UnderlinedLink.defaultProps = {
-  href: '#',
-  target: '_self',
+UnderlinedLink.propTypes = {
+  text: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default UnderlinedLink;

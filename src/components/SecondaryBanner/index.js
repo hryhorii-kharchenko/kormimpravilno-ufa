@@ -24,7 +24,7 @@ function SecondaryBanner({
         id="banner"
       >
         <ContentWrapper>
-          <div styleName="breadcrumbs">
+          <nav styleName="breadcrumbs">
             <Link to="/" styleName="main-link">
               Главная
             </Link>
@@ -32,7 +32,7 @@ function SecondaryBanner({
             <Link to={pathname} styleName="secondary-link">
               {pageShortTitle || pageTitle}
             </Link>
-          </div>
+          </nav>
 
           <div styleName="heading-wrapper">
             <h1 styleName="heading">{pageTitle}</h1>

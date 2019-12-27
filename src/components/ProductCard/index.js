@@ -20,36 +20,39 @@ function ProductCard({
 }) {
   return (
     <article styleName="ProductCard">
-      <Img fluid={avatar} alt={heading} styleName="avatar" />
+      <Link to={slug} styleName="link-wrapper">
+        <Img fluid={avatar} alt={heading} styleName="avatar" />
 
-      <div styleName="content-wrapper">
-        <header styleName="header">
-          <h3 styleName="heading">{heading}</h3>
-          <p styleName="composition">
-            <strong>Состав: </strong>
-            {composition}
-          </p>
-          <p styleName="weight">
-            <strong>Общий вес: </strong>
-            {weight}
-          </p>
-        </header>
+        <div styleName="content-wrapper">
+          <header styleName="header">
+            <h3 styleName="heading">{heading}</h3>
+            <p styleName="composition">
+              <strong>Состав: </strong>
+              {composition}
+            </p>
+            <p styleName="weight">
+              <strong>Общий вес: </strong>
+              {weight}
+            </p>
+          </header>
 
-        <div styleName="separator" />
+          <div styleName="separator" />
 
-        <footer styleName="footer">
-          <p styleName="price">{price}</p>
-          <Button
-            isAction
-            isTextBlack
-            styleName="cart-btn"
-            onClick={() => onClick(id)}
-          >
-            <img src={cartIcon} alt="" styleName="cart-btn-img" />
-            <span>В корзину</span>
-          </Button>
-        </footer>
-      </div>
+          <footer styleName="footer">
+            <p styleName="price">{price}</p>
+          </footer>
+        </div>
+      </Link>
+
+      <Button
+        isAction
+        isTextBlack
+        styleName="cart-btn"
+        onClick={() => onClick(id)}
+      >
+        <img src={cartIcon} alt="" styleName="cart-btn-img" />
+        <span>В корзину</span>
+      </Button>
     </article>
   );
 }

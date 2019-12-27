@@ -1,0 +1,41 @@
+.ProductBreadcrumbs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main-link {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.36;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $black;
+}
+
+.shop-link {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.36;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $black;
+}
+
+.curr-link {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.36;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $black;
+  opacity: 0.4;
+}
+
+.dot {
+  margin: 0 12px;
+  width: 6px;
+  height: 6px;
+  background-color: $white;
+  border-radius: 50%;
+}

@@ -14,7 +14,7 @@ function RecipeGallery({ recipes, isSlider }) {
           avatar={recipe.featuredImage.imageFile.childImageSharp.fluid}
           heading={recipe.recipe_post.recipeName}
           description={recipe.recipe_post.description}
-          link={recipe.slug}
+          slug={recipe.slug}
           key={recipe.id}
           // id={recipe.id}
         />

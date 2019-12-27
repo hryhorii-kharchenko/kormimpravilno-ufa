@@ -4,6 +4,14 @@
   border: solid 1px #e2e2e2;
 }
 
+.link-wrapper {
+  text-decoration: none;
+  color: $black;
+}
+
+.link-wrapper:hover .underlined-link {
+}
+
 .avatar {
   width: 100%;
   max-height: 217px;
@@ -32,4 +40,7 @@
 
 .footer {
   margin: 15px 0px 0px;
+}
+
+.underlined-link {
 }
