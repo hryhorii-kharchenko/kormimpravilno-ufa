@@ -10,7 +10,6 @@ import './MainProductSection.module.css';
 
 function MainProductSection({
   productName,
-  productId,
   id,
   composition,
   weight,
@@ -20,63 +19,82 @@ function MainProductSection({
   image,
   cart,
   addToCartOnClick,
-  removeFromCartOnClick,
+  removeOneStackFromCartOnClick,
 }) {
-  // TODO if (cart contains id) { display ProductInCartCounter }
-
   return (
-    <section className="MainProductSection" id="main">
+    <section styleName="MainProductSection" id="main">
       <ContentWrapper>
-        <div className="img-wrapper">
+        <div styleName="img-wrapper">
           <Img
             fluid={image.imageFile.childImageSharp.fluid}
             alt={productName}
+            slyleName="avatar"
           />
         </div>
-        <div className="text-wrapper">
-          <div className="heading-wrapper">
-            <h1 className="heading">{productName}</h1>
-            <div className="heading-underline" />
+        <div styleName="text-wrapper">
+          <div styleName="heading-wrapper">
+            <h1 styleName="heading">{productName}</h1>
+            <div styleName="heading-underline" />
           </div>
-          <div className="info">
-            <p className="info-title">Состав:</p>
-            <p className="info-text">{composition}</p>
+          <div styleName="info">
+            <p styleName="info-title">Состав:</p>
+            <p styleName="info-text">{composition}</p>
           </div>
-          <div className="info">
-            <p className="info-title">Общий вес:</p>
-            <p className="info-text">{weight}</p>
+          <div styleName="info">
+            <p styleName="info-title">Общий вес:</p>
+            <p styleName="info-text">{weight}</p>
           </div>
 
-          <div className="price-wrapper">
+          <div styleName="line" />
+
+          <div styleName="price-wrapper">
             <p styleName="price">{price}</p>
-
-            <div className="cart-modificators-wrapper">
+            <div styleName="cart-modificators-wrapper">
               <ProductInCartCounter
                 addOnClick={addToCartOnClick}
-                removeOnClick={removeFromCartOnClick}
+                removeOnClick={removeOneStackFromCartOnClick}
                 cart={cart}
-                itemId={id}
+                id={id}
               />
-
               <Button
                 isAction
                 isTextBlack
-                styleName="cart-btn"
+                styleName="addtocart-btn"
                 onClick={() => addToCartOnClick(id)}
               />
             </div>
           </div>
 
-          <div className="info">
-            <p className="info-title">Способы приготовления:</p>
-            <p className="info-text">{cooking}</p>
+          <div styleName="line" />
+
+          <div styleName="info">
+            <p styleName="info-title">Способы приготовления:</p>
+            <p styleName="info-text">{cooking}</p>
           </div>
-          <div className="info">
-            <p className="info-title">
+          <div styleName="info">
+            <p styleName="info-title">
               Средние значения пищевой и энергетической ценности на 100г
               продукта:
             </p>
-            <p className="info-text">{nutrition}</p>
+            <p styleName="info-text">{nutrition}</p>
+          </div>
+
+          <div styleName="line line-last" />
+
+          <div styleName="share">
+            <p styleName="share-title">Поделиться: </p>
+            <Button isCircle isExternal styleName="share-btn">
+              <img src="" alt="Facebook" styleName="share-img" />
+            </Button>
+            <Button isCircle isExternal styleName="share-btn">
+              <img src="" alt="Twitter" styleName="share-img" />
+            </Button>
+            <Button isCircle isExternal styleName="share-btn">
+              <img src="" alt="VK" styleName="share-img" />
+            </Button>
+            <Button isCircle isExternal styleName="share-btn">
+              <img src="" alt="Pinterest" styleName="share-img" />
+            </Button>
           </div>
         </div>
       </ContentWrapper>
@@ -86,7 +104,6 @@ function MainProductSection({
 
 MainProductSection.propTypes = {
   productName: PropTypes.string.isRequired,
-  productId: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   composition: PropTypes.string.isRequired,
   weight: PropTypes.string.isRequired,
@@ -100,6 +117,9 @@ MainProductSection.propTypes = {
       }),
     }),
   }).isRequired,
+  cart: PropTypes.shape().isRequired,
+  addToCartOnClick: PropTypes.func.isRequired,
+  removeOneStackFromCartOnClick: PropTypes.func.isRequired,
 };
 
 export default MainProductSection;

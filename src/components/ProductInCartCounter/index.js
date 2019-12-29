@@ -3,16 +3,20 @@ import PropTypes from 'prop-types';
 
 import './ProductInCartCounter.module.css';
 
-function ProductInCartCounter({ addOnClick, removeOnClick, cart, itemId }) {
-  const count = 
-  
+function ProductInCartCounter({ addOnClick, removeOnClick, cart, id }) {
+  const count = cart[id];
+
+  if (!count) {
+    return null;
+  }
+
   return (
-    <div className="ProductInCartCounter">
-      <button className="remove" type="button">
+    <div styleName="ProductInCartCounter">
+      <button styleName="remove" type="button" onClick={() => addOnClick(id)}>
         -
       </button>
-      <span className="counter">{count}</span>
-      <button className="add" type="button">
+      <span styleName="counter">{count}</span>
+      <button styleName="add" type="button" onClick={() => removeOnClick(id)}>
         +
       </button>
     </div>
@@ -22,7 +26,8 @@ function ProductInCartCounter({ addOnClick, removeOnClick, cart, itemId }) {
 ProductInCartCounter.propTypes = {
   addOnClick: PropTypes.func.isRequired,
   removeOnClick: PropTypes.func.isRequired,
-  itemId: PropTypes.func.isRequired,
+  cart: PropTypes.shape().isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default ProductInCartCounter;

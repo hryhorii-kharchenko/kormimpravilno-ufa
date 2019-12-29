@@ -1,0 +1,26 @@
+.SimilarProductSection {
+  padding: 22px 0px 102px;
+}
+
+.SimilarProductSection h2 {
+  font-size: 40px;
+}
+
+.btn-wrapper {
+  margin: 25px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #dbdbdb;
+}
+
+.button {
+  min-width: 160px;
+  max-width: 160px;
+  margin: 0px 23px;
+}

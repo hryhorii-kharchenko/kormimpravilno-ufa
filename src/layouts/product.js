@@ -8,33 +8,45 @@ import MainProductSection from '../components/MainProductSection';
 import SimilarProductSection from '../components/SimilarProductSection';
 
 function ProductLayout({
-  productName,
-  productId,
+  // productName,
+  // productId,
+  // composition,
+  // weight,
+  // price,
+  // cooking,
+  // nutrition,
+  // similar,
+  // image,
   id,
-  composition,
-  weight,
-  price,
-  cooking,
-  nutrition,
-  similar,
-  image,
   defaultImage,
   universal,
   cart,
   catalog,
   addToCartBtnHandler,
-  cartRemoveOneItemHandler,
-  cartRemoveAllItemsHandler,
+  cartRemoveOneStackHandler,
+  cartRemoveWholeItemHandler,
   location,
 }) {
+  const { price, image } = catalog;
+  const {
+    productName,
+    composition,
+    weight,
+    cooking,
+    nutrition,
+    similar,
+  } = catalog.product_post;
+
+  const avatar = image || defaultImage;
+
   return (
     <Layout
       data={universal}
       cart={cart}
       catalog={catalog}
       addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneItemHandler={cartRemoveOneItemHandler}
-      cartRemoveAllItemsHandler={cartRemoveAllItemsHandler}
+      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
     >
       <SEO title={productName} />
 
@@ -42,30 +54,27 @@ function ProductLayout({
         productName={productName}
         pathname={location.pathname}
       />
-      <MainProductSection />
-      <SimilarProductSection />
+      <MainProductSection
+        productName={productName}
+        id={id}
+        composition={composition}
+        weight={weight}
+        price={price}
+        cooking={cooking}
+        nutrition={nutrition}
+        image={avatar}
+        cart={cart}
+        addToCartOnClick={addToCartBtnHandler}
+        removeOneStackFromCartOnClick={cartRemoveOneStackHandler}
+      />
+      <SimilarProductSection similar={similar} catalog={catalog} />
     </Layout>
   );
 }
 
-ProductLayout.defaultProps = {
-  similar: {
-    first: 1,
-    second: 2,
-    third: 3,
-  },
-  image: {
-    imageFile: {
-      childImageSharp: {
-        fluid: null,
-      },
-    },
-  },
-};
-
 ProductLayout.propTypes = {
   productName: PropTypes.string.isRequired,
-  productId: PropTypes.string.isRequired,
+  // productId: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   composition: PropTypes.string.isRequired,
   weight: PropTypes.string.isRequired,
@@ -76,14 +85,14 @@ ProductLayout.propTypes = {
     first: PropTypes.string,
     second: PropTypes.string,
     third: PropTypes.string,
-  }),
+  }).isRequired,
   image: PropTypes.shape({
     imageFile: PropTypes.shape({
       childImageSharp: PropTypes.shape({
         fluid: PropTypes.shape(),
       }),
     }),
-  }),
+  }).isRequired,
   defaultImage: PropTypes.shape({
     imageFile: PropTypes.shape({
       childImageSharp: PropTypes.shape({
@@ -95,8 +104,8 @@ ProductLayout.propTypes = {
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
-  cartRemoveOneItemHandler: PropTypes.func.isRequired,
-  cartRemoveAllItemsHandler: PropTypes.func.isRequired,
+  cartRemoveOneStackHandler: PropTypes.func.isRequired,
+  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,

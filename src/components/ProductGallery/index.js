@@ -11,7 +11,7 @@ function ProductGallery({ products, onClick, isSlider }) {
     if (!isSlider) {
       return (
         <ProductCard
-          avatar={product.image.imageFile.childImageSharp.fluid}
+          avatar={product.imageSmall.imageFile.childImageSharp.fluid}
           heading={product.product_post.productName}
           composition={product.product_post.composition}
           weight={product.product_post.weight}
@@ -25,7 +25,7 @@ function ProductGallery({ products, onClick, isSlider }) {
     return (
       <div styleName="product-wrapper" key={product.id}>
         <ProductCard
-          avatar={product.image.imageFile.childImageSharp.fluid}
+          avatar={product.imageSmall.imageFile.childImageSharp.fluid}
           heading={product.product_post.productName}
           composition={product.product_post.composition}
           weight={product.product_post.weight}

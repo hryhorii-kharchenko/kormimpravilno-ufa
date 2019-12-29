@@ -17,8 +17,8 @@ function DeliveryPage({
   catalog,
   cart,
   addToCartBtnHandler,
-  cartRemoveOneItemHandler,
-  cartRemoveAllItemsHandler,
+  cartRemoveOneStackHandler,
+  cartRemoveWholeItemHandler,
   location,
 }) {
   function getSectionEntriesFromPage(sectionName, sourceObject) {
@@ -48,8 +48,8 @@ function DeliveryPage({
       cart={cart}
       catalog={catalog}
       addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneItemHandler={cartRemoveOneItemHandler}
-      cartRemoveAllItemsHandler={cartRemoveAllItemsHandler}
+      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
     >
       <SEO title="Доставка и оплата" />
 
@@ -74,8 +74,8 @@ DeliveryPage.propTypes = {
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
-  cartRemoveOneItemHandler: PropTypes.func.isRequired,
-  cartRemoveAllItemsHandler: PropTypes.func.isRequired,
+  cartRemoveOneStackHandler: PropTypes.func.isRequired,
+  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,

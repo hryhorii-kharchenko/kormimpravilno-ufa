@@ -11,19 +11,21 @@ class ShopProvider extends Component {
     };
 
     this.addToCartBtnHandler = this.addToCartBtnHandler.bind(this);
-    this.cartRemoveOneItemHandler = this.cartRemoveOneItemHandler.bind(this);
-    this.cartRemoveAllItemsHandler = this.cartRemoveAllItemsHandler.bind(this);
+    this.cartRemoveOneStackHandler = this.cartRemoveOneStackHandler.bind(this);
+    this.cartRemoveWholeItemHandler = this.cartRemoveWholeItemHandler.bind(
+      this
+    );
   }
 
   addToCartBtnHandler(id, amount) {
     this.addItemToCart(id, amount);
   }
 
-  cartRemoveOneItemHandler(id) {
+  cartRemoveOneStackHandler(id) {
     this.removeOneStackOfItemFromCart(id);
   }
 
-  cartRemoveAllItemsHandler(id) {
+  cartRemoveWholeItemHandler(id) {
     this.removeAllStacksOfItemFromCart(id);
   }
 
@@ -60,8 +62,8 @@ class ShopProvider extends Component {
     const { cart } = this.state;
     const {
       addToCartBtnHandler,
-      cartRemoveOneItemHandler,
-      cartRemoveAllItemsHandler,
+      cartRemoveOneStackHandler,
+      cartRemoveWholeItemHandler,
     } = this;
     const structuredCart = {};
 
@@ -92,13 +94,29 @@ class ShopProvider extends Component {
                     price
                     productId
                     id
-                    image {
+                    imageSmall {
                       sourceUrl
                       mediaItemId
                       modified
                       imageFile {
                         childImageSharp {
                           fluid(maxWidth: 385, maxHeight: 350) {
+                            base64
+                            aspectRatio
+                            src
+                            srcSet
+                            sizes
+                          }
+                        }
+                      }
+                    }
+                    imageFull {
+                      sourceUrl
+                      mediaItemId
+                      modified
+                      imageFile {
+                        childImageSharp {
+                          fluid(maxWidth: 556, maxHeight: 504) {
                             base64
                             aspectRatio
                             src
@@ -119,8 +137,8 @@ class ShopProvider extends Component {
             cart: structuredCart,
             catalog: data.wpgraphql.products.nodes,
             addToCartBtnHandler,
-            cartRemoveOneItemHandler,
-            cartRemoveAllItemsHandler,
+            cartRemoveOneStackHandler,
+            cartRemoveWholeItemHandler,
           });
         }}
       />
