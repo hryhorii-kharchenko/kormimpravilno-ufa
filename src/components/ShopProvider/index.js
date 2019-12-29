@@ -20,11 +20,11 @@ class ShopProvider extends Component {
   }
 
   cartRemoveOneItemHandler(id) {
-    this.removeOneItemFromCart(id);
+    this.removeOneStackOfItemFromCart(id);
   }
 
   cartRemoveAllItemsHandler(id) {
-    this.removeAllItemsFromCart(id);
+    this.removeAllStacksOfItemFromCart(id);
   }
 
   addItemToCart(id, amount) {
@@ -33,7 +33,7 @@ class ShopProvider extends Component {
     }));
   }
 
-  removeOneItemFromCart(id) {
+  removeOneStackOfItemFromCart(id) {
     this.setState(({ cart }) => {
       const removeElement = cart.indexOf(id);
       const newCart = [
@@ -45,7 +45,7 @@ class ShopProvider extends Component {
     });
   }
 
-  removeAllItemsFromCart(id) {
+  removeAllStacksOfItemFromCart(id) {
     this.setState(state => ({
       cart: state.cart.filter(productId => productId !== id),
     }));
