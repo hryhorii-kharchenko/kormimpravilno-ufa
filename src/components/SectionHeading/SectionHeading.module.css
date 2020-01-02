@@ -6,6 +6,9 @@
   margin: 0px 0px 20px;
 }
 
+.big {
+}
+
 .heading {
   margin: 0px 0px 10px;
   font-size: 34px;
@@ -18,6 +21,10 @@
   text-align: left;
 }
 
+.big .heading {
+  font-size: 40px;
+}
+
 .decoration {
   width: 100px;
   height: 3px;
@@ -28,4 +35,8 @@
 
 .aligned-left .decoration {
   margin: 0px;
+}
+
+.big .decoration {
+  height: 4px;
 }

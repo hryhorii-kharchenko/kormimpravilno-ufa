@@ -16,11 +16,45 @@ function MainProductSection({
   price,
   cooking,
   nutrition,
+  info,
   image,
   cart,
   addToCartOnClick,
   removeOneStackFromCartOnClick,
 }) {
+  const compositionHtml = (
+    <div styleName="info">
+      <p styleName="info-title">Состав:</p>
+      <p styleName="info-text">{composition}</p>
+    </div>
+  );
+  const weightHtml = (
+    <div styleName="info">
+      <p styleName="info-title">Общий вес:</p>
+      <p styleName="info-text">{weight}</p>
+    </div>
+  );
+  const cookingHtml = (
+    <div styleName="info">
+      <p styleName="info-title">Способы приготовления:</p>
+      <p styleName="info-text">{cooking}</p>
+    </div>
+  );
+  const nutritionHtml = (
+    <div styleName="info">
+      <p styleName="info-title">
+        Средние значения пищевой и энергетической ценности на 100г продукта:
+      </p>
+      <p styleName="info-text">{nutrition}</p>
+    </div>
+  );
+  const infoHtml = (
+    <div styleName="info">
+      <p styleName="info-title">Информация о продукте:</p>
+      <p styleName="info-text">{info}</p>
+    </div>
+  );
+
   return (
     <section styleName="MainProductSection" id="main">
       <ContentWrapper>
@@ -32,19 +66,8 @@ function MainProductSection({
           />
         </div>
         <div styleName="text-wrapper">
-          <div styleName="heading-wrapper">
-            <h1 styleName="heading">{productName}</h1>
-            <div styleName="heading-underline" />
-          </div>
-          <div styleName="info">
-            <p styleName="info-title">Состав:</p>
-            <p styleName="info-text">{composition}</p>
-          </div>
-          <div styleName="info">
-            <p styleName="info-title">Общий вес:</p>
-            <p styleName="info-text">{weight}</p>
-          </div>
-
+          {composition ? compositionHtml : null}
+          {weight ? weightHtml : null}
           <div styleName="line" />
 
           <div styleName="price-wrapper">
@@ -67,17 +90,9 @@ function MainProductSection({
 
           <div styleName="line" />
 
-          <div styleName="info">
-            <p styleName="info-title">Способы приготовления:</p>
-            <p styleName="info-text">{cooking}</p>
-          </div>
-          <div styleName="info">
-            <p styleName="info-title">
-              Средние значения пищевой и энергетической ценности на 100г
-              продукта:
-            </p>
-            <p styleName="info-text">{nutrition}</p>
-          </div>
+          {cooking ? cookingHtml : null}
+          {nutrition ? nutritionHtml : null}
+          {info ? infoHtml : null}
 
           <div styleName="line line-last" />
 
@@ -102,14 +117,23 @@ function MainProductSection({
   );
 }
 
+MainProductSection.defaultProps = {
+  composition: null,
+  weight: null,
+  cooking: null,
+  nutrition: null,
+  info: null,
+};
+
 MainProductSection.propTypes = {
   productName: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  composition: PropTypes.string.isRequired,
-  weight: PropTypes.string.isRequired,
+  composition: PropTypes.string,
+  weight: PropTypes.string,
   price: PropTypes.string.isRequired,
-  cooking: PropTypes.string.isRequired,
-  nutrition: PropTypes.string.isRequired,
+  cooking: PropTypes.string,
+  nutrition: PropTypes.string,
+  info: PropTypes.string,
   image: PropTypes.shape({
     imageFile: PropTypes.shape({
       childImageSharp: PropTypes.shape({

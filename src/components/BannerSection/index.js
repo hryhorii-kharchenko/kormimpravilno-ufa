@@ -33,7 +33,7 @@ function BannerSection({ data, bgImg }) {
             <Button href="/shop" isFilled styleName="bannerBtn">
               {data.bannerBtnStore}
             </Button>
-            <Button href="/recipes" styleName="bannerBtn">
+            <Button href="/#recipes" styleName="bannerBtn">
               {data.bannerBtnRecipes}
             </Button>
           </Wrapper>

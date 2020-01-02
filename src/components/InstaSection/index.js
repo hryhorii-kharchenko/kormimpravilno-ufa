@@ -12,7 +12,7 @@ function InstaSection({ data }) {
   return (
     <section styleName="InstaSection" id="insta">
       <ContentWrapper>
-        <SectionHeading text={data.instagramHeading} />
+        <SectionHeading text={data.instagramHeading} isBig />
         <SectionSubheading text={data.instagramSubheading} />
 
         {/* <InstaGallery feed={} /> */}

@@ -14,10 +14,10 @@ function RecipeSection({ data, recipes }) {
   return (
     <section styleName="RecipeSection" id="recipes">
       <ContentWrapper>
-        <SectionHeading text={data.recipesHeading} />
+        <SectionHeading text={data.recipesHeading} isBig />
         <SectionSubheading text={data.recipesSubheading} />
 
-        <RecipeGallery recipes={recipes} isSlider />
+        <RecipeGallery posts={recipes} recipes={recipes} isSlider />
       </ContentWrapper>
     </section>
   );

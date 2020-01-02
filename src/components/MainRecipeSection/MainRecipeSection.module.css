@@ -1,0 +1,50 @@
+.MainRecipeSection {
+  margin: 20px 0px 0px;
+  padding: 70px 0px 0px;
+}
+
+.ingredients-wrapper {
+  max-width: 634px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.preparation-wrapper {
+  max-width: 634px;
+  margin: 50px auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heading {
+}
+
+.text-wrapper ul {
+  margin: 0;
+  padding: 0;
+}
+
+.text-wrapper ul > li {
+  margin: 0;
+  list-style-type: none;
+}
+
+.img-wrapper {
+  max-width: 726px;
+  margin: 90px auto;
+  position: relative;
+  z-index: 1;
+}
+
+.image {
+  width: 100%;
+}
+
+.decoration {
+  content: url('./bg-wave-2.svg');
+  top: 300px;
+  right: 0px;
+  position: absolute;
+  z-index: 0;
+}

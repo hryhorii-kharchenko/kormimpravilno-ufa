@@ -18,6 +18,19 @@ function ProductCard({
   slug,
   onClick,
 }) {
+  const compositionHtml = (
+    <p styleName="composition">
+      <strong>Состав: </strong>
+      {composition}
+    </p>
+  );
+  const weightHtml = (
+    <p styleName="weight">
+      <strong>Общий вес: </strong>
+      {weight}
+    </p>
+  );
+
   return (
     <article styleName="ProductCard">
       <Link to={slug} styleName="link-wrapper">
@@ -26,14 +39,8 @@ function ProductCard({
         <div styleName="content-wrapper">
           <header styleName="header">
             <h3 styleName="heading">{heading}</h3>
-            <p styleName="composition">
-              <strong>Состав: </strong>
-              {composition}
-            </p>
-            <p styleName="weight">
-              <strong>Общий вес: </strong>
-              {weight}
-            </p>
+            {composition ? compositionHtml : null}
+            {weight ? weightHtml : null}
           </header>
 
           <div styleName="separator" />
@@ -57,11 +64,16 @@ function ProductCard({
   );
 }
 
+ProductCard.defaultProps = {
+  composition: null,
+  weight: null,
+};
+
 ProductCard.propTypes = {
   avatar: PropTypes.shape().isRequired,
   heading: PropTypes.string.isRequired,
-  composition: PropTypes.string.isRequired,
-  weight: PropTypes.string.isRequired,
+  composition: PropTypes.string,
+  weight: PropTypes.string,
   price: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,

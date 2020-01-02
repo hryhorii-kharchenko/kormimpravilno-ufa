@@ -39,6 +39,13 @@ function IndexPage({
   const recipe = getSectionEntriesFromPage('recipe', page);
   const instagram = getSectionEntriesFromPage('instagram', page);
 
+  for (let i = 0; i < posts.length; i += 1) {
+    if (!posts[i].featuredImage) {
+      posts[i].featuredImage = {};
+      posts[i].featuredImage.imageFile = data.defaultImageSmall;
+    }
+  }
+
   return (
     <Layout
       data={universal}
@@ -68,6 +75,7 @@ function IndexPage({
 IndexPage.propTypes = {
   data: PropTypes.shape({
     bannerBg: PropTypes.shape.isRequired,
+    defaultImageSmall: PropTypes.shape.isRequired,
     wpgraphql: PropTypes.shape({
       mainPage: PropTypes.shape({
         main_page: PropTypes.shape(),
@@ -94,6 +102,17 @@ export const query = graphql`
       childImageSharp {
         fluid(quality: 90, maxWidth: 1920) {
           ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    defaultImageSmall: file(relativePath: { eq: "default.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 385, maxHeight: 217) {
+          base64
+          aspectRatio
+          src
+          srcSet
+          sizes
         }
       }
     }
@@ -183,28 +202,3 @@ export const query = graphql`
     }
   }
 `;
-
-// export const query = graphql`
-//   query indexQuery {
-//     wpgraphql {
-//       posts {
-//         nodes {
-//           recipe_post {
-//             recipeName
-//             description
-//             // ingredients
-//             // preparation
-//             // similar {
-//             //   first
-//             //   second
-//             //   third
-//             // }
-//           }
-//           // id
-//           // postId
-//           slug
-//         }
-//       }
-//     }
-//   }
-// `;

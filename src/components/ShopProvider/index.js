@@ -84,6 +84,7 @@ class ShopProvider extends Component {
                     weight
                     cooking
                     nutrition
+                    info
                     similar {
                       first
                       second
@@ -94,7 +95,9 @@ class ShopProvider extends Component {
                     price
                     productId
                     id
-                    imageSmall {
+                    slug
+                    modified
+                    imageSmall: image {
                       sourceUrl
                       mediaItemId
                       modified
@@ -110,7 +113,7 @@ class ShopProvider extends Component {
                         }
                       }
                     }
-                    imageFull {
+                    imageFull: image {
                       sourceUrl
                       mediaItemId
                       modified
@@ -130,12 +133,49 @@ class ShopProvider extends Component {
                 }
               }
             }
+            defaultImageSmall: file(relativePath: { eq: "default.jpg" }) {
+              childImageSharp {
+                fluid(maxWidth: 385, maxHeight: 350) {
+                  base64
+                  aspectRatio
+                  src
+                  srcSet
+                  sizes
+                }
+              }
+            }
+            defaultImageFull: file(relativePath: { eq: "default.jpg" }) {
+              childImageSharp {
+                fluid(maxWidth: 556, maxHeight: 504) {
+                  base64
+                  aspectRatio
+                  src
+                  srcSet
+                  sizes
+                }
+              }
+            }
           }
         `}
-        render={data => {
+        render={dataParam => {
+          const data = dataParam;
+
+          for (let i = 0; i < data.wpgraphql.products.nodes.length; i += 1) {
+            if (!data.wpgraphql.products.nodes[i].imageSmall) {
+              data.wpgraphql.products.nodes[i].imageSmall = {};
+              data.wpgraphql.products.nodes[i].imageFull = {};
+              data.wpgraphql.products.nodes[i].imageSmall.imageFile =
+                data.defaultImageSmall;
+              data.wpgraphql.products.nodes[i].imageFull.imageFile =
+                data.defaultImageFull;
+            }
+          }
+
           return React.cloneElement(children, {
             cart: structuredCart,
-            catalog: data.wpgraphql.products.nodes,
+            catalog: data.wpgraphql.products.nodes.sort(
+              (a, b) => new Date(b.modified) - new Date(a.modified)
+            ),
             addToCartBtnHandler,
             cartRemoveOneStackHandler,
             cartRemoveWholeItemHandler,

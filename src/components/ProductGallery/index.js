@@ -6,8 +6,27 @@ import ProductCard from '../ProductCard';
 
 import './ProductGallery.module.css';
 
-function ProductGallery({ products, onClick, isSlider }) {
-  const gallery = products.map(product => {
+function ProductGallery({ catalog, products, onClick, isSlider }) {
+  const filtered = products.filter(elem => {
+    return elem !== undefined;
+  });
+
+  if (filtered.length < 3) {
+    const { length } = filtered;
+    let position = 0;
+
+    for (let i = 0; i < 3 - length; i += 1) {
+      while (catalog.includes(filtered[position])) {
+        position += 1;
+      }
+      if (catalog[position]) {
+        filtered.push(catalog[position]);
+      }
+      position += 1;
+    }
+  }
+
+  const gallery = filtered.map(product => {
     if (!isSlider) {
       return (
         <ProductCard
@@ -18,6 +37,7 @@ function ProductGallery({ products, onClick, isSlider }) {
           price={product.price}
           key={product.id}
           id={product.id}
+          slug={product.slug}
           onClick={onClick}
         />
       );
@@ -31,22 +51,19 @@ function ProductGallery({ products, onClick, isSlider }) {
           weight={product.product_post.weight}
           price={product.price}
           id={product.id}
+          slug={product.slug}
           onClick={onClick}
         />
       </div>
     );
   });
 
+  for (let i = 0; i < 3 - gallery.length; i += 0) {
+    gallery.push(gallery[0]);
+  }
+
   if (!isSlider) {
     return <section styleName="ProductGallery">{gallery}</section>;
-  }
-
-  if (gallery.length === 1) {
-    gallery.push(...gallery, ...gallery);
-  }
-
-  if (gallery.length === 2) {
-    gallery.push(gallery[0]);
   }
 
   const settings = {
@@ -72,6 +89,16 @@ ProductGallery.defaultProps = {
 };
 
 ProductGallery.propTypes = {
+  catalog: PropTypes.arrayOf(
+    PropTypes.shape({
+      avatar: PropTypes.shape,
+      productName: PropTypes.string,
+      composition: PropTypes.string,
+      weight: PropTypes.string,
+      price: PropTypes.string,
+      id: PropTypes.string,
+    })
+  ).isRequired,
   products: PropTypes.arrayOf(
     PropTypes.shape({
       avatar: PropTypes.shape,

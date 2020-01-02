@@ -12,7 +12,7 @@ function PopularSection({ data, products, onClick, shopBtnText }) {
   return (
     <section styleName="PopularSection">
       <ContentWrapper>
-        <SectionHeading text={data.popularHeading} />
+        <SectionHeading text={data.popularHeading} isBig />
 
         <ProductGallery products={products} onClick={onClick} isSlider />
         <div styleName="btn-wrapper">

@@ -1,4 +1,8 @@
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+const path = require(`path`);
+const {
+  createRemoteFileNode,
+  createFilePath,
+} = require(`gatsby-source-filesystem`);
 
 if (process.NODE_ENV === 'development') {
   exports.onCreateWebpackConfig = ({ actions }) => {
@@ -21,6 +25,129 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     });
   }
+};
+
+// exports.onCreateNode = ({ node, getNode, actions }) => {
+//   const { createNodeField } = actions;
+//   if (node.internal.type === `WPGraphQL`) {
+//     const slug = createFilePath({ node, getNode, basePath: `pages` });
+//     createNodeField({
+//       node,
+//       name: `slug`,
+//       value: slug,
+//     });
+//   }
+// };
+exports.createPages = async ({ graphql, actions }) => {
+  const { data } = await graphql(`
+    query {
+      wpgraphql {
+        products {
+          nodes {
+            ... on WPGraphQL_SimpleProduct {
+              id
+              slug
+            }
+          }
+        }
+        posts {
+          nodes {
+            id
+            recipe_post {
+              recipeName
+              description
+              ingredients
+              preparation
+              similar {
+                first
+                second
+                third
+              }
+            }
+            slug
+            featuredImage {
+              sourceUrl
+              mediaItemId
+              modified
+              imageFile {
+                childImageSharp {
+                  fluid(maxWidth: 726, maxHeight: 909) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
+          }
+        }
+        universalPage: page(id: "cGFnZToyMDg=") {
+          universal_page {
+            copyright
+            inn
+            instaLink
+            orgn
+            ooo
+            phone
+          }
+        }
+      }
+      bannerBg: file(relativePath: { eq: "bg-recipe.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90, maxWidth: 1920) {
+            base64
+            aspectRatio
+            src
+            srcSet
+            sizes
+          }
+        }
+      }
+      defaultImageFull: file(relativePath: { eq: "default.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 726, maxHeight: 909) {
+            base64
+            aspectRatio
+            src
+            srcSet
+            sizes
+          }
+        }
+      }
+    }
+  `);
+  data.wpgraphql.products.nodes.forEach(({ id, slug }) => {
+    actions.createPage({
+      path: slug,
+      component: path.resolve(`./src/layouts/product.js`),
+      context: {
+        id,
+        universal: data.wpgraphql.universalPage.universal_page,
+      },
+    });
+  });
+
+  const posts = data.wpgraphql.posts.nodes;
+  for (let i = 0; i < posts.length; i += 1) {
+    if (!posts[i].featuredImage) {
+      posts[i].featuredImage = {};
+      posts[i].featuredImage.imageFile = data.defaultImageFull;
+    }
+  }
+  posts.forEach(({ id, slug }) => {
+    actions.createPage({
+      path: slug,
+      component: path.resolve(`./src/layouts/recipe.js`),
+      context: {
+        id,
+        posts,
+        bannerBg: data.bannerBg,
+        universal: data.wpgraphql.universalPage.universal_page,
+      },
+    });
+  });
 };
 
 exports.createResolvers = ({

@@ -6,6 +6,8 @@ import ContentWrapper from '../ContentWrapper';
 import ProductGallery from '../ProductGallery';
 import Button from '../Button';
 
+import './SimilarProductSection.module.css';
+
 function SimilarProductSection({ similar, catalog }) {
   const products = [];
 
@@ -16,9 +18,9 @@ function SimilarProductSection({ similar, catalog }) {
   return (
     <section styleName="SimilarProductSection" id="similar">
       <ContentWrapper>
-        <SectionHeading text="Вас может заинтересовать" />
+        <SectionHeading text="Вас может заинтересовать" isBig />
 
-        <ProductGallery products={products} isSlider />
+        <ProductGallery catalog={catalog} products={products} />
 
         <div styleName="btn-wrapper">
           <div styleName="line" />

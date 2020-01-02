@@ -8,18 +8,7 @@ import MainProductSection from '../components/MainProductSection';
 import SimilarProductSection from '../components/SimilarProductSection';
 
 function ProductLayout({
-  // productName,
-  // productId,
-  // composition,
-  // weight,
-  // price,
-  // cooking,
-  // nutrition,
-  // similar,
-  // image,
-  id,
-  defaultImage,
-  universal,
+  pageContext,
   cart,
   catalog,
   addToCartBtnHandler,
@@ -27,17 +16,20 @@ function ProductLayout({
   cartRemoveWholeItemHandler,
   location,
 }) {
-  const { price, image } = catalog;
+  const { id, universal } = pageContext;
+  const product = catalog.find(prod => prod.id === id);
+  const { price, imageFull } = product;
   const {
     productName,
     composition,
     weight,
     cooking,
     nutrition,
+    info,
     similar,
-  } = catalog.product_post;
+  } = product.product_post;
 
-  const avatar = image || defaultImage;
+  const avatar = imageFull;
 
   return (
     <Layout
@@ -62,6 +54,7 @@ function ProductLayout({
         price={price}
         cooking={cooking}
         nutrition={nutrition}
+        info={info}
         image={avatar}
         cart={cart}
         addToCartOnClick={addToCartBtnHandler}
@@ -73,34 +66,17 @@ function ProductLayout({
 }
 
 ProductLayout.propTypes = {
-  productName: PropTypes.string.isRequired,
-  // productId: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  composition: PropTypes.string.isRequired,
-  weight: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  cooking: PropTypes.string.isRequired,
-  nutrition: PropTypes.string.isRequired,
-  similar: PropTypes.shape({
-    first: PropTypes.string,
-    second: PropTypes.string,
-    third: PropTypes.string,
-  }).isRequired,
-  image: PropTypes.shape({
-    imageFile: PropTypes.shape({
-      childImageSharp: PropTypes.shape({
-        fluid: PropTypes.shape(),
+  pageContext: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    defaultImage: PropTypes.shape({
+      imageFile: PropTypes.shape({
+        childImageSharp: PropTypes.shape({
+          fluid: PropTypes.shape(),
+        }),
       }),
     }),
+    universal: PropTypes.shape().isRequired,
   }).isRequired,
-  defaultImage: PropTypes.shape({
-    imageFile: PropTypes.shape({
-      childImageSharp: PropTypes.shape({
-        fluid: PropTypes.shape(),
-      }),
-    }),
-  }).isRequired,
-  universal: PropTypes.shape().isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,

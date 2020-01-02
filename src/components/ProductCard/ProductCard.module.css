@@ -1,5 +1,6 @@
 .ProductCard {
   max-width: 385px;
+  height: 100%;
   border-radius: 6px;
   border: solid 1px #e2e2e2;
   position: relative;

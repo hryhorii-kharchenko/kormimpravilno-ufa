@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 
 import './SectionHeading.module.css';
 
-function SectionHeading({ text, isAlignedLeft }) {
+function SectionHeading({ text, isAlignedLeft, isBig }) {
   return (
-    <div styleName={`SectionHeading ${isAlignedLeft ? 'aligned-left' : ''}`}>
+    <div
+      styleName={`SectionHeading ${isAlignedLeft ? 'aligned-left ' : ''}${
+        isBig ? 'big' : ''
+      }`}
+    >
       <h2 styleName="heading">{text}</h2>
       <div styleName="decoration" />
     </div>
@@ -14,11 +18,13 @@ function SectionHeading({ text, isAlignedLeft }) {
 
 SectionHeading.defaultProps = {
   isAlignedLeft: false,
+  isBig: false,
 };
 
 SectionHeading.propTypes = {
   text: PropTypes.string.isRequired,
   isAlignedLeft: PropTypes.bool,
+  isBig: PropTypes.bool,
 };
 
 export default SectionHeading;

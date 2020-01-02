@@ -10,7 +10,7 @@ import './RecipeCard.module.css';
 function RecipeCard({ avatar, heading, description, slug }) {
   return (
     <article styleName="RecipeCard">
-      <Link to={slug} className="link-wrapper">
+      <Link to={slug} styleName="link-wrapper">
         <Img fluid={avatar} alt={heading} styleName="avatar" />
 
         <div styleName="content-wrapper">

@@ -31,7 +31,12 @@ function Footer({ copyright, ooo, inn, orgn }) {
 
         <p styleName="creator">
           Создание сайта -
-          <a href="https://yevdokimov.pro" styleName="creator-link">
+          <a
+            href="https://yevdokimov.pro"
+            target="_blank"
+            rel="noopener noreferrer"
+            styleName="creator-link"
+          >
             Yevdokimov
           </a>
         </p>

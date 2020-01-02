@@ -6,8 +6,27 @@ import RecipeCard from '../RecipeCard';
 
 import './RecipeGallery.module.css';
 
-function RecipeGallery({ recipes, isSlider }) {
-  const gallery = recipes.map(recipe => {
+function RecipeGallery({ posts, recipes, isSlider }) {
+  const filtered = recipes.filter(elem => {
+    return elem !== undefined;
+  });
+
+  if (filtered.length < 3) {
+    const { length } = filtered;
+    let position = 0;
+
+    for (let i = 0; i < 3 - length; i += 1) {
+      while (posts.includes(filtered[position])) {
+        position += 1;
+      }
+      if (posts[position]) {
+        filtered.push(posts[position]);
+      }
+      position += 1;
+    }
+  }
+
+  const gallery = filtered.map(recipe => {
     if (!isSlider) {
       return (
         <RecipeCard
@@ -16,7 +35,6 @@ function RecipeGallery({ recipes, isSlider }) {
           description={recipe.recipe_post.description}
           slug={recipe.slug}
           key={recipe.id}
-          // id={recipe.id}
         />
       );
     }
@@ -27,23 +45,18 @@ function RecipeGallery({ recipes, isSlider }) {
           avatar={recipe.featuredImage.imageFile.childImageSharp.fluid}
           heading={recipe.recipe_post.recipeName}
           description={recipe.recipe_post.description}
-          link={recipe.slug}
-          // id={recipe.id}
+          slug={recipe.slug}
         />
       </div>
     );
   });
 
+  for (let i = 0; i < 3 - gallery.length; i += 0) {
+    gallery.push(gallery[0]);
+  }
+
   if (!isSlider) {
     return <section styleName="RecipeGallery">{gallery}</section>;
-  }
-
-  if (gallery.length === 1) {
-    gallery.push(...gallery, ...gallery);
-  }
-
-  if (gallery.length === 2) {
-    gallery.push(gallery[0]);
   }
 
   const settings = {
@@ -69,6 +82,7 @@ RecipeGallery.defaultProps = {
 };
 
 RecipeGallery.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   recipes: PropTypes.arrayOf(
     PropTypes.shape({
       avatar: PropTypes.shape,
