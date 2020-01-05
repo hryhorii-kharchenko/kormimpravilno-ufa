@@ -27,33 +27,49 @@ function Header({ phone, instaLink }) {
     { value: '/peterburg', label: 'Санкт-Петербург' },
   ];
 
+  let browserWidth = 1200;
+
+  if (typeof window !== 'undefined') {
+    browserWidth = window.innerWidth;
+  }
+
+  if (browserWidth > 1220) {
+    return (
+      <Headroom style={{ zIndex: 100 }}>
+        <header styleName="Header">
+          <Menu items={menuItems} />
+
+          <Logo />
+
+          <Wrapper justifyContent="flex-end" styleName="Wrapper">
+            <CityPicker options={cityOptions} current="Москва" />
+
+            <Button
+              href={`tel:${phone}`}
+              isTextBlack
+              isExternal
+              styleName="phone-btn"
+            >
+              {phone}
+            </Button>
+
+            <Button href={instaLink} target="_blank" isCircle isExternal>
+              <img styleName="insta-img" src={instaIcon} alt="Instagram" />
+            </Button>
+
+            <Button onClick={() => alert(1)} isCircle isAction>
+              <img styleName="cart-img" src={cartIcon} alt="Корзина" />
+            </Button>
+          </Wrapper>
+        </header>
+      </Headroom>
+    );
+  }
+
   return (
     <Headroom style={{ zIndex: 100 }}>
-      <header styleName="header">
-        <Menu items={menuItems} />
-
+      <header styleName="Header">
         <Logo />
-
-        <Wrapper justifyContent="flex-end" styleName="Wrapper">
-          <CityPicker options={cityOptions} current="Москва" />
-
-          <Button
-            href={`tel:${phone}`}
-            isTextBlack
-            isExternal
-            styleName="phone-btn"
-          >
-            {phone}
-          </Button>
-
-          <Button href={instaLink} target="_blank" isCircle isExternal>
-            <img styleName="insta-img" src={instaIcon} alt="Instagram" />
-          </Button>
-
-          <Button onClick={() => alert(1)} isCircle isAction>
-            <img styleName="cart-img" src={cartIcon} alt="Корзина" />
-          </Button>
-        </Wrapper>
       </header>
     </Headroom>
   );

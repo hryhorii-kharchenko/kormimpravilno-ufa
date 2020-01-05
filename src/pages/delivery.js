@@ -58,6 +58,7 @@ function DeliveryPage({
         pageShortTitle="Доставка и оплата"
         pathname={pathname}
         fluid={bannerBgFluid}
+        isDeliveryHeading
       />
       <HowDeliverySection data={how} />
       <OrderDeliverySection data={order} />

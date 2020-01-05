@@ -8,8 +8,6 @@ import ContentWrapper from '../ContentWrapper';
 
 import './HowSection.module.css';
 
-// TODO add correct wave bg
-
 function HowSection({ data }) {
   const chainElems = Object.entries(data)
     .filter(field => field[0].includes('Chain'))

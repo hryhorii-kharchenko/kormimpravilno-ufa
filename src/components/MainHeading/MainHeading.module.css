@@ -21,9 +21,32 @@
   line-height: 1.23;
 }
 
+.firstLine {
+}
+
 .secondLine {
   display: block;
   font-size: 40px;
   font-weight: bold;
   line-height: 1.23;
+}
+
+@media screen and (max-width: 750px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .secondLine {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .title {
+    font-size: 25px;
+  }
+
+  .secondLine {
+    font-size: 25px;
+  }
 }

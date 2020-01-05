@@ -12,8 +12,12 @@
 }
 
 .SecondaryBanner.aligned-left {
+  min-height: initial;
   margin: 0;
-  padding: 52px 0px 58px;
+  justify-content: flex-start;
+}
+
+.aligned-left-wrapper {
 }
 
 .breadcrumbs {
@@ -35,12 +39,20 @@
   color: $white;
 }
 
+.aligned-left .main-link {
+  color: $black;
+}
+
 .dot {
   margin: 0 12px;
   width: 6px;
   height: 6px;
   background-color: $white;
   border-radius: 50%;
+}
+
+.aligned-left .dot {
+  background-color: $main;
 }
 
 .secondary-link {
@@ -53,16 +65,22 @@
   opacity: 0.6;
 }
 
+.aligned-left .secondary-link {
+  color: $black;
+  opacity: 0.5;
+}
+
 .heading-wrapper {
-  max-width: 450px;
+  max-width: 650px;
   margin: 12px auto 0px;
 }
 
 .aligned-left .heading-wrapper {
-  margin: 12px 0px 0px;
+  margin: 10px 0px 0px;
 }
 
 .heading {
+  margin: 0px;
   font-size: 40px;
   font-weight: 800;
   line-height: 1.15;
@@ -72,6 +90,7 @@
 
 .aligned-left .heading {
   text-align: left;
+  color: $black;
 }
 
 .line {
@@ -83,5 +102,17 @@
 }
 
 .aligned-left .line {
-  margin: 15px 0px 0px;
+  margin: 10px 0px 0px;
+}
+
+@media screen and (max-width: 500px) {
+  .heading {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .delivery-heading {
+    font-size: 24px;
+  }
 }

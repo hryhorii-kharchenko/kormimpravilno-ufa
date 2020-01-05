@@ -20,11 +20,11 @@ function SimilarProductSection({ similar, catalog }) {
       <ContentWrapper>
         <SectionHeading text="Вас может заинтересовать" isBig />
 
-        <ProductGallery catalog={catalog} products={products} />
+        <ProductGallery catalog={catalog} products={products} isSlider />
 
         <div styleName="btn-wrapper">
           <div styleName="line" />
-          <Button href="/shop" styleName="button">
+          <Button href="/shop" isTextBlack styleName="button">
             Магазин
           </Button>
           <div styleName="line" />
@@ -36,9 +36,9 @@ function SimilarProductSection({ similar, catalog }) {
 
 SimilarProductSection.propTypes = {
   similar: PropTypes.shape({
-    first: PropTypes.string,
-    second: PropTypes.string,
-    third: PropTypes.string,
+    first: PropTypes.number,
+    second: PropTypes.number,
+    third: PropTypes.number,
   }).isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };

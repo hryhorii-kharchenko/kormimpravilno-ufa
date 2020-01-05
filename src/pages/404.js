@@ -1,14 +1,60 @@
 import React from 'react';
+import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
-const NotFoundPage = () => (
-  <Layout>
-    <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-);
+function NotFoundPage({
+  data,
+  catalog,
+  cart,
+  addToCartBtnHandler,
+  cartRemoveOneStackHandler,
+  cartRemoveWholeItemHandler,
+}) {
+  const universal = data.wpgraphql.universalPage.universal_page;
+
+  return (
+    <Layout
+      data={universal}
+      cart={cart}
+      catalog={catalog}
+      addToCartBtnHandler={addToCartBtnHandler}
+      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+    >
+      <SEO title="404" />
+
+      <h1>404 - Страница не найдена</h1>
+    </Layout>
+  );
+}
+
+NotFoundPage.propTypes = {
+  data: PropTypes.shape().isRequired,
+  catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  cart: PropTypes.shape().isRequired,
+  addToCartBtnHandler: PropTypes.func.isRequired,
+  cartRemoveOneStackHandler: PropTypes.func.isRequired,
+  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+};
 
 export default NotFoundPage;
+
+export const query = graphql`
+  query pageNotFoundQuery {
+    wpgraphql {
+      universalPage: page(id: "cGFnZToyMDg=") {
+        universal_page {
+          copyright
+          inn
+          instaLink
+          orgn
+          ooo
+          phone
+        }
+      }
+    }
+  }
+`;

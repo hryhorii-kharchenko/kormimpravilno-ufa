@@ -34,3 +34,34 @@
   left: 26px;
   position: absolute;
 }
+
+@media screen and (max-width: 600px) {
+  .BoxedQuote {
+    background-image: none;
+  }
+
+  .button-wrapper {
+    max-width: 268px;
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .BoxedQuote {
+    padding: 0;
+  }
+
+  .text {
+    margin: 0 auto 30px;
+  }
+
+  .decoration {
+    top: -20px;
+    left: 0px;
+    position: absolute;
+  }
+}

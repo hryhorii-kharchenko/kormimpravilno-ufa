@@ -1,6 +1,15 @@
 .ContactsAboutSection {
   margin: 80px 0px 100px;
   padding: 80px 0px 0px;
+  position: relative;
+}
+
+.ContactsAboutSection:after {
+  content: url('./bg-wave-3.svg');
+  top: 0px;
+  right: 0px;
+  position: absolute;
+  z-index: 0;
 }
 
 .wrapper {
@@ -8,17 +17,18 @@
   border: solid 2px $white;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   border-radius: 6px;
   box-shadow: 0 11px 24px 0 rgba(0, 0, 0, 0.13);
   background-color: $white;
+  position: relative;
+  z-index: 1;
 }
 
 .text-wrapper {
   max-width: 465px;
-  min-width: 300px;
+  min-width: 280px;
   width: 100%;
-  height: 100%;
   padding: 24px;
   box-sizing: border-box;
 }
@@ -98,6 +108,42 @@
 .map-wrapper {
   max-width: 738px;
   width: 100%;
-  height: 100%;
   background-color: $black;
+}
+
+@media screen and (max-width: 950px) {
+  .wrapper {
+    max-width: 738px;
+    margin: 34px auto 0px;
+    flex-wrap: wrap;
+  }
+
+  .map-wrapper {
+    max-height: 473px;
+    min-height: 437px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .text-wrapper {
+    padding: 17px;
+  }
+
+  .icon-wrapper {
+    max-width: 45px;
+    min-width: 45px;
+    height: 45px;
+  }
+
+  .icon {
+    width: 19px;
+  }
+
+  .info {
+    font-size: 14px;
+  }
+
+  .link .info {
+    font-size: 14px;
+  }
 }

@@ -8,7 +8,7 @@ import arrowDownSvg from '../../images/svg/arrow-down.svg';
 function CityPicker({ options, current }) {
   const links = options.map(option => (
     <Link to={option.value} styleName="link" key={option.value}>
-      option.label
+      {option.label}
     </Link>
   ));
 

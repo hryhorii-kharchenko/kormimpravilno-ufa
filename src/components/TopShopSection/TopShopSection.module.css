@@ -1,0 +1,22 @@
+.TopShopSection {
+  padding: 20px 0px 25px;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 570px) {
+  .content-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .sorting {
+    width: 100%;
+    margin: 20px 0px 0px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

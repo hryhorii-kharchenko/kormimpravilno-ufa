@@ -4,7 +4,7 @@
   overflow: visible;
 }
 
-.ConfirmationDeliverySection::after {
+.ConfirmationDeliverySection:after {
   content: url(./bg-wave-2.svg);
   top: -11px;
   left: 0;

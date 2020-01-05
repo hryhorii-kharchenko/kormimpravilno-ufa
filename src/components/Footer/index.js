@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Logo from '../Logo';
-import Wrapper from '../Wrapper';
 
 import './Footer.module.css';
 
@@ -13,7 +12,7 @@ function Footer({ copyright, ooo, inn, orgn }) {
       <footer styleName="Footer">
         <Logo isAlt />
 
-        <Wrapper styleName="wrapper">
+        <div styleName="wrapper">
           <p styleName="info">{copyright}</p>
           <p styleName="info">
             <strong>ООО </strong>
@@ -27,7 +26,7 @@ function Footer({ copyright, ooo, inn, orgn }) {
             <strong>ОРГН </strong>
             {orgn}
           </p>
-        </Wrapper>
+        </div>
 
         <p styleName="creator">
           Создание сайта -

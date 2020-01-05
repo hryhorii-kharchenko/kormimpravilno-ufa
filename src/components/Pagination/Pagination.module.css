@@ -1,0 +1,55 @@
+.Pagination {
+  margin: 40px 0px 0px;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-arrow {
+}
+
+.arrow-prev-img {
+  width: 9px;
+  height: 15px;
+}
+
+.right-arrow {
+}
+
+.arrow-next-img {
+  width: 9px;
+  height: 15px;
+}
+
+.arrow-inactive {
+}
+
+.number-btn {
+  margin-right: 15px;
+}
+
+.number-btn:last-child {
+  margin-right: initial;
+}
+
+.dots {
+  margin-right: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background-color: #37b23a;
+}
+
+.dot:last-child {
+  margin-right: initial;
+}

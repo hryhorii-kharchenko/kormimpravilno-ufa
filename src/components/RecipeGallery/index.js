@@ -6,16 +6,16 @@ import RecipeCard from '../RecipeCard';
 
 import './RecipeGallery.module.css';
 
-function RecipeGallery({ posts, recipes, isSlider }) {
+function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
   const filtered = recipes.filter(elem => {
     return elem !== undefined;
   });
 
-  if (filtered.length < 3) {
+  if (filtered.length < aimRecipeCount) {
     const { length } = filtered;
     let position = 0;
 
-    for (let i = 0; i < 3 - length; i += 1) {
+    for (let i = 0; i < aimRecipeCount - length; i += 1) {
       while (posts.includes(filtered[position])) {
         position += 1;
       }
@@ -27,22 +27,10 @@ function RecipeGallery({ posts, recipes, isSlider }) {
   }
 
   const gallery = filtered.map(recipe => {
-    if (!isSlider) {
-      return (
-        <RecipeCard
-          avatar={recipe.featuredImage.imageFile.childImageSharp.fluid}
-          heading={recipe.recipe_post.recipeName}
-          description={recipe.recipe_post.description}
-          slug={recipe.slug}
-          key={recipe.id}
-        />
-      );
-    }
-
     return (
       <div styleName="recipe-wrapper" key={recipe.id}>
         <RecipeCard
-          avatar={recipe.featuredImage.imageFile.childImageSharp.fluid}
+          avatar={recipe.featuredImageSmall.imageFile.childImageSharp.fluid}
           heading={recipe.recipe_post.recipeName}
           description={recipe.recipe_post.description}
           slug={recipe.slug}
@@ -51,11 +39,41 @@ function RecipeGallery({ posts, recipes, isSlider }) {
     );
   });
 
-  for (let i = 0; i < 3 - gallery.length; i += 0) {
+  for (let i = 0; i < aimRecipeCount - gallery.length; i += 0) {
     gallery.push(gallery[0]);
   }
 
   if (!isSlider) {
+    return <section styleName="RecipeGallery">{gallery}</section>;
+  }
+
+  if (isSlider && aimRecipeCount === 3) {
+    let browserWidth = 1220;
+    const settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      responsive: [{ breakpoing: 586, settings: { centerMode: false } }],
+    };
+
+    if (typeof window !== `undefined`) {
+      browserWidth = window.innerWidth;
+    }
+
+    if (browserWidth < 1254) {
+      return (
+        <Slider
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...settings}
+          styleName="Slider"
+        >
+          {gallery}
+        </Slider>
+      );
+    }
+
     return <section styleName="RecipeGallery">{gallery}</section>;
   }
 
@@ -79,6 +97,7 @@ function RecipeGallery({ posts, recipes, isSlider }) {
 
 RecipeGallery.defaultProps = {
   isSlider: false,
+  aimRecipeCount: 3,
 };
 
 RecipeGallery.propTypes = {
@@ -93,6 +112,7 @@ RecipeGallery.propTypes = {
     })
   ).isRequired,
   isSlider: PropTypes.bool,
+  aimRecipeCount: PropTypes.number,
 };
 
 export default RecipeGallery;

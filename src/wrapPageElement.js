@@ -6,7 +6,7 @@ import ShopProvider from './components/ShopProvider';
 if (typeof window !== 'undefined') {
   // eslint-disable-next-line global-require
   require('smooth-scroll')('a[href*="#"]', {
-    speed: 1500,
+    speed: 600,
     easing: 'easeInOutQuart',
   });
 }

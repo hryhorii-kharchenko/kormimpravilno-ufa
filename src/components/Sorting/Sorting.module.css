@@ -1,0 +1,46 @@
+.Sorting {
+}
+
+.dropdown {
+  font-size: 14px;
+  line-height: 1.46;
+  color: $black;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.text {
+  font-weight: bold;
+}
+
+.dropbtn {
+  width: 166px;
+  height: 45px;
+  margin-left: 5px;
+  border-radius: 22.5px;
+  border: solid 1px #d8d8d8;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.current {
+  margin: 0;
+  font-weight: bold;
+  color: $main;
+}
+
+.arrow {
+  width: 10px;
+  height: 12px;
+  margin-left: 5px;
+}
+
+.options {
+  display: none;
+}
+
+.option {
+}

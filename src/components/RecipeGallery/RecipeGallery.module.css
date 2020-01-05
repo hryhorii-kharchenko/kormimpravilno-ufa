@@ -1,10 +1,17 @@
 .RecipeGallery {
+  margin: 0px -10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  position: relative;
+  z-index: 1;
 }
 
 .Slider {
-  margin: 0 -20px;
+  margin: 0px -10px;
 }
 
 .recipe-wrapper {
-  margin: 0 20px;
+  width: 100%;
+  margin: 0 10px;
 }

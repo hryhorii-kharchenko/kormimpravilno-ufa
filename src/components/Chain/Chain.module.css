@@ -5,4 +5,20 @@
   background-repeat: repeat-y;
   background-size: 1px auto;
   background-position: center top 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.Chain:after {
+  /* content: url('./bg-wave-2.svg'); */
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+@media screen and (max-width: 712px) {
+  .Chain {
+    background-position: left 11px top 10px;
+  }
 }

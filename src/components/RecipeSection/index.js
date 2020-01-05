@@ -8,8 +8,6 @@ import ContentWrapper from '../ContentWrapper';
 
 import './RecipeSection.module.css';
 
-// TODO add correct wave bg
-
 function RecipeSection({ data, recipes }) {
   return (
     <section styleName="RecipeSection" id="recipes">

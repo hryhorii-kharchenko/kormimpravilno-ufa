@@ -159,15 +159,17 @@ class ShopProvider extends Component {
         `}
         render={dataParam => {
           const data = dataParam;
+          const products = data.wpgraphql.products.nodes;
 
-          for (let i = 0; i < data.wpgraphql.products.nodes.length; i += 1) {
-            if (!data.wpgraphql.products.nodes[i].imageSmall) {
-              data.wpgraphql.products.nodes[i].imageSmall = {};
-              data.wpgraphql.products.nodes[i].imageFull = {};
-              data.wpgraphql.products.nodes[i].imageSmall.imageFile =
-                data.defaultImageSmall;
-              data.wpgraphql.products.nodes[i].imageFull.imageFile =
-                data.defaultImageFull;
+          for (let i = 0; i < products.length; i += 1) {
+            if (!products[i].imageSmall) {
+              products[i].imageSmall = {};
+              products[i].imageFull = {};
+              products[i].imageSmall.imageFile = data.defaultImageSmall;
+              products[i].imageFull.imageFile = data.defaultImageFull;
+            }
+            if (products[i].slug[0] !== '/') {
+              products[i].slug = `/${products[i].slug}`;
             }
           }
 

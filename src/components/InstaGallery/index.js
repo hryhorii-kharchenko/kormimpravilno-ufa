@@ -8,7 +8,7 @@ function InstaGallery({ feed }) {
     <InstaCard imgSrc={post.imgSrc} link={post.link} key={post.link} />
   ));
 
-  return <section className="InstaGallery">{gallery}</section>;
+  return <section styleName="InstaGallery">{gallery}</section>;
 }
 
 InstaGallery.propTypes = {

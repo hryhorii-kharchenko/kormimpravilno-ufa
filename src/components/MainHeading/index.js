@@ -8,7 +8,7 @@ function MainHeading({ firstLine, secondLine }) {
     <div styleName="MainHeading">
       <div styleName="decoration" />
       <h1 styleName="title">
-        {firstLine}
+        <span styleName="firstLine">{firstLine}</span>
         <strong styleName="secondLine">{secondLine}</strong>
       </h1>
     </div>

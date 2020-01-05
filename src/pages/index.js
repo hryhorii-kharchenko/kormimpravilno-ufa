@@ -40,9 +40,13 @@ function IndexPage({
   const instagram = getSectionEntriesFromPage('instagram', page);
 
   for (let i = 0; i < posts.length; i += 1) {
-    if (!posts[i].featuredImage) {
-      posts[i].featuredImage = {};
-      posts[i].featuredImage.imageFile = data.defaultImageSmall;
+    if (!posts[i].featuredImageSmall) {
+      posts[i].featuredImageSmall = {};
+      posts[i].featuredImageSmall.imageFile = data.defaultImageSmall;
+    }
+
+    if (posts[i].slug[0] !== '/') {
+      posts[i].slug = `/${posts[i].slug}`;
     }
   }
 
@@ -181,7 +185,7 @@ export const query = graphql`
             description
           }
           slug
-          featuredImage {
+          featuredImageSmall: featuredImage {
             sourceUrl
             mediaItemId
             modified

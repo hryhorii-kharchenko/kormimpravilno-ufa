@@ -65,7 +65,23 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
             slug
-            featuredImage {
+            featuredImageSmall: featuredImage {
+              sourceUrl
+              mediaItemId
+              modified
+              imageFile {
+                childImageSharp {
+                  fluid(maxWidth: 726, maxHeight: 909) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
+            featuredImageFull: featuredImage {
               sourceUrl
               mediaItemId
               modified
@@ -105,6 +121,17 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      defaultImageSmall: file(relativePath: { eq: "default.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 385, maxHeight: 217) {
+            base64
+            aspectRatio
+            src
+            srcSet
+            sizes
+          }
+        }
+      }
       defaultImageFull: file(relativePath: { eq: "default.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 726, maxHeight: 909) {
@@ -131,9 +158,12 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const posts = data.wpgraphql.posts.nodes;
   for (let i = 0; i < posts.length; i += 1) {
-    if (!posts[i].featuredImage) {
-      posts[i].featuredImage = {};
-      posts[i].featuredImage.imageFile = data.defaultImageFull;
+    if (!posts[i].featuredImageSmall) {
+      posts[i].featuredImageSmall = {};
+      posts[i].featuredImageSmall.imageFile = data.defaultImageSmall;
+    }
+    if (posts[i].slug[0] !== '/') {
+      posts[i].slug = `/${posts[i].slug}`;
     }
   }
   posts.forEach(({ id, slug }) => {

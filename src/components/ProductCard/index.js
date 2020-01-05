@@ -42,24 +42,24 @@ function ProductCard({
             {composition ? compositionHtml : null}
             {weight ? weightHtml : null}
           </header>
-
-          <div styleName="separator" />
-
-          <footer styleName="footer">
-            <p styleName="price">{price}</p>
-          </footer>
         </div>
       </Link>
+      <footer styleName="footer">
+        <div styleName="separator" />
 
-      <Button
-        isAction
-        isTextBlack
-        styleName="cart-btn"
-        onClick={() => onClick(id)}
-      >
-        <img src={cartIcon} alt="" styleName="cart-btn-img" />
-        <span>В корзину</span>
-      </Button>
+        <div styleName="footer-content-wrapper">
+          <p styleName="price">{price}</p>
+          <Button
+            isAction
+            isTextBlack
+            styleName="cart-btn"
+            onClick={() => onClick(id)}
+          >
+            <img src={cartIcon} alt="" styleName="cart-btn-img" />
+            <span>В корзину</span>
+          </Button>
+        </div>
+      </footer>
     </article>
   );
 }

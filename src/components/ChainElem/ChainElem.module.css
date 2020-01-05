@@ -1,6 +1,8 @@
 .ChainElem {
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .elem-wrapper {
@@ -57,14 +59,6 @@
   position: relative;
 }
 
-/* .decoration-left {
-  background-position: right 9px;
-}
-
-.decoration-right {
-  background-position: left 9px;
-} */
-
 .circle {
   width: 19px;
   height: 19px;
@@ -101,4 +95,43 @@
   position: absolute;
   background-color: $white;
   z-index: 0;
+}
+
+@media screen and (max-width: 712px) {
+  .ChainElem {
+    justify-content: flex-start;
+  }
+
+  .left {
+    max-width: initial;
+    width: 100%;
+    padding: 0px 0px 28px 15px;
+    text-align: left;
+    align-items: flex-start;
+    order: 1;
+  }
+
+  .right {
+    max-width: initial;
+    width: 100%;
+    padding: 0px 0px 28px 15px;
+    text-align: left;
+    align-items: flex-start;
+    order: 1;
+  }
+
+  .decoration-wrapper {
+    max-width: 19px;
+    width: 100%;
+  }
+
+  .decoration-left .circle {
+    left: 0;
+    right: 0;
+  }
+
+  .decoration-right .circle {
+    left: 0;
+    right: 0;
+  }
 }

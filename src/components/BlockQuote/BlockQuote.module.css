@@ -4,6 +4,7 @@
   padding: 20px 0px 0px 101px;
   position: relative;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .text {
@@ -40,4 +41,10 @@
   left: 0px;
   position: absolute;
   z-index: -1;
+}
+
+@media screen and (max-width: 500px) {
+  .BlockQuote {
+    padding: 20px 0px 0px 10px;
+  }
 }

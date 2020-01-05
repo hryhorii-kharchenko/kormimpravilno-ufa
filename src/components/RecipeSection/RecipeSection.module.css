@@ -1,4 +1,12 @@
 .RecipeSection {
   margin: 20px 0px 0px;
   padding: 70px 0px 70px;
+  position: relative;
+}
+
+.RecipeSection:after {
+  content: url('./bg-wave-3.svg');
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }

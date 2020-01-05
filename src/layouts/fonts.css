@@ -2,6 +2,11 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 p {
   margin-top: 14px;
   margin-bottom: 14px;

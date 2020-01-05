@@ -13,6 +13,7 @@ function SecondaryBanner({
   pathname,
   fluid,
   isAlignedLeft,
+  isDeliveryHeading,
 }) {
   if (!isAlignedLeft) {
     return (
@@ -35,7 +36,13 @@ function SecondaryBanner({
           </nav>
 
           <div styleName="heading-wrapper">
-            <h1 styleName="heading">{pageTitle}</h1>
+            <h1
+              styleName={`heading${
+                isDeliveryHeading ? ' delivery-heading' : ''
+              }`}
+            >
+              {pageTitle}
+            </h1>
             <div styleName="line" />
           </div>
         </ContentWrapper>
@@ -45,7 +52,7 @@ function SecondaryBanner({
 
   return (
     <section styleName="SecondaryBanner aligned-left" id="banner">
-      <ContentWrapper>
+      <div className="aligned-left-wrapper">
         <div styleName="breadcrumbs">
           <Link to="/" styleName="main-link">
             Главная
@@ -60,7 +67,7 @@ function SecondaryBanner({
           <h1 styleName="heading">{pageTitle}</h1>
           <div styleName="line" />
         </div>
-      </ContentWrapper>
+      </div>
     </section>
   );
 }

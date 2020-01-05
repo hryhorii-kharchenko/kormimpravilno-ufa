@@ -6,16 +6,22 @@ import ProductCard from '../ProductCard';
 
 import './ProductGallery.module.css';
 
-function ProductGallery({ catalog, products, onClick, isSlider }) {
+function ProductGallery({
+  catalog,
+  products,
+  onClick,
+  isSlider,
+  aimProductCount,
+}) {
   const filtered = products.filter(elem => {
     return elem !== undefined;
   });
 
-  if (filtered.length < 3) {
+  if (filtered.length < aimProductCount) {
     const { length } = filtered;
     let position = 0;
 
-    for (let i = 0; i < 3 - length; i += 1) {
+    for (let i = 0; i < aimProductCount - length; i += 1) {
       while (catalog.includes(filtered[position])) {
         position += 1;
       }
@@ -27,21 +33,6 @@ function ProductGallery({ catalog, products, onClick, isSlider }) {
   }
 
   const gallery = filtered.map(product => {
-    if (!isSlider) {
-      return (
-        <ProductCard
-          avatar={product.imageSmall.imageFile.childImageSharp.fluid}
-          heading={product.product_post.productName}
-          composition={product.product_post.composition}
-          weight={product.product_post.weight}
-          price={product.price}
-          key={product.id}
-          id={product.id}
-          slug={product.slug}
-          onClick={onClick}
-        />
-      );
-    }
     return (
       <div styleName="product-wrapper" key={product.id}>
         <ProductCard
@@ -58,11 +49,41 @@ function ProductGallery({ catalog, products, onClick, isSlider }) {
     );
   });
 
-  for (let i = 0; i < 3 - gallery.length; i += 0) {
+  for (let i = 0; i < aimProductCount - gallery.length; i += 0) {
     gallery.push(gallery[0]);
   }
 
   if (!isSlider) {
+    return <section styleName="ProductGallery">{gallery}</section>;
+  }
+
+  if (isSlider && aimProductCount === 3) {
+    let browserWidth = 1220;
+    const settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      centerMode: true,
+      responsive: [{ breakpoing: 586, settings: { centerMode: false } }],
+    };
+
+    if (typeof window !== `undefined`) {
+      browserWidth = window.innerWidth;
+    }
+
+    if (browserWidth < 1254) {
+      return (
+        <Slider
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...settings}
+          styleName="Slider"
+        >
+          {gallery}
+        </Slider>
+      );
+    }
+
     return <section styleName="ProductGallery">{gallery}</section>;
   }
 
@@ -85,7 +106,9 @@ function ProductGallery({ catalog, products, onClick, isSlider }) {
 }
 
 ProductGallery.defaultProps = {
+  products: [],
   isSlider: false,
+  aimProductCount: 3,
 };
 
 ProductGallery.propTypes = {
@@ -108,9 +131,10 @@ ProductGallery.propTypes = {
       price: PropTypes.string,
       id: PropTypes.string,
     })
-  ).isRequired,
+  ),
   onClick: PropTypes.func.isRequired,
   isSlider: PropTypes.bool,
+  aimProductCount: PropTypes.number,
 };
 
 export default ProductGallery;

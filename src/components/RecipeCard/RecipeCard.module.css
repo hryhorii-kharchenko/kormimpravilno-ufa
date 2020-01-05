@@ -1,7 +1,9 @@
 .RecipeCard {
   max-width: 385px;
+  width: 100%;
   border-radius: 6px;
   border: solid 1px #e2e2e2;
+  background-color: $white;
 }
 
 .link-wrapper {

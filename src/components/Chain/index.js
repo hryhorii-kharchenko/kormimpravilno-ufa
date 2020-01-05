@@ -5,6 +5,8 @@ import ChainElem from '../ChainElem';
 
 import './Chain.module.css';
 
+// TODO add wave bg
+
 function Chain({ elements }) {
   const chain = elements.map((elem, index, { length }) => {
     if (index === 0) {

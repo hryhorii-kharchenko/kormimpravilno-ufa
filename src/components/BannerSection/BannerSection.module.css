@@ -1,12 +1,14 @@
 .Banner {
   height: 75vh;
   padding: 0px 0px 55px;
+  position: relative;
 }
 
 .banner-wrapper {
   min-height: 100%;
   height: 100%;
   position: relative;
+  z-index: 1;
 }
 
 .content-wrapper {
@@ -31,4 +33,56 @@
 
 .bannerBtn:last-child {
   margin-right: initial;
+}
+
+.overlay {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(
+      to left top,
+      rgba(0, 0, 0, 0.05) 0% /*bottom-right color*/,
+      rgba(0, 0, 0, 0.15) 50% /*middle color*/,
+      rgba(0, 0, 0, 0.3) 100% /*top-left color*/
+    );
+    z-index: 0;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .Banner {
+    height: 580px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .content-wrapper {
+    margin: 0px 0px 0px 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .Banner {
+    height: 550px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .bannerBtn:last-child {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .Banner {
+    height: 450px;
+  }
 }

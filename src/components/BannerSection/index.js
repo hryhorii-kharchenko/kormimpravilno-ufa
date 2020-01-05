@@ -29,7 +29,7 @@ function BannerSection({ data, bgImg }) {
 
           <p styleName="subtitle">{data.bannerSubheading}</p>
 
-          <Wrapper justifyContent="flex-start">
+          <Wrapper justifyContent="flex-start" flexWrap="wrap">
             <Button href="/shop" isFilled styleName="bannerBtn">
               {data.bannerBtnStore}
             </Button>
@@ -41,6 +41,8 @@ function BannerSection({ data, bgImg }) {
       </div>
 
       <ScrollDown url="/#company" />
+
+      <div styleName="overlay" />
     </BackgroundImg>
   );
 }

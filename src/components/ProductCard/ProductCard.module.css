@@ -1,5 +1,6 @@
 .ProductCard {
   max-width: 385px;
+  width: 100%;
   height: 100%;
   border-radius: 6px;
   border: solid 1px #e2e2e2;
@@ -22,10 +23,11 @@
 }
 
 .header {
+  margin: 0px 0px 75px;
 }
 
 .heading {
-  margin: 0;
+  margin: 0px;
   font-size: 19px;
   font-weight: bold;
   line-height: 1.32;
@@ -43,15 +45,27 @@
   line-height: 1.57;
 }
 
+.footer {
+  width: 100%;
+  padding: 0px 19px 20px 19px;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  box-sizing: border-box;
+}
+
 .separator {
   width: 100%;
   height: 1px;
-  margin: 15px auto 0px;
+  margin: 0px auto;
   background-color: #e2e2e2;
 }
 
-.footer {
-  margin: 23px 0px 0px;
+.footer-content-wrapper {
+  margin: 18px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .price {
@@ -63,9 +77,6 @@
 
 .cart-btn {
   width: 182px;
-  right: 19px;
-  bottom: 20px;
-  position: absolute;
 }
 
 img.cart-btn-img {

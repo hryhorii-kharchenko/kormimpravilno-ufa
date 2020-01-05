@@ -14,7 +14,12 @@ function PopularSection({ data, products, onClick, shopBtnText }) {
       <ContentWrapper>
         <SectionHeading text={data.popularHeading} isBig />
 
-        <ProductGallery products={products} onClick={onClick} isSlider />
+        <ProductGallery
+          // products={products}
+          catalog={products}
+          onClick={onClick}
+          isSlider
+        />
         <div styleName="btn-wrapper">
           <div styleName="line" />
           <Button href="/shop" isFilled styleName="shop-btn">

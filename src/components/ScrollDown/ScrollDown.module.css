@@ -3,6 +3,7 @@
   transform: translateX(-50%);
   bottom: 25px;
   position: absolute;
+  z-index: 1;
 }
 
 .mouse {

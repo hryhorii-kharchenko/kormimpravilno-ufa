@@ -1,7 +1,12 @@
 .ProductBreadcrumbs {
+  padding: 20px 0px;
+}
+
+.nav-wrapper {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .main-link {
@@ -33,9 +38,11 @@
 }
 
 .dot {
-  margin: 0 12px;
+  margin: 0px 12px;
   width: 6px;
   height: 6px;
-  background-color: $white;
+  top: -1px;
+  position: relative;
+  background-color: $main;
   border-radius: 50%;
 }

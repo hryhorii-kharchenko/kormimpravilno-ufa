@@ -1,40 +1,131 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
+import TopShopSection from '../components/TopShopSection';
+import MainShopSection from '../components/MainShopSection';
 
-function ShopPage({
-  data,
-  catalog,
-  cart,
-  addToCartBtnHandler,
-  cartRemoveOneStackHandler,
-  cartRemoveWholeItemHandler,
-}) {
-  function getSectionEntriesFromPage(sectionName, sourceObject) {
-    return Object.fromEntries(
-      Object.entries(sourceObject).filter(field =>
-        field[0].includes(sectionName)
-      )
-    );
+class ShopPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentSort: 0,
+      possibleSort: [
+        { value: 0, label: 'По умолчанию' },
+        { value: 1, label: 'По названию' },
+        { value: 2, label: 'Последнее' },
+        { value: 3, label: 'Низкие цены' },
+        { value: 4, label: 'Высокие цены' },
+        { value: 5, label: 'Низкий вес' },
+        { value: 6, label: 'Высокий вес' },
+      ],
+      localCatalog: [...props.catalog].sort(
+        (a, b) => b.productId - a.productId
+      ),
+    };
+
+    this.sortChangeHandler = this.sortChangeHandler.bind(this);
   }
 
-  const universal = data.wpgraphql.universalPage.universal_page;
+  sortChangeHandler(newSortId) {
+    this.setState(state => {
+      let sortFunc;
 
-  return (
-    <Layout
-      data={universal}
-      cart={cart}
-      catalog={catalog}
-      addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
-    >
-      <SEO title="Магазин" />
-    </Layout>
-  );
+      switch (newSortId) {
+        case 0:
+          sortFunc = function(a, b) {
+            return b.productId - a.productId;
+          };
+          break;
+        case 1:
+          sortFunc = function(a, b) {
+            return a.title.localeCompare(b.title);
+          };
+          break;
+        case 2:
+          sortFunc = function(a, b) {
+            return b.productId - a.productId;
+          };
+          break;
+        case 3:
+          sortFunc = function(a, b) {
+            return b.price - a.price;
+          };
+          break;
+        case 4:
+          sortFunc = function(a, b) {
+            return a.price - b.price;
+          };
+          break;
+        case 5:
+          sortFunc = function(a, b) {
+            return (
+              parseInt(a.product_post.weight, 10) -
+              parseInt(b.product_post.weight, 10)
+            );
+          };
+          break;
+        case 6:
+          sortFunc = function(a, b) {
+            return (
+              parseInt(b.product_post.weight, 10) -
+              parseInt(a.product_post.weight, 10)
+            );
+          };
+          break;
+        default:
+          sortFunc = function(a, b) {
+            return b.productId - a.productId;
+          };
+          break;
+      }
+
+      return {
+        currentSort: newSortId,
+        localCatalog: [...state.localCatalog].sort(sortFunc),
+      };
+    });
+  }
+
+  render() {
+    const {
+      data,
+      catalog,
+      cart,
+      addToCartBtnHandler,
+      cartRemoveOneStackHandler,
+      cartRemoveWholeItemHandler,
+      location,
+    } = this.props;
+    const { currentSort, possibleSort, localCatalog } = this.state;
+
+    const universal = data.wpgraphql.universalPage.universal_page;
+
+    return (
+      <Layout
+        data={universal}
+        cart={cart}
+        catalog={catalog}
+        addToCartBtnHandler={addToCartBtnHandler}
+        cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+        cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      >
+        <SEO title="Магазин" />
+
+        <TopShopSection
+          pageTitle="Магазин"
+          pathname={location.pathname}
+          currentSort={currentSort}
+          possibleSort={possibleSort}
+          onSortChange={this.sortChangeHandler}
+        />
+        <MainShopSection catalog={localCatalog} />
+      </Layout>
+    );
+  }
 }
 
 ShopPage.propTypes = {
@@ -44,19 +135,15 @@ ShopPage.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }).isRequired,
 };
 
 export default ShopPage;
 
 export const query = graphql`
   query shopQuery {
-    bannerBg: file(relativePath: { eq: "bg-banner.jpg" }) {
-      childImageSharp {
-        fluid(quality: 90, maxWidth: 1920) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
     wpgraphql {
       universalPage: page(id: "cGFnZToyMDg=") {
         universal_page {

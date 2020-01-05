@@ -24,7 +24,7 @@ function SimilarRecipeSection({ similar, posts }) {
           styleName="subheading"
         />
 
-        <RecipeGallery posts={posts} recipes={recipes} />
+        <RecipeGallery posts={posts} recipes={recipes} isSlider />
       </ContentWrapper>
     </section>
   );
@@ -32,9 +32,9 @@ function SimilarRecipeSection({ similar, posts }) {
 
 SimilarRecipeSection.propTypes = {
   similar: PropTypes.shape({
-    first: PropTypes.string,
-    second: PropTypes.string,
-    third: PropTypes.string,
+    first: PropTypes.number,
+    second: PropTypes.number,
+    third: PropTypes.number,
   }).isRequired,
   posts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };

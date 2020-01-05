@@ -18,9 +18,9 @@ function RecipeLayout({
 }) {
   const { id, posts, bannerBg, universal } = pageContext;
   const recipe = posts.find(prod => prod.id === id);
-  const { featuredImage } = recipe;
+  const { featuredImageFull } = recipe;
   const { recipeName, ingredients, preparation, similar } = recipe.recipe_post;
-  const avatar = featuredImage;
+  const avatar = featuredImageFull;
 
   return (
     <Layout
@@ -40,7 +40,7 @@ function RecipeLayout({
       <MainRecipeSection
         ingredients={ingredients}
         preparation={preparation}
-        avatarFluid={avatar.imageFile.childImageSharp.fluid}
+        avatarFluid={avatar ? avatar.imageFile.childImageSharp.fluid : null}
       />
       <SimilarRecipeSection similar={similar} posts={posts} />
     </Layout>

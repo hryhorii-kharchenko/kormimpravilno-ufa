@@ -7,6 +7,11 @@ import Button from '../Button';
 import ProductInCartCounter from '../ProductInCartCounter';
 
 import './MainProductSection.module.css';
+import cartIcon from '../../images/svg/cart.svg';
+import fbIcon from '../../images/svg/facebook.svg';
+import twitterIcon from '../../images/svg/twitter.svg';
+import vkIcon from '../../images/svg/vk.svg';
+import pinterestIcon from '../../images/svg/pinterest.svg';
 
 function MainProductSection({
   productName,
@@ -22,6 +27,17 @@ function MainProductSection({
   addToCartOnClick,
   removeOneStackFromCartOnClick,
 }) {
+  let browserWidth = 1200;
+  if (typeof window !== 'undefined') {
+    browserWidth = window.innerWidth;
+  }
+
+  const heading = (
+    <div styleName="heading-wrapper">
+      <h1 styleName="heading">{productName}</h1>
+      <div styleName="heading-underline" />
+    </div>
+  );
   const compositionHtml = (
     <div styleName="info">
       <p styleName="info-title">Состав:</p>
@@ -58,58 +74,66 @@ function MainProductSection({
   return (
     <section styleName="MainProductSection" id="main">
       <ContentWrapper>
-        <div styleName="img-wrapper">
-          <Img
-            fluid={image.imageFile.childImageSharp.fluid}
-            alt={productName}
-            slyleName="avatar"
-          />
-        </div>
-        <div styleName="text-wrapper">
-          {composition ? compositionHtml : null}
-          {weight ? weightHtml : null}
-          <div styleName="line" />
-
-          <div styleName="price-wrapper">
-            <p styleName="price">{price}</p>
-            <div styleName="cart-modificators-wrapper">
-              <ProductInCartCounter
-                addOnClick={addToCartOnClick}
-                removeOnClick={removeOneStackFromCartOnClick}
-                cart={cart}
-                id={id}
-              />
-              <Button
-                isAction
-                isTextBlack
-                styleName="addtocart-btn"
-                onClick={() => addToCartOnClick(id)}
-              />
-            </div>
+        {browserWidth <= 1000 ? heading : null}
+        <div styleName="content-wrapper">
+          <div styleName="img-wrapper">
+            <Img
+              fluid={image.imageFile.childImageSharp.fluid}
+              alt={productName}
+              styleName="avatar"
+            />
           </div>
-
-          <div styleName="line" />
-
-          {cooking ? cookingHtml : null}
-          {nutrition ? nutritionHtml : null}
-          {info ? infoHtml : null}
-
-          <div styleName="line line-last" />
-
-          <div styleName="share">
-            <p styleName="share-title">Поделиться: </p>
-            <Button isCircle isExternal styleName="share-btn">
-              <img src="" alt="Facebook" styleName="share-img" />
-            </Button>
-            <Button isCircle isExternal styleName="share-btn">
-              <img src="" alt="Twitter" styleName="share-img" />
-            </Button>
-            <Button isCircle isExternal styleName="share-btn">
-              <img src="" alt="VK" styleName="share-img" />
-            </Button>
-            <Button isCircle isExternal styleName="share-btn">
-              <img src="" alt="Pinterest" styleName="share-img" />
-            </Button>
+          <div styleName="text-wrapper">
+            {browserWidth > 1000 ? heading : null}
+            {composition ? compositionHtml : null}
+            {weight ? weightHtml : null}
+            <div styleName="line" />
+            <div styleName="price-wrapper">
+              <p styleName="price">{price}</p>
+              <div styleName="cart-modificators-wrapper">
+                <ProductInCartCounter
+                  addOnClick={addToCartOnClick}
+                  removeOnClick={removeOneStackFromCartOnClick}
+                  cart={cart}
+                  id={id}
+                />
+                <Button
+                  isAction
+                  isTextBlack
+                  styleName="cart-btn"
+                  onClick={() => addToCartOnClick(id)}
+                >
+                  <img src={cartIcon} alt="" styleName="cart-btn-img" />
+                  <span>В корзину</span>
+                </Button>
+              </div>
+            </div>
+            <div styleName="line" />
+            {cooking ? cookingHtml : null}
+            {nutrition ? nutritionHtml : null}
+            {info ? infoHtml : null}
+            <div styleName="line line-last" />
+            <div styleName="share">
+              <p styleName="share-title">Поделиться: </p>
+              <div styleName="share-wrapper">
+                <Button isCircle isExternal styleName="share-btn">
+                  <img src={fbIcon} alt="Facebook" styleName="share-img" />
+                </Button>
+                <Button isCircle isExternal styleName="share-btn">
+                  <img src={twitterIcon} alt="Twitter" styleName="share-img" />
+                </Button>
+                <Button isCircle isExternal styleName="share-btn">
+                  <img src={vkIcon} alt="VK" styleName="share-img" />
+                </Button>
+                <Button isCircle isExternal styleName="share-btn">
+                  <img
+                    src={pinterestIcon}
+                    alt="Pinterest"
+                    styleName="share-img"
+                  />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </ContentWrapper>

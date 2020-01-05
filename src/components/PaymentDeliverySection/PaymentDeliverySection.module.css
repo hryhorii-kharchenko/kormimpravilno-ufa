@@ -11,7 +11,7 @@
 
 .payment-ways-wrapper {
   max-width: 564px;
-  min-width: 300px;
+  min-width: 280px;
   width: 100%;
   margin-right: 30px;
 }
@@ -45,7 +45,7 @@
 
 .logos-wrapper {
   max-width: 620px;
-  margin: -20px -20px 0px 0px;
+  margin: -20px -10px 0px -10px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -57,7 +57,7 @@
   min-width: 200px;
   width: 100%;
   height: 130px;
-  margin: 20px 20px 0px 0px;
+  margin: 20px 10px 0px 10px;
   border-radius: 6px;
   box-shadow: 0 8px 23px 0 rgba(0, 0, 0, 0.06);
   background-color: $white;
@@ -91,7 +91,7 @@
 
 .img-wrapper {
   max-width: 601px;
-  min-width: 300px;
+  min-width: 280px;
   width: 100%;
   height: 100%;
   margin-right: 30px;
@@ -103,7 +103,7 @@
 
 .text-wrapper {
   max-width: 554px;
-  min-width: 300px;
+  min-width: 280px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -115,4 +115,28 @@
   font-size: 14px;
   line-height: 1.5;
   color: $black;
+}
+
+@media screen and (max-width: 1000px) {
+  .first-row {
+    flex-wrap: wrap;
+  }
+
+  .logos-wrapper {
+    margin: 10px auto;
+  }
+
+  .second-row {
+    flex-wrap: wrap;
+  }
+
+  .img-wrapper {
+    margin: 30px auto 0px;
+    order: 2;
+  }
+
+  .text-wrapper {
+    margin: 0px auto;
+    text-align: center;
+  }
 }

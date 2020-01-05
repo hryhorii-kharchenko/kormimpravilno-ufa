@@ -1,12 +1,11 @@
 .SectionHeading {
   margin: 0px auto 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .SectionHeading.aligned-left {
   margin: 0px 0px 20px;
-}
-
-.big {
 }
 
 .heading {
@@ -39,4 +38,14 @@
 
 .big .decoration {
   height: 4px;
+}
+
+@media screen and (max-width: 500px) {
+  .heading {
+    font-size: 24px;
+  }
+
+  .big .heading {
+    font-size: 30px;
+  }
 }

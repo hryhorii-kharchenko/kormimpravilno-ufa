@@ -1,6 +1,15 @@
 .SimilarRecipeSection {
   margin: 20px 0px 100px;
   padding: 70px 0px 0px;
+  position: relative;
+}
+
+.SimilarRecipeSection:after {
+  content: url('./bg-wave-2.svg');
+  top: -188px;
+  left: 0px;
+  position: absolute;
+  z-index: 0;
 }
 
 .subheading {
