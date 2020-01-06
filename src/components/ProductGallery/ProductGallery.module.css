@@ -1,10 +1,10 @@
 .ProductGallery {
   margin: -22px -11px 0px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: stretch;
   align-content: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 
 .Slider {
@@ -14,9 +14,16 @@
 .product-wrapper {
   max-width: 385px;
   width: 100%;
-  margin: 0 11px;
+
+  /* padding: 0 11px; */
 }
 
 .ProductGallery .product-wrapper {
   margin-top: 22px;
+}
+
+@media screen and (max-width: 1020px) {
+  .product-wrapper {
+    margin: 0 auto;
+  }
 }

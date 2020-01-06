@@ -25,7 +25,10 @@ function Sorting({ currentSort, possibleSort, onSortChange, className }) {
           <p styleName="current">{sortName.label}</p>
           <img src={arrowDownSvg} alt="" styleName="arrow" />
         </div>
-        <div styleName="options">{options}</div>
+        <div styleName="options">
+          <div styleName="filler" />
+          {options}
+        </div>
       </div>
     </div>
   );
@@ -37,7 +40,7 @@ Sorting.defaultProps = {
 
 Sorting.propTypes = {
   currentSort: PropTypes.number.isRequired,
-  possibleSort: PropTypes.arrayOf(PropTypes.string).isRequired,
+  possibleSort: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onSortChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };

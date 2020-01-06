@@ -31,6 +31,7 @@ class MainShopSection extends Component {
         <ContentWrapper>
           <ProductGallery
             products={currentPageProducts}
+            catalog={currentPageProducts}
             onClick={addToCartBtnHandler}
           />
           <Pagination

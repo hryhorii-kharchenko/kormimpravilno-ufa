@@ -1,4 +1,5 @@
 .Logo {
+  width: 204px;
   top: 25px;
   left: 50%;
   transform: translateX(-50%);
@@ -6,6 +7,7 @@
 }
 
 .Logo-alt {
+  width: 166px;
 }
 
 @media screen and (max-width: 1220px) {
@@ -16,6 +18,10 @@
 
 @media screen and (max-width: 380px) {
   .Logo {
-    left: 136px;
+    width: 170px;
+  }
+
+  .logo-img {
+    width: 100%;
   }
 }

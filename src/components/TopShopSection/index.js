@@ -39,7 +39,7 @@ TopShopSection.propTypes = {
   pageTitle: PropTypes.string.isRequired,
   pathname: PropTypes.string.isRequired,
   currentSort: PropTypes.number.isRequired,
-  possibleSort: PropTypes.arrayOf(PropTypes.string).isRequired,
+  possibleSort: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onSortChange: PropTypes.func.isRequired,
 };
 

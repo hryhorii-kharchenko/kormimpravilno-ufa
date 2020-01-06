@@ -1,5 +1,7 @@
 .TopShopSection {
   padding: 20px 0px 25px;
+  position: relative;
+  z-index: 1;
 }
 
 .content-wrapper {

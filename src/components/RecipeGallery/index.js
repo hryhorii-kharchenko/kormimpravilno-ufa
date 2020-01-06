@@ -50,12 +50,28 @@ function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
   if (isSlider && aimRecipeCount === 3) {
     let browserWidth = 1220;
     const settings = {
-      dots: true,
+      dots: false,
       infinite: true,
-      slidesToShow: 1,
+      slidesToShow: 2,
       slidesToScroll: 1,
       centerMode: true,
-      responsive: [{ breakpoing: 586, settings: { centerMode: false } }],
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            dots: false,
+          },
+        },
+        {
+          breakpoint: 568,
+          settings: {
+            slidesToShow: 1,
+            centerMode: false,
+            dots: false,
+          },
+        },
+      ],
     };
 
     if (typeof window !== `undefined`) {

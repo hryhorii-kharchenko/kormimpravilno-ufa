@@ -8,11 +8,11 @@ function ProductInCartCounter({ quantity, addOnClick, removeOnClick }) {
 
   return (
     <div styleName="ProductInCartCounter">
-      <button styleName="remove" type="button" onClick={() => addOnClick()}>
+      <button styleName="remove" type="button" onClick={() => removeOnClick()}>
         -
       </button>
       <span styleName="counter">{quantity}</span>
-      <button styleName="add" type="button" onClick={() => removeOnClick()}>
+      <button styleName="add" type="button" onClick={() => addOnClick()}>
         +
       </button>
     </div>

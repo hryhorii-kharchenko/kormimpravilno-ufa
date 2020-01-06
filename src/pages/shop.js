@@ -42,7 +42,9 @@ class ShopPage extends Component {
           break;
         case 1:
           sortFunc = function(a, b) {
-            return a.title.localeCompare(b.title);
+            return a.product_post.productName.localeCompare(
+              b.product_post.productName
+            );
           };
           break;
         case 2:
@@ -52,12 +54,18 @@ class ShopPage extends Component {
           break;
         case 3:
           sortFunc = function(a, b) {
-            return b.price - a.price;
+            return (
+              parseInt(a.price.slice(1).replace(/\./g, ''), 10) -
+              parseInt(b.price.slice(1).replace(/\./g, ''), 10)
+            );
           };
           break;
         case 4:
           sortFunc = function(a, b) {
-            return a.price - b.price;
+            return (
+              parseInt(b.price.slice(1).replace(/\./g, ''), 10) -
+              parseInt(a.price.slice(1).replace(/\./g, ''), 10)
+            );
           };
           break;
         case 5:
