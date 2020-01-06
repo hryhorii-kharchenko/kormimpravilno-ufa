@@ -92,10 +92,9 @@ function MainProductSection({
               <p styleName="price">{price}</p>
               <div styleName="cart-modificators-wrapper">
                 <ProductInCartCounter
-                  addOnClick={addToCartOnClick}
-                  removeOnClick={removeOneStackFromCartOnClick}
-                  cart={cart}
-                  id={id}
+                  quantity={cart[id]}
+                  addOnClick={() => addToCartOnClick(id)}
+                  removeOnClick={() => removeOneStackFromCartOnClick(id)}
                 />
                 <Button
                   isAction

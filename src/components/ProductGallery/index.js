@@ -114,20 +114,32 @@ ProductGallery.defaultProps = {
 ProductGallery.propTypes = {
   catalog: PropTypes.arrayOf(
     PropTypes.shape({
-      avatar: PropTypes.shape,
-      productName: PropTypes.string,
-      composition: PropTypes.string,
-      weight: PropTypes.string,
+      imageSmall: PropTypes.shape({
+        imageFile: PropTypes.shape({
+          childImageSharp: PropTypes.shape({ fluid: PropTypes.shape() }),
+        }),
+      }),
+      product_post: PropTypes.shape({
+        productName: PropTypes.string,
+        composition: PropTypes.string,
+        weight: PropTypes.string,
+      }),
       price: PropTypes.string,
       id: PropTypes.string,
     })
   ).isRequired,
   products: PropTypes.arrayOf(
     PropTypes.shape({
-      avatar: PropTypes.shape,
-      productName: PropTypes.string,
-      composition: PropTypes.string,
-      weight: PropTypes.string,
+      imageSmall: PropTypes.shape({
+        imageFile: PropTypes.shape({
+          childImageSharp: PropTypes.shape({ fluid: PropTypes.shape() }),
+        }),
+      }),
+      product_post: PropTypes.shape({
+        productName: PropTypes.string,
+        composition: PropTypes.string,
+        weight: PropTypes.string,
+      }),
       price: PropTypes.string,
       id: PropTypes.string,
     })

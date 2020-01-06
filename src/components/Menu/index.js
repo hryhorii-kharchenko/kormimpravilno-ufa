@@ -5,10 +5,26 @@ import MenuItem from '../MenuItem';
 
 import './Menu.module.css';
 
-function Menu({ items }) {
-  const itemsMapped = items.map(menuItem => (
-    <MenuItem title={menuItem.title} url={menuItem.url} key={menuItem.title} />
-  ));
+function Menu({ items, firstItemId }) {
+  const itemsMapped = items.map((menuItem, i) => {
+    if (i === 0) {
+      return (
+        <MenuItem
+          title={menuItem.title}
+          url={menuItem.url}
+          key={menuItem.title}
+          id={firstItemId}
+        />
+      );
+    }
+    return (
+      <MenuItem
+        title={menuItem.title}
+        url={menuItem.url}
+        key={menuItem.title}
+      />
+    );
+  });
 
   return (
     <nav styleName="Menu">
@@ -17,6 +33,10 @@ function Menu({ items }) {
   );
 }
 
+Menu.defaultProps = {
+  firstItemId: '',
+};
+
 Menu.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
@@ -24,6 +44,7 @@ Menu.propTypes = {
       title: PropTypes.string,
     })
   ).isRequired,
+  firstItemId: PropTypes.string,
 };
 
 export default Menu;

@@ -60,7 +60,11 @@ function ProductLayout({
         addToCartOnClick={addToCartBtnHandler}
         removeOneStackFromCartOnClick={cartRemoveOneStackHandler}
       />
-      <SimilarProductSection similar={similar} catalog={catalog} />
+      <SimilarProductSection
+        similar={similar}
+        catalog={catalog}
+        addToCartBtnHandler={addToCartBtnHandler}
+      />
     </Layout>
   );
 }

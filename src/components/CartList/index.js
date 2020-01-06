@@ -1,50 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../Header';
-import Footer from '../Footer';
+import CartItem from '../CartItem';
 
-function Layout({
-  data,
-  children,
+import './CartList.module.css';
+
+function CartList({
   cart,
   catalog,
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
+  className,
 }) {
-  return (
-    <>
-      <Header
-        phone={data.phone}
-        instaLink={data.instaLink}
-        cart={cart}
-        catalog={catalog}
+  const cartList = Object.entries(cart).map(([key, value]) => {
+    const product = catalog.find(elem => elem.id === key);
+    return (
+      <CartItem
+        product={product}
+        quantity={value}
         addToCartBtnHandler={addToCartBtnHandler}
         cartRemoveOneStackHandler={cartRemoveOneStackHandler}
         cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
       />
+    );
+  });
 
-      <main>{children}</main>
-
-      <Footer
-        copyright={data.copyright}
-        ooo={data.ooo}
-        inn={data.inn}
-        orgn={data.orgn}
-      />
-    </>
+  return (
+    <section styleName="CartList" className={className}>
+      {cartList}
+    </section>
   );
 }
 
-Layout.propTypes = {
-  data: PropTypes.shape().isRequired,
-  children: PropTypes.node.isRequired,
+CartList.defaultProps = {
+  className: '',
+};
+
+CartList.propTypes = {
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-export default Layout;
+export default CartList;

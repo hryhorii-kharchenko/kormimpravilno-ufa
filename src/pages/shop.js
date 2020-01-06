@@ -122,7 +122,10 @@ class ShopPage extends Component {
           possibleSort={possibleSort}
           onSortChange={this.sortChangeHandler}
         />
-        <MainShopSection catalog={localCatalog} />
+        <MainShopSection
+          catalog={localCatalog}
+          addToCartBtnHandler={addToCartBtnHandler}
+        />
       </Layout>
     );
   }

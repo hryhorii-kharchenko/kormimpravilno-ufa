@@ -13,3 +13,9 @@
     top: 15px;
   }
 }
+
+@media screen and (max-width: 380px) {
+  .Logo {
+    left: 136px;
+  }
+}

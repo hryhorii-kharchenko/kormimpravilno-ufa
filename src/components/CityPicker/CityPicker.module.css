@@ -32,3 +32,10 @@
 
 .link {
 }
+
+@media screen and (max-width: 1220px) {
+  .dropdown {
+    text-align: center;
+    color: $white;
+  }
+}

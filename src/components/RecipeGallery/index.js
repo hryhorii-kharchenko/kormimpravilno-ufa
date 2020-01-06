@@ -101,13 +101,33 @@ RecipeGallery.defaultProps = {
 };
 
 RecipeGallery.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      featuredImageSmall: PropTypes.shape({
+        imageFile: PropTypes.shape({
+          childImageSharp: PropTypes.shape({ fluid: PropTypes.shape() }),
+        }),
+      }),
+      recipe_post: PropTypes.shape({
+        recipeName: PropTypes.string,
+        description: PropTypes.string,
+      }),
+      slug: PropTypes.string,
+      id: PropTypes.string,
+    })
+  ).isRequired,
   recipes: PropTypes.arrayOf(
     PropTypes.shape({
-      avatar: PropTypes.shape,
-      heading: PropTypes.string,
-      description: PropTypes.string,
-      link: PropTypes.string,
+      featuredImageSmall: PropTypes.shape({
+        imageFile: PropTypes.shape({
+          childImageSharp: PropTypes.shape({ fluid: PropTypes.shape() }),
+        }),
+      }),
+      recipe_post: PropTypes.shape({
+        recipeName: PropTypes.string,
+        description: PropTypes.string,
+      }),
+      slug: PropTypes.string,
       id: PropTypes.string,
     })
   ).isRequired,
