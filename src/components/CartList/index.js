@@ -22,6 +22,7 @@ function CartList({
         addToCartBtnHandler={addToCartBtnHandler}
         cartRemoveOneStackHandler={cartRemoveOneStackHandler}
         cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+        key={product.id}
       />
     );
   });

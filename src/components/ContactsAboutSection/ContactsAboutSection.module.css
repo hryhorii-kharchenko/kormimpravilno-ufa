@@ -10,6 +10,7 @@
   right: 0px;
   position: absolute;
   z-index: 0;
+  opacity: 0.7;
 }
 
 .wrapper {
@@ -97,8 +98,13 @@
   font-size: 18px;
   font-weight: bold;
   line-height: 1.17;
-  color: #37b23a;
+  color: $main;
   text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+
+.link:hover .info {
+  color: $mainHover;
 }
 
 .line {

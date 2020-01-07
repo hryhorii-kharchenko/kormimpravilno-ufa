@@ -16,6 +16,12 @@
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.14);
   background-color: $white;
   color: $black;
+  transition: color background-color 0.2s ease-in-out;
+}
+
+.remove:hover {
+  background-color: $main;
+  color: $white;
 }
 
 .counter {
@@ -33,4 +39,10 @@
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.14);
   background-color: $white;
   color: $main;
+  transition: color background-color 0.2s ease-in-out;
+}
+
+.add:hover {
+  background-color: $main;
+  color: $white;
 }

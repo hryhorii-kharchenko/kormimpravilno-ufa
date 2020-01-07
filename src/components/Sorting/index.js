@@ -26,8 +26,7 @@ function Sorting({ currentSort, possibleSort, onSortChange, className }) {
           <img src={arrowDownSvg} alt="" styleName="arrow" />
         </div>
         <div styleName="options">
-          <div styleName="filler" />
-          {options}
+          <div styleName="options-inner-wrapper">{options}</div>
         </div>
       </div>
     </div>

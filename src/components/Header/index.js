@@ -70,11 +70,7 @@ function Header({
           <Button href={instaLink} target="_blank" isCircle isExternal>
             <img styleName="insta-img" src={instaIcon} alt="Instagram" />
           </Button>
-          <Button
-            onClick={() => setIsMobileMenuActive(!isMobileMenuActive)}
-            isCircle
-            isAction
-          >
+          <Button onClick={() => setIsCartActive(true)} isCircle isAction>
             <img styleName="cart-img" src={cartIcon} alt="Корзина" />
           </Button>
         </div>
@@ -101,6 +97,11 @@ function Header({
       }}
       underlayStyle={{ background: 'rgba(0, 0, 0, 0.63)' }}
       verticallyCenter
+      dialogStyle={{
+        maxWidth: '857px',
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
     >
       <div id="cart-modal" styleName="cart-modal">
         <Cart

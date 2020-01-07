@@ -171,6 +171,7 @@ class ShopProvider extends Component {
             if (products[i].slug[0] !== '/') {
               products[i].slug = `/${products[i].slug}`;
             }
+            products[i].price = products[i].price.replace(/\./g, '');
           }
 
           return React.cloneElement(children, {

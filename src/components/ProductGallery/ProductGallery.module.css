@@ -1,14 +1,14 @@
 .ProductGallery {
   margin: -22px -11px 0px;
-  /* display: flex;
+  display: flex;
   justify-content: center;
   align-items: stretch;
   align-content: flex-start;
-  flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 .Slider {
-  margin: 0px -11px;
+  /* margin: 0px -11px; */
 }
 
 .product-wrapper {
@@ -22,8 +22,14 @@
   margin-top: 22px;
 }
 
-@media screen and (max-width: 1020px) {
-  .product-wrapper {
-    margin: 0 auto;
+@media screen and (max-width: 490px) {
+  .Slider {
+    margin: 0 -10px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .Slider {
+    margin: 0 -26px;
   }
 }

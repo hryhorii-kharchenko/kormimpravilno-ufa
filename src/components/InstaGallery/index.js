@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import InstaCard from '../InstaCard';
 
+import './InstaGallery.module.css';
+
 function InstaGallery({ feed }) {
   const gallery = feed.map(post => (
     <InstaCard imgSrc={post.imgSrc} link={post.link} key={post.link} />

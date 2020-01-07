@@ -6,11 +6,20 @@
   text-decoration: none;
 }
 
+.UnderlinedLink:hover .text {
+  color: $main;
+}
+
+.UnderlinedLink:hover .underline {
+  width: 147px;
+}
+
 .text {
   margin: 0;
   font-size: 14px;
   font-weight: 800;
   color: $black;
+  transition: color 0.2s ease-in-out;
 }
 
 .arrow {
@@ -25,4 +34,5 @@
   bottom: -4px;
   position: absolute;
   background-color: $main;
+  transition: width 0.2s ease-in-out;
 }

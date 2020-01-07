@@ -1,0 +1,19 @@
+.InstaCard {
+  max-width: 290px;
+  max-height: 290px;
+  width: 100%;
+  height: auto;
+  margin: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border 0.2s ease-in-out;
+}
+
+.InstaCard:hover {
+  border: solid 2px $main;
+}
+
+.image {
+  width: 100%;
+}

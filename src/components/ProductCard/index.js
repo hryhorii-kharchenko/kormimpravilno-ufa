@@ -48,7 +48,7 @@ function ProductCard({
         <div styleName="separator" />
 
         <div styleName="footer-content-wrapper">
-          <p styleName="price">{price}</p>
+          <p styleName="price">{`${price.slice(1)} руб`}</p>
           <Button
             isAction
             isTextBlack

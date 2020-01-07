@@ -89,7 +89,7 @@ function MainProductSection({
             {weight ? weightHtml : null}
             <div styleName="line" />
             <div styleName="price-wrapper">
-              <p styleName="price">{price}</p>
+              <p styleName="price">{`${price.slice(1)} руб`}</p>
               <div styleName="cart-modificators-wrapper">
                 <ProductInCartCounter
                   quantity={cart[id]}

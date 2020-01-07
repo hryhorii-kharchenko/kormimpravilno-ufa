@@ -1,8 +1,18 @@
 .Sorting {
 }
 
+.Sorting:hover .dropbtn {
+  border: solid 1px $main;
+  border-radius: 22.5px 22.5px 0px 0px;
+}
+
 .Sorting:hover .options {
   display: block;
+}
+
+.Sorting:hover .options-inner-wrapper {
+  bottom: 0%;
+  top: 100%;
 }
 
 .Sorting:hover .arrow {
@@ -24,7 +34,7 @@
 }
 
 .dropbtn {
-  width: 166px;
+  width: 165px;
   height: 45px;
   margin-left: 5px;
   border-radius: 22.5px;
@@ -52,34 +62,47 @@
 
 .options {
   display: none;
-  width: 166px;
+  width: 167px;
   top: 100%;
   right: 0;
-  background-color: white;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
-  margin-top: -23px;
   /* max-height: 200px;
   overflow-y: auto; */
   position: absolute;
+  /* overflow: hidden; */
   z-index: 1;
 }
 
-.filler {
-  max-width: 164px;
-  width: 100%;
-  height: 23px;
-  border-left: solid 1px #d8d8d8;
-  border-right: solid 1px #d8d8d8;
-  background-color: $white;
+.options-inner-wrapper {
+  bottom: 100%;
+  top: 0%;
+  right: 0;
+  position: absolute;
+  transition: top bottom 1s ease-in-out;
 }
 
 .option {
   width: 100%;
   height: 45px;
-  border: solid 1px #d8d8d8;
+  border-top: none;
+  border-bottom: solid 1px $main;
+  border-left: solid 1px $main;
+  border-right: solid 1px $main;
   background-color: $white;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.option:hover {
+  background-color: $main;
+  color: $white;
+}
+
+.option:last-child {
+  border-radius: 0px 0px 22.5px 22.5px;
+  background-clip: padding-box;
 }

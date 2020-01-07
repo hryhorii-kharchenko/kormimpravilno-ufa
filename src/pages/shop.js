@@ -55,16 +55,14 @@ class ShopPage extends Component {
         case 3:
           sortFunc = function(a, b) {
             return (
-              parseInt(a.price.slice(1).replace(/\./g, ''), 10) -
-              parseInt(b.price.slice(1).replace(/\./g, ''), 10)
+              parseInt(a.price.slice(1), 10) - parseInt(b.price.slice(1), 10)
             );
           };
           break;
         case 4:
           sortFunc = function(a, b) {
             return (
-              parseInt(b.price.slice(1).replace(/\./g, ''), 10) -
-              parseInt(a.price.slice(1).replace(/\./g, ''), 10)
+              parseInt(b.price.slice(1), 10) - parseInt(a.price.slice(1), 10)
             );
           };
           break;

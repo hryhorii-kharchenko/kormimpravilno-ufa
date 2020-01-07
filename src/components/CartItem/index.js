@@ -30,21 +30,30 @@ function CartItem({
           styleName="image"
         />
         <div styleName="inner-wrapper">
-          <h3 styleName="heading">{product.product_post.productName}</h3>
+          <div styleName="heading-wrapper">
+            <h3 styleName="heading">{product.product_post.productName}</h3>
+          </div>
           <div styleName="second-row-wrapper">
             <p styleName="single-price">
               Цена за ед.:
-              <span styleName="single-price-number">{product.price}</span>
+              <span styleName="single-price-number">
+                {`${product.price.slice(1)} руб`}
+              </span>
             </p>
-            <ProductInCartCounter
-              quantity={quantity}
-              addOnClick={() => addToCartBtnHandler(product.id)}
-              removeOnClick={() => cartRemoveOneStackHandler(product.id)}
-            />
+
+            <div styleName="product-counter-wrapper">
+              <p styleName="product-counter">Кол-во:</p>
+              <ProductInCartCounter
+                quantity={quantity}
+                addOnClick={() => addToCartBtnHandler(product.id)}
+                removeOnClick={() => cartRemoveOneStackHandler(product.id)}
+              />
+            </div>
+
             <p styleName="total-price">
               Итого:
               <span styleName="total-price-number">
-                {parseInt(product.price.slice(1), 10) * quantity}
+                {`${parseInt(product.price.slice(1), 10) * quantity} руб`}
               </span>
             </p>
           </div>

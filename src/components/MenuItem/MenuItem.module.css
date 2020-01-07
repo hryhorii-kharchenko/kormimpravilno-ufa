@@ -1,10 +1,31 @@
 .MenuItem {
   margin-right: 20px;
   list-style-type: none;
+  cursor: pointer;
+  position: relative;
 }
 
 .MenuItem:last-child {
   margin-right: initial;
+}
+
+.link:after {
+  content: '';
+  width: 0%;
+  height: 1px;
+  top: 100%;
+  left: 0;
+  position: absolute;
+  background-color: $main;
+  transition: width 0.2s ease-in-out;
+}
+
+.MenuItem:hover .link {
+  color: $main;
+}
+
+.MenuItem:hover .link:after {
+  width: 100%;
 }
 
 .link {
@@ -13,6 +34,7 @@
   text-transform: uppercase;
   text-decoration: none;
   color: $black;
+  transition: color 0.2s solid;
 }
 
 @media screen and (max-width: 1220px) {
@@ -25,5 +47,6 @@
     display: block;
     text-align: center;
     color: $white;
+    position: relative;
   }
 }
