@@ -12,9 +12,9 @@ import Button from '../Button';
 import Cart from '../Cart';
 
 import './Header.module.css';
-import instaIcon from '../../images/svg/insta.svg';
-import cartIcon from '../../images/svg/cart.svg';
-import crossIcon from '../../images/svg/cross.svg';
+import InstaIcon from '../../images/inline/insta.svg';
+import CartIcon from '../../images/inline/cart.svg';
+import CrossIcon from '../../images/inline/cross.svg';
 
 function Header({
   phone,
@@ -68,10 +68,10 @@ function Header({
 
         <div styleName="mobile-menu-btn-wrapper">
           <Button href={instaLink} target="_blank" isCircle isExternal>
-            <img styleName="insta-img" src={instaIcon} alt="Instagram" />
+            <InstaIcon styleName="insta-img" />
           </Button>
           <Button onClick={() => setIsCartActive(true)} isCircle isAction>
-            <img styleName="cart-img" src={cartIcon} alt="Корзина" />
+            <CartIcon styleName="cart-img" />
           </Button>
         </div>
       </div>
@@ -79,7 +79,7 @@ function Header({
   ) : null;
 
   const burgerContentHtml = isMobileMenuActive ? (
-    <img src={crossIcon} alt="Закрыть" styleName="cross-img" />
+    <CrossIcon styleName="cross-img" />
   ) : (
     <>
       <div styleName="burger-line" />
@@ -143,11 +143,11 @@ function Header({
             </Button>
 
             <Button href={instaLink} target="_blank" isCircle isExternal>
-              <img styleName="insta-img" src={instaIcon} alt="Instagram" />
+              <InstaIcon styleName="insta-img" />
             </Button>
 
             <Button onClick={() => setIsCartActive(true)} isCircle isAction>
-              <img styleName="cart-img" src={cartIcon} alt="Корзина" />
+              <CartIcon styleName="cart-img" />
             </Button>
           </Wrapper>
         </header>

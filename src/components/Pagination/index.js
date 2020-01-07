@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 
 import './Pagination.module.css';
-import arrowPrevIcon from '../../images/svg/arrow-previous.svg';
-import arrowNextIcon from '../../images/svg/arrow-next.svg';
+import arrowPrevIcon from '../../images/icons/arrow-previous.svg';
+import arrowNextIcon from '../../images/icons/arrow-next.svg';
 
 function Pagination({ currentPage, totalPages }) {
   const firstNumber = 1;

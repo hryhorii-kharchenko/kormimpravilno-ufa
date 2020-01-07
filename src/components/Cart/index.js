@@ -5,8 +5,8 @@ import CartList from '../CartList';
 import Button from '../Button';
 
 import './Cart.module.css';
-import arrowBackIcon from '../../images/svg/arrow-previous.svg';
-import crossIcon from '../../images/svg/cross.svg';
+import arrowBackIcon from '../../images/icons/arrow-previous.svg';
+import CrossIcon from '../../images/inline/cross.svg';
 
 function Cart({
   closeCart,
@@ -66,7 +66,7 @@ function Cart({
       </footer>
 
       <button type="button" onClick={closeCart} styleName="cross-btn">
-        <img src={crossIcon} alt="Закрыть" styleName="cross-img" />
+        <CrossIcon styleName="cross-img" />
       </button>
     </div>
   );

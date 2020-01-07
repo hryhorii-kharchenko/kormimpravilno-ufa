@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 
 import './BoxedQuote.module.css';
-import quotesImg from '../../images/svg/quotes.svg';
+import quotesImg from '../../images/icons/quotes.svg';
 
 function BoxedQuote({ text, btnText }) {
   return (

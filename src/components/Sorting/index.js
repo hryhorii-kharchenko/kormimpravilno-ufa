@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './Sorting.module.css';
-import arrowDownSvg from '../../images/svg/arrow-down.svg';
+import arrowDownSvg from '../../images/icons/arrow-down.svg';
 
 function Sorting({ currentSort, possibleSort, onSortChange, className }) {
   const sortName = possibleSort.find(elem => elem.value === currentSort);

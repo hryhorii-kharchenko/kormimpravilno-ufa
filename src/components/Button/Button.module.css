@@ -36,6 +36,18 @@
   height: 40px;
   line-height: 40px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle path {
+  fill: $black;
+  transition: fill 0.1s ease-in-out;
+}
+
+.circle:hover path {
+  fill: $white;
 }
 
 .grayBorder {

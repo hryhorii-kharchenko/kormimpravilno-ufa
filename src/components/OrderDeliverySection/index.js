@@ -7,7 +7,7 @@ import SectionHeading from '../SectionHeading';
 import SanitizeHTML from '../SanitizeHTML';
 
 import './OrderDeliverySection.module.css';
-import leafImg from '../../images/svg/leaf.svg';
+import leafImg from '../../images/icons/leaf.svg';
 
 function OrderDeliverySection({ data }) {
   return (

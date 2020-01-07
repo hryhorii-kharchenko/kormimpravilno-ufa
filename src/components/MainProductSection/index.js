@@ -7,11 +7,11 @@ import Button from '../Button';
 import ProductInCartCounter from '../ProductInCartCounter';
 
 import './MainProductSection.module.css';
-import cartIcon from '../../images/svg/cart.svg';
-import fbIcon from '../../images/svg/facebook.svg';
-import twitterIcon from '../../images/svg/twitter.svg';
-import vkIcon from '../../images/svg/vk.svg';
-import pinterestIcon from '../../images/svg/pinterest.svg';
+import CartIcon from '../../images/inline/cart.svg';
+import FbIcon from '../../images/inline/facebook.svg';
+import TwitterIcon from '../../images/inline/twitter.svg';
+import VkIcon from '../../images/inline/vk.svg';
+import PinterestIcon from '../../images/inline/pinterest.svg';
 
 function MainProductSection({
   productName,
@@ -102,7 +102,7 @@ function MainProductSection({
                   styleName="cart-btn"
                   onClick={() => addToCartOnClick(id)}
                 >
-                  <img src={cartIcon} alt="" styleName="cart-btn-img" />
+                  <CartIcon styleName="cart-btn-img" />
                   <span>В корзину</span>
                 </Button>
               </div>
@@ -116,20 +116,16 @@ function MainProductSection({
               <p styleName="share-title">Поделиться: </p>
               <div styleName="share-wrapper">
                 <Button isCircle isExternal styleName="share-btn">
-                  <img src={fbIcon} alt="Facebook" styleName="share-img" />
+                  <FbIcon styleName="share-img" />
                 </Button>
                 <Button isCircle isExternal styleName="share-btn">
-                  <img src={twitterIcon} alt="Twitter" styleName="share-img" />
+                  <TwitterIcon styleName="share-img" />
                 </Button>
                 <Button isCircle isExternal styleName="share-btn">
-                  <img src={vkIcon} alt="VK" styleName="share-img" />
+                  <VkIcon styleName="share-img" />
                 </Button>
                 <Button isCircle isExternal styleName="share-btn">
-                  <img
-                    src={pinterestIcon}
-                    alt="Pinterest"
-                    styleName="share-img"
-                  />
+                  <PinterestIcon styleName="share-img" />
                 </Button>
               </div>
             </div>

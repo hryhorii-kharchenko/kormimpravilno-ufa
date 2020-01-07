@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import './ScrollDown.module.css';
-import mouseIcon from '../../images/svg/scroll-down.svg';
+import mouseIcon from '../../images/icons/scroll-down.svg';
 
 function ScrollDown({ url }) {
   return (

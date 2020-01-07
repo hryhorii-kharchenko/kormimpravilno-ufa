@@ -133,7 +133,7 @@ class ShopProvider extends Component {
                 }
               }
             }
-            defaultImageSmall: file(relativePath: { eq: "default.jpg" }) {
+            defaultImageSmall: file(relativePath: { eq: "placeholder.png" }) {
               childImageSharp {
                 fluid(maxWidth: 385, maxHeight: 350) {
                   base64
@@ -144,7 +144,7 @@ class ShopProvider extends Component {
                 }
               }
             }
-            defaultImageFull: file(relativePath: { eq: "default.jpg" }) {
+            defaultImageFull: file(relativePath: { eq: "placeholder.png" }) {
               childImageSharp {
                 fluid(maxWidth: 556, maxHeight: 504) {
                   base64

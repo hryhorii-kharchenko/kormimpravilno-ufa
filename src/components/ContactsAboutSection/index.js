@@ -5,10 +5,10 @@ import ContentWrapper from '../ContentWrapper';
 import SectionHeading from '../SectionHeading';
 
 import './ContactsAboutSection.module.css';
-import phoneIcon from '../../images/svg/phone.svg';
-import pinIcon from '../../images/svg/pin.svg';
-import mailIcon from '../../images/svg/mail.svg';
-import pdfIcon from '../../images/svg/pdf.svg';
+import phoneIcon from '../../images/icons/phone.svg';
+import pinIcon from '../../images/icons/pin.svg';
+import mailIcon from '../../images/icons/mail.svg';
+import pdfIcon from '../../images/icons/pdf.svg';
 
 function ContactsAboutSection({ data }) {
   return (

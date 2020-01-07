@@ -20,6 +20,10 @@
   color: $white;
 }
 
+.ProductCard:hover .cart-btn-img path {
+  fill: $white;
+}
+
 .link-wrapper {
   color: $black;
   text-decoration: none;
@@ -27,7 +31,7 @@
 
 .avatar {
   width: 100%;
-  max-height: 350px;
+  /* max-height: 350px; */
 }
 
 .content-wrapper {
@@ -94,13 +98,18 @@
   line-height: 40px;
 }
 
-img.cart-btn-img {
+svg.cart-btn-img {
   width: 17px;
   height: 18px;
   margin-right: 12px;
   top: 2px;
   position: relative;
   display: inline-block;
+}
+
+.cart-btn-img path {
+  fill: $black;
+  transition: fill 0.1s ease-in-out;
 }
 
 @media screen and (max-width: 450px) {

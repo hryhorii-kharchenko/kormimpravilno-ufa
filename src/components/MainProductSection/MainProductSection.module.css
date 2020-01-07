@@ -89,13 +89,22 @@
   min-width: 182px;
 }
 
-img.cart-btn-img {
+.cart-btn:hover path {
+  fill: $white;
+}
+
+svg.cart-btn-img {
   width: 17px;
   height: 18px;
   margin-right: 12px;
   top: 2px;
   position: relative;
   display: inline-block;
+}
+
+.cart-btn-img path {
+  fill: $black;
+  transition: fill 0.1s ease-in-out;
 }
 
 .share {
@@ -128,7 +137,8 @@ img.cart-btn-img {
   align-items: center;
 }
 
-.share-img {
+.share-img path {
+  fill: $main;
 }
 
 .line {

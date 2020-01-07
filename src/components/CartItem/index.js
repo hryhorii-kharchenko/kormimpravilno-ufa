@@ -5,7 +5,7 @@ import Img from 'gatsby-image';
 import ProductInCartCounter from '../ProductInCartCounter';
 
 import './CartItem.module.css';
-import crossIcon from '../../images/svg/cross.svg';
+import CrossIcon from '../../images/inline/cross.svg';
 
 function CartItem({
   product,
@@ -21,7 +21,7 @@ function CartItem({
         onClick={() => cartRemoveWholeItemHandler(product.id)}
         styleName="cross-btn"
       >
-        <img src={crossIcon} alt="Удалить" styleName="cross-img" />
+        <CrossIcon styleName="cross-img" />
       </button>
 
       <div styleName="product-wrapper">

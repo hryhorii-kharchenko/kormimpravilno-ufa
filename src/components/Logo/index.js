@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import './Logo.module.css';
-import logoSvg from '../../images/svg/logo.svg';
+import logoSvg from '../../images/icons/logo.svg';
 
 function Logo({ isAlt }) {
   const styleName = isAlt ? 'Logo-alt' : 'Logo';

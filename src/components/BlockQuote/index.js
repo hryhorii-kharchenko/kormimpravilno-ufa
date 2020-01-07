@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './BlockQuote.module.css';
-import leafImg from '../../images/svg/leaf.svg';
+import leafImg from '../../images/icons/leaf.svg';
 
 function BlockQuote({ text, author }) {
   return (

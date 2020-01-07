@@ -15,7 +15,7 @@
   max-width: 385px;
   width: 100%;
 
-  /* padding: 0 11px; */
+  padding: 0 11px;
 }
 
 .ProductGallery .product-wrapper {
@@ -25,6 +25,10 @@
 @media screen and (max-width: 490px) {
   .Slider {
     margin: 0 -10px;
+  }
+
+  .Slider .product-wrapper {
+    padding: 0;
   }
 }
 

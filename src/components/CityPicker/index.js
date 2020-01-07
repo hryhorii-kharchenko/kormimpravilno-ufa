@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import './CityPicker.module.css';
-import arrowDownSvg from '../../images/svg/arrow-down.svg';
+import arrowDownSvg from '../../images/icons/arrow-down.svg';
 
 function CityPicker({ options, current }) {
   const links = options.map(option => (

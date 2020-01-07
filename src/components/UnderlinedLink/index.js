@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './UnderlinedLink.module.css';
-import arrowImg from '../../images/svg/arrow-next.svg';
+import arrowImg from '../../images/icons/arrow-next.svg';
 
 function UnderlinedLink({ text, className }) {
   return (

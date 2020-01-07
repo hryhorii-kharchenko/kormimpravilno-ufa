@@ -6,7 +6,7 @@ import Img from 'gatsby-image';
 import Button from '../Button';
 
 import './ProductCard.module.css';
-import cartIcon from '../../images/svg/cart.svg';
+import CartIcon from '../../images/inline/cart.svg';
 
 function ProductCard({
   avatar,
@@ -55,7 +55,7 @@ function ProductCard({
             styleName="cart-btn"
             onClick={() => onClick(id)}
           >
-            <img src={cartIcon} alt="" styleName="cart-btn-img" />
+            <CartIcon styleName="cart-btn-img" />
             <span>В корзину</span>
           </Button>
         </div>

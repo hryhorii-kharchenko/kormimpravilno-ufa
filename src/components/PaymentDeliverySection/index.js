@@ -6,10 +6,10 @@ import SectionHeading from '../SectionHeading';
 import ContentWrapper from '../ContentWrapper';
 
 import './PaymentDeliverySection.module.css';
-import mirLogoImg from '../../images/svg/logo-mir.svg';
-import visaLogoImg from '../../images/svg/logo-visa.svg';
-import mcLogoImg from '../../images/svg/logo-mastercard.svg';
-import jcbLogoImg from '../../images/svg/logo-jcb.svg';
+import mirLogoImg from '../../images/icons/logo-mir.svg';
+import visaLogoImg from '../../images/icons/logo-visa.svg';
+import mcLogoImg from '../../images/icons/logo-mastercard.svg';
+import jcbLogoImg from '../../images/icons/logo-jcb.svg';
 import SanitizeHTML from '../SanitizeHTML';
 
 function PaymentDeliverySection({ data }) {

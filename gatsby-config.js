@@ -5,6 +5,20 @@ module.exports = {
     author: 'kharchenko.hryhorii@yandex.com',
   },
   plugins: [
+    // {
+    //   resolve: 'gatsby-plugin-svgr',
+    //   options: {
+    //     exclude: /icons/,
+    //   },
+    // },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /inline/,
+        },
+      },
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,
