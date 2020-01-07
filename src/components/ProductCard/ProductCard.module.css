@@ -5,7 +5,7 @@
   border-radius: 6px;
   border: 1px solid #e2e2e2;
   position: relative;
-  transition: box-shadow border 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, border 0.2s ease-in-out;
   cursor: pointer;
 }
 
@@ -94,7 +94,8 @@
 
 .cart-btn {
   width: 182px;
-  transition: background-color box-shadow color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out,
+    box-shadow color 0.2s ease-in-out;
   line-height: 40px;
 }
 

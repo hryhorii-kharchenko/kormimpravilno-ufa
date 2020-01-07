@@ -79,7 +79,7 @@
   top: 0%;
   right: 0;
   position: absolute;
-  transition: top bottom 1s ease-in-out;
+  transition: top 0.5s ease-in-out, bottom 0.5s ease-in-out;
 }
 
 .option {

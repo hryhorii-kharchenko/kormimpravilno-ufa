@@ -15,7 +15,8 @@
   text-transform: uppercase;
   text-decoration: none;
 
-  transition: color background-color box-shadow 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .Button:hover {
@@ -34,11 +35,13 @@
 .circle {
   width: 40px;
   height: 40px;
-  line-height: 40px;
+  line-height: 42px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .circle path {

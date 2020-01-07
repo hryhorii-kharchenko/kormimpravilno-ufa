@@ -9,14 +9,15 @@
 }
 
 .remove {
-  width: 25px;
+  max-width: 25px;
+  min-width: 25px;
   height: 25px;
   border: 0;
   border-radius: 50%;
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.14);
   background-color: $white;
   color: $black;
-  transition: color background-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .remove:hover {
@@ -32,14 +33,15 @@
 }
 
 .add {
-  width: 25px;
+  max-width: 25px;
+  min-width: 25px;
   height: 25px;
   border: 0;
   border-radius: 50%;
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.14);
   background-color: $white;
   color: $main;
-  transition: color background-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .add:hover {

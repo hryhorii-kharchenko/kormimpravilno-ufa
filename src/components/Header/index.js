@@ -27,6 +27,7 @@ function Header({
 }) {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const [isCartActive, setIsCartActive] = useState(false);
+  const openCart = () => setIsCartActive(true);
   const closeCart = () => setIsCartActive(false);
 
   const menuItems = [
@@ -71,7 +72,9 @@ function Header({
             <InstaIcon styleName="insta-img" />
           </Button>
           <Button onClick={() => setIsCartActive(true)} isCircle isAction>
-            <CartIcon styleName="cart-img" />
+            <div className="cart-icon-wrapper">
+              <CartIcon styleName="cart-img" />
+            </div>
           </Button>
         </div>
       </div>
@@ -147,7 +150,9 @@ function Header({
             </Button>
 
             <Button onClick={() => setIsCartActive(true)} isCircle isAction>
-              <CartIcon styleName="cart-img" />
+              <div className="cart-icon-wrapper">
+                <CartIcon styleName="cart-img" />
+              </div>
             </Button>
           </Wrapper>
         </header>

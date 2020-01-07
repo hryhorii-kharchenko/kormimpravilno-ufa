@@ -4,7 +4,7 @@
   border-radius: 6px;
   border: solid 1px #e2e2e2;
   background-color: $white;
-  transition: box-shadow border 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, border 0.2s ease-in-out;
   cursor: pointer;
 }
 

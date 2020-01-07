@@ -55,20 +55,42 @@ function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
       slidesToShow: 2,
       slidesToScroll: 1,
       centerMode: true,
+      centerPadding: '50px',
       responsive: [
         {
           breakpoint: 1024,
           settings: {
             slidesToShow: 1,
+            centerMode: true,
             dots: false,
+            centerPadding: '150px',
+          },
+        },
+        {
+          breakpoint: 815,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '60px',
           },
         },
         {
           breakpoint: 568,
           settings: {
             slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '20px',
+          },
+        },
+        {
+          breakpoint: 490,
+          settings: {
+            slidesToShow: 1,
             centerMode: false,
             dots: false,
+            centerPadding: '0px',
           },
         },
       ],
