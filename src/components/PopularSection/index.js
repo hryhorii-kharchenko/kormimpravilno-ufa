@@ -20,6 +20,8 @@ function PopularSection({ data, products, onClick, shopBtnText }) {
           onClick={onClick}
           isSlider
         />
+      </ContentWrapper>
+      <ContentWrapper>
         <div styleName="btn-wrapper">
           <div styleName="line" />
           <Button href="/shop" isFilled styleName="shop-btn">

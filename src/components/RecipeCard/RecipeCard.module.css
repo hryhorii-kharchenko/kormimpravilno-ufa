@@ -13,11 +13,11 @@
   border: 1px solid transparent;
 }
 
-.underlined-link > p {
+.RecipeCard:hover .underlined-link > p {
   color: $main;
 }
 
-.underlined-link > div {
+.RecipeCard:hover .underlined-link > div {
   width: 147px;
 }
 
@@ -60,4 +60,11 @@
 }
 
 .underlined-link {
+}
+
+@media screen and (max-width: 490px) {
+  .RecipeCard {
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }

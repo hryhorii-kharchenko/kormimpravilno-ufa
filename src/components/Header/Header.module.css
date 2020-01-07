@@ -59,6 +59,18 @@
   margin: 15px auto;
 }
 
+.mobile-menu-btn-wrapper .insta-img {
+  width: 16px;
+}
+
+.mobile-menu-btn-wrapper .cart-img {
+  width: 14px;
+}
+
+.mobile-menu-btn-wrapper path {
+  fill: $white;
+}
+
 @media screen and (max-width: 1220px) {
   .Header {
     height: 60px;

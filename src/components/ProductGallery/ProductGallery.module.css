@@ -9,31 +9,36 @@
 
 .Slider {
   /* margin: 0px -11px; */
+  margin-left: -20px;
 }
 
 .product-wrapper {
   max-width: 385px;
   width: 100%;
+}
 
-  padding: 0 11px;
+.Slider .product-wrapper {
+  margin-left: 20px;
 }
 
 .ProductGallery .product-wrapper {
   margin-top: 22px;
+  padding: 0 11px;
 }
 
 @media screen and (max-width: 490px) {
   .Slider {
-    margin: 0 -10px;
+    margin: 0 auto;
   }
 
   .Slider .product-wrapper {
-    padding: 0;
+    max-width: 320px;
+    margin: -10px;
   }
 }
 
 @media screen and (max-width: 420px) {
   .Slider {
-    margin: 0 -26px;
+    /* margin: 0 -26px; */
   }
 }

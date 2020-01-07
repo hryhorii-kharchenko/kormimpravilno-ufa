@@ -58,7 +58,7 @@ function ProductGallery({
   }
 
   if (isSlider && aimProductCount === 3) {
-    let browserWidth = 1220;
+    let browserWidth = 1366;
     const settings = {
       dots: false,
       infinite: true,
@@ -100,6 +100,7 @@ function ProductGallery({
             slidesToShow: 1,
             centerMode: false,
             dots: false,
+            centerPadding: '0px',
           },
         },
       ],
