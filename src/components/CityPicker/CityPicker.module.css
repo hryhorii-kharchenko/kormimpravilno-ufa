@@ -1,3 +1,24 @@
+.CityPicker {
+  position: relative;
+}
+
+.open .current {
+  color: $main;
+}
+
+.open .arrow {
+  transform: rotate(180deg);
+}
+
+.open .options {
+  display: block;
+}
+
+.open .options-inner-wrapper {
+  bottom: 0%;
+  top: 100%;
+}
+
 .dropdown {
   font-size: 13px;
   line-height: 1.46;
@@ -5,8 +26,14 @@
   text-transform: uppercase;
 }
 
+.text {
+}
+
 .dropbtn {
   margin-left: 5px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
@@ -17,6 +44,7 @@
   margin: 0;
   border-bottom: 1px dotted $main;
   font-weight: bold;
+  text-transform: uppercase;
   color: $main;
 }
 
@@ -28,9 +56,63 @@
 
 .options {
   display: none;
+  margin-top: 8px;
+  top: 100%;
+  right: -11px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  /* max-height: 200px;
+  overflow-y: auto; */
+  position: absolute;
+  /* overflow: hidden; */
+  z-index: 1;
+  box-shadow: 0 14px 14px 0 rgba(0, 0, 0, 0.11);
 }
 
-.link {
+.options-inner-wrapper {
+  width: 105px;
+  bottom: 100%;
+  top: 0%;
+  right: 0;
+  position: absolute;
+  transition: top 0.5s ease-in-out, bottom 0.5s ease-in-out;
+}
+
+.option {
+  width: 105px;
+  /* height: 45px; */
+  padding: 8px 0px;
+  border-top: none;
+  border-bottom: solid 1px $main;
+  border-left: solid 1px $main;
+  border-right: solid 1px $main;
+  color: $black;
+  background-color: $white;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.75;
+  text-transform: capitalize;
+  text-decoration: none;
+  display: block;
+  box-sizing: border-box;
+}
+
+.option:hover {
+  background-color: $main;
+  color: $white;
+}
+
+.option:first-child {
+  border-top: solid 1px $main;
+  border-radius: 22.5px 22.5px 0px 0px;
+}
+
+.option:last-child {
+  border-radius: 0px 0px 22.5px 22.5px;
+  background-clip: padding-box;
 }
 
 @media screen and (max-width: 1220px) {

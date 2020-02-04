@@ -12,6 +12,7 @@ function CartList({
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
   className,
+  isOrder,
 }) {
   const cartList = Object.entries(cart).map(([key, value]) => {
     const product = catalog.find(elem => elem.id === key);
@@ -23,6 +24,7 @@ function CartList({
         cartRemoveOneStackHandler={cartRemoveOneStackHandler}
         cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
         key={product.id}
+        isOrder
       />
     );
   });
@@ -36,6 +38,7 @@ function CartList({
 
 CartList.defaultProps = {
   className: '',
+  isOrder: false,
 };
 
 CartList.propTypes = {
@@ -45,6 +48,7 @@ CartList.propTypes = {
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
   className: PropTypes.string,
+  isOrder: PropTypes.bool,
 };
 
 export default CartList;

@@ -8,7 +8,12 @@ import Button from '../Button';
 
 import './SimilarProductSection.module.css';
 
-function SimilarProductSection({ similar, catalog, addToCartBtnHandler }) {
+function SimilarProductSection({
+  similar,
+  catalog,
+  addToCartBtnHandler,
+  openCart,
+}) {
   const products = [];
 
   products.push(catalog.find(() => catalog.productId === similar.first));
@@ -24,6 +29,7 @@ function SimilarProductSection({ similar, catalog, addToCartBtnHandler }) {
           catalog={catalog}
           products={products}
           onClick={addToCartBtnHandler}
+          openCart={openCart}
           isSlider
         />
 
@@ -47,6 +53,7 @@ SimilarProductSection.propTypes = {
   }).isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default SimilarProductSection;

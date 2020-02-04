@@ -8,7 +8,7 @@ import Button from '../Button';
 
 import './PopularSection.module.css';
 
-function PopularSection({ data, products, onClick, shopBtnText }) {
+function PopularSection({ data, products, onClick, openCart, shopBtnText }) {
   return (
     <section styleName="PopularSection">
       <ContentWrapper>
@@ -18,6 +18,7 @@ function PopularSection({ data, products, onClick, shopBtnText }) {
           // products={products}
           catalog={products}
           onClick={onClick}
+          openCart={openCart}
           isSlider
         />
       </ContentWrapper>
@@ -44,6 +45,7 @@ PopularSection.propTypes = {
   }).isRequired,
   products: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   onClick: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
   shopBtnText: PropTypes.string,
 };
 

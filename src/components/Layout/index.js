@@ -8,10 +8,11 @@ function Layout({
   data,
   children,
   cart,
-  catalog,
-  addToCartBtnHandler,
-  cartRemoveOneStackHandler,
-  cartRemoveWholeItemHandler,
+  // catalog,
+  // addToCartBtnHandler,
+  // cartRemoveOneStackHandler,
+  // cartRemoveWholeItemHandler,
+  openCart,
 }) {
   return (
     <>
@@ -19,10 +20,11 @@ function Layout({
         phone={data.phone}
         instaLink={data.instaLink}
         cart={cart}
-        catalog={catalog}
-        addToCartBtnHandler={addToCartBtnHandler}
-        cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-        cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+        // catalog={catalog}
+        // addToCartBtnHandler={addToCartBtnHandler}
+        // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+        // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+        openCart={openCart}
       />
 
       <main>{children}</main>
@@ -40,11 +42,12 @@ function Layout({
 Layout.propTypes = {
   data: PropTypes.shape().isRequired,
   children: PropTypes.node.isRequired,
-  catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  // catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
-  addToCartBtnHandler: PropTypes.func.isRequired,
-  cartRemoveOneStackHandler: PropTypes.func.isRequired,
-  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  // addToCartBtnHandler: PropTypes.func.isRequired,
+  // cartRemoveOneStackHandler: PropTypes.func.isRequired,
+  // cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default Layout;

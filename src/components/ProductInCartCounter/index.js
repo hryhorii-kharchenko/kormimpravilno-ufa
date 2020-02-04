@@ -5,6 +5,19 @@ import './ProductInCartCounter.module.css';
 
 function ProductInCartCounter({ quantity, addOnClick, removeOnClick }) {
   if (!quantity) return null;
+  if (quantity === 1) {
+    return (
+      <div styleName="ProductInCartCounter">
+        <button styleName="remove disabled" type="button" disabled>
+          -
+        </button>
+        <span styleName="counter">{quantity}</span>
+        <button styleName="add" type="button" onClick={() => addOnClick()}>
+          +
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div styleName="ProductInCartCounter">

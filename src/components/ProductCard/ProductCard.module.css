@@ -115,7 +115,7 @@ svg.cart-btn-img {
 
 @media screen and (max-width: 490px) {
   .ProductCard {
-    max-width: 300px;
+    max-width: 310px;
     margin: 0 auto;
   }
 }

@@ -13,7 +13,58 @@ function CartItem({
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
+  isOrder,
 }) {
+  if (!isOrder) {
+    return (
+      <article styleName="CartItem">
+        <button
+          type="button"
+          onClick={() => cartRemoveWholeItemHandler(product.id)}
+          styleName="cross-btn"
+        >
+          <CrossIcon styleName="cross-img" />
+        </button>
+
+        <div styleName="product-wrapper">
+          <Img
+            fluid={product.imageSmall.imageFile.childImageSharp.fluid}
+            styleName="image"
+          />
+          <div styleName="inner-wrapper">
+            <div styleName="heading-wrapper">
+              <h3 styleName="heading">{product.product_post.productName}</h3>
+            </div>
+            <div styleName="second-row-wrapper">
+              <p styleName="single-price">
+                Цена за ед.:
+                <span styleName="single-price-number">
+                  {`${product.price.slice(1)} руб`}
+                </span>
+              </p>
+
+              <div styleName="product-counter-wrapper">
+                <p styleName="product-counter">Кол-во:</p>
+                <ProductInCartCounter
+                  quantity={quantity}
+                  addOnClick={() => addToCartBtnHandler(product.id)}
+                  removeOnClick={() => cartRemoveOneStackHandler(product.id)}
+                />
+              </div>
+
+              <p styleName="total-price">
+                Итого:
+                <span styleName="total-price-number">
+                  {`${parseInt(product.price.slice(1), 10) * quantity} руб`}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </article>
+    );
+  }
+
   return (
     <article styleName="CartItem">
       <button
@@ -34,15 +85,13 @@ function CartItem({
             <h3 styleName="heading">{product.product_post.productName}</h3>
           </div>
           <div styleName="second-row-wrapper">
-            <p styleName="single-price">
-              Цена за ед.:
-              <span styleName="single-price-number">
-                {`${product.price.slice(1)} руб`}
-              </span>
-            </p>
-
-            <div styleName="product-counter-wrapper">
-              <p styleName="product-counter">Кол-во:</p>
+            <div
+              styleName={`${
+                isOrder
+                  ? ' product-counter-order-wrapper'
+                  : 'product-counter-wrapper'
+              }`}
+            >
               <ProductInCartCounter
                 quantity={quantity}
                 addOnClick={() => addToCartBtnHandler(product.id)}
@@ -51,7 +100,6 @@ function CartItem({
             </div>
 
             <p styleName="total-price">
-              Итого:
               <span styleName="total-price-number">
                 {`${parseInt(product.price.slice(1), 10) * quantity} руб`}
               </span>
@@ -62,6 +110,10 @@ function CartItem({
     </article>
   );
 }
+
+CartItem.defaultProps = {
+  isOrder: false,
+};
 
 CartItem.propTypes = {
   product: PropTypes.shape({
@@ -81,6 +133,7 @@ CartItem.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  isOrder: PropTypes.bool,
 };
 
 export default CartItem;

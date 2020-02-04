@@ -18,7 +18,7 @@ class MainShopSection extends Component {
   }
 
   render() {
-    const { catalog, addToCartBtnHandler } = this.props;
+    const { catalog, addToCartBtnHandler, openCart } = this.props;
     const { currentPage, productsOnPage } = this.state;
 
     const currentPageProducts = catalog.slice(
@@ -33,6 +33,7 @@ class MainShopSection extends Component {
             products={currentPageProducts}
             catalog={currentPageProducts}
             onClick={addToCartBtnHandler}
+            openCart={openCart}
           />
           <Pagination
             currentPage={currentPage + 1}
@@ -47,6 +48,7 @@ class MainShopSection extends Component {
 MainShopSection.propTypes = {
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default MainShopSection;

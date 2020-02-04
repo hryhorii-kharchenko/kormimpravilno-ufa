@@ -56,13 +56,14 @@ function Cart({
           <p styleName="continue-text">Продолжить покупки</p>
         </button>
 
-        <Button isFilled href="#" styleName="order-btn">
+        <Button
+          isFilled
+          onClick={closeCart}
+          href={Object.keys(cart).length > 0 ? '/order' : null}
+          styleName="order-btn"
+        >
           Оформить заказ
         </Button>
-
-        {/* <Button isFilled href="/order" styleName="order-btn">
-          Оформить заказ
-        </Button> */}
       </footer>
 
       <button type="button" onClick={closeCart} styleName="cross-btn">

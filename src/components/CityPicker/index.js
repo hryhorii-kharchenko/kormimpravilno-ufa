@@ -5,28 +5,54 @@ import { Link } from 'gatsby';
 import './CityPicker.module.css';
 import arrowDownSvg from '../../images/icons/arrow-down.svg';
 
-function CityPicker({ options, current }) {
-  const links = options.map(option => (
-    <Link to={option.value} styleName="link" key={option.value}>
+function CityPicker({ links, current, isPickerActive, setIsPickerActive }) {
+  const options = links.map(option => (
+    <Link to={option.value} styleName="option" key={option.value}>
       {option.label}
     </Link>
   ));
 
   return (
-    <div styleName="dropdown">
-      <span>Город:</span>
-      <div styleName="dropbtn">
-        <p styleName="current">{current}</p>
-        <img src={arrowDownSvg} alt="" styleName="arrow" />
+    <div
+      onBlur={() => {
+        setTimeout(() => {
+          if (
+            document.activeElement.parentElement.id !== 'options-inner-wrapper'
+          )
+            setIsPickerActive(false);
+        }, 1);
+      }}
+      styleName={`CityPicker${isPickerActive ? ' open' : ''}`}
+    >
+      <div styleName="dropdown">
+        <span styleName="text">Город:</span>
+        <button
+          type="button"
+          onClick={() => {
+            return isPickerActive
+              ? setIsPickerActive(false)
+              : setIsPickerActive(true);
+          }}
+          styleName="dropbtn"
+        >
+          <p styleName="current">{current}</p>
+          <img src={arrowDownSvg} alt="" styleName="arrow" />
+        </button>
+        <div styleName="options">
+          <div id="options-inner-wrapper" styleName="options-inner-wrapper">
+            {options}
+          </div>
+        </div>
       </div>
-      <div styleName="options">{links}</div>
     </div>
   );
 }
 
 CityPicker.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  links: PropTypes.arrayOf(PropTypes.shape).isRequired,
   current: PropTypes.string.isRequired,
+  isPickerActive: PropTypes.bool.isRequired,
+  setIsPickerActive: PropTypes.func.isRequired,
 };
 
 export default CityPicker;

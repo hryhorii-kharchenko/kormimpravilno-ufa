@@ -43,7 +43,7 @@ function Button({
         {children}
       </a>
     );
-  } else if (isAction) {
+  } else if (isAction || !href) {
     element = (
       <button
         onClick={onClick}
@@ -56,7 +56,12 @@ function Button({
     );
   } else {
     element = (
-      <Link to={href} styleName={btnStyles.join(' ')} className={className}>
+      <Link
+        to={href}
+        onClick={onClick}
+        styleName={btnStyles.join(' ')}
+        className={className}
+      >
         {children}
       </Link>
     );
@@ -64,6 +69,20 @@ function Button({
 
   return element;
 }
+
+Button.defaultProps = {
+  href: null,
+  target: '_self',
+  width: null,
+  className: null,
+  onClick: null,
+  isTextBlack: false,
+  isCircle: false,
+  isFilled: false,
+  isExternal: false,
+  isAction: false,
+  isOrder: false,
+};
 
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
@@ -76,19 +95,6 @@ Button.propTypes = {
   isFilled: PropTypes.bool,
   isExternal: PropTypes.bool,
   isAction: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  href: '#',
-  target: '_self',
-  width: null,
-  className: null,
-  onClick: null,
-  isTextBlack: false,
-  isCircle: false,
-  isFilled: false,
-  isExternal: false,
-  isAction: false,
 };
 
 export default Button;

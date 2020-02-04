@@ -19,6 +19,7 @@ function IndexPage({
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
+  openCart,
 }) {
   function getSectionEntriesFromPage(sectionName, sourceObject) {
     return Object.fromEntries(
@@ -54,10 +55,11 @@ function IndexPage({
     <Layout
       data={universal}
       cart={cart}
-      catalog={catalog}
-      addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      // catalog={catalog}
+      // addToCartBtnHandler={addToCartBtnHandler}
+      // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      openCart={openCart}
     >
       <SEO title="Главная" />
 
@@ -68,6 +70,7 @@ function IndexPage({
         data={popular}
         products={catalog}
         onClick={addToCartBtnHandler}
+        openCart={openCart}
         shopBtnText={banner.bannerBtnStore}
       />
       <RecipeSection data={recipe} recipes={posts} />
@@ -96,6 +99,7 @@ IndexPage.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default IndexPage;

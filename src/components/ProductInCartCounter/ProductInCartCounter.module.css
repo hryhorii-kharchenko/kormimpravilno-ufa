@@ -1,4 +1,5 @@
 .ProductInCartCounter {
+  width: 109px;
   height: 41px;
   padding: 0px 8px;
   border-radius: 22.5px;
@@ -6,6 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .remove {
@@ -17,12 +19,23 @@
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.14);
   background-color: $white;
   color: $black;
+  font-size: 26px;
+  line-height: 20px;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.remove.disabled {
+  color: #d1d1d1;
 }
 
 .remove:hover {
   background-color: $main;
   color: $white;
+}
+
+.remove.disabled:hover {
+  background-color: $white;
+  color: #d1d1d1;
 }
 
 .counter {
@@ -41,6 +54,8 @@
   box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.14);
   background-color: $white;
   color: $main;
+  font-size: 22px;
+  line-height: 25px;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 

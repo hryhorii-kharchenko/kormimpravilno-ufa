@@ -10,10 +10,11 @@ import SimilarRecipeSection from '../components/SimilarRecipeSection';
 function RecipeLayout({
   pageContext,
   cart,
-  catalog,
-  addToCartBtnHandler,
-  cartRemoveOneStackHandler,
-  cartRemoveWholeItemHandler,
+  // catalog,
+  // addToCartBtnHandler,
+  // cartRemoveOneStackHandler,
+  // cartRemoveWholeItemHandler,
+  openCart,
   location,
 }) {
   const { id, posts, bannerBg, universal } = pageContext;
@@ -26,10 +27,11 @@ function RecipeLayout({
     <Layout
       data={universal}
       cart={cart}
-      catalog={catalog}
-      addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      // catalog={catalog}
+      // addToCartBtnHandler={addToCartBtnHandler}
+      // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      openCart={openCart}
     >
       <SEO title={recipeName} />
       <SecondaryBanner
@@ -70,11 +72,12 @@ RecipeLayout.propTypes = {
     }),
     universal: PropTypes.shape(),
   }).isRequired,
-  catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  // catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
-  addToCartBtnHandler: PropTypes.func.isRequired,
-  cartRemoveOneStackHandler: PropTypes.func.isRequired,
-  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  // addToCartBtnHandler: PropTypes.func.isRequired,
+  // cartRemoveOneStackHandler: PropTypes.func.isRequired,
+  // cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,

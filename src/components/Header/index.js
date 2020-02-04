@@ -9,7 +9,6 @@ import Logo from '../Logo';
 import Wrapper from '../Wrapper';
 import CityPicker from '../CityPicker';
 import Button from '../Button';
-import Cart from '../Cart';
 
 import './Header.module.css';
 import InstaIcon from '../../images/inline/insta.svg';
@@ -20,15 +19,18 @@ function Header({
   phone,
   instaLink,
   cart,
-  catalog,
-  addToCartBtnHandler,
-  cartRemoveOneStackHandler,
-  cartRemoveWholeItemHandler,
+  // catalog,
+  // addToCartBtnHandler,
+  // cartRemoveOneStackHandler,
+  // cartRemoveWholeItemHandler,
+  openCart,
 }) {
+  const cartLength = Object.values(cart).reduce((prev, curr) => prev + curr, 0);
+  const cardCounterHtml =
+    cartLength > 0 ? <p styleName="cart-counter">{cartLength}</p> : null;
+
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
-  const [isCartActive, setIsCartActive] = useState(false);
-  const openCart = () => setIsCartActive(true);
-  const closeCart = () => setIsCartActive(false);
+  const [isPickerActive, setIsPickerActive] = useState(false);
 
   const menuItems = [
     { title: 'Главная', url: '/' },
@@ -40,7 +42,7 @@ function Header({
     { value: '/moscow', label: 'Москва' },
     { value: '/kazan', label: 'Казань' },
     { value: '/ekaterinburg', label: 'Екатеринбург' },
-    { value: '/peterburg', label: 'Санкт-Петербург' },
+    { value: '/peterburg', label: 'Петербург' },
   ];
 
   const mobileMenuInitialFocusId = 'initial-focus-menu-modal';
@@ -57,7 +59,12 @@ function Header({
     >
       <div id="mobile-menu-modal" styleName="mobile-menu-modal">
         <Menu items={menuItems} firstItemId={mobileMenuInitialFocusId} />
-        <CityPicker options={cityOptions} current="Москва" />
+        <CityPicker
+          links={cityOptions}
+          current="Москва"
+          isPickerActive={isPickerActive}
+          setIsPickerActive={setIsPickerActive}
+        />
         <Button
           href={`tel:${phone}`}
           isTextBlack
@@ -71,10 +78,11 @@ function Header({
           <Button href={instaLink} target="_blank" isCircle isExternal>
             <InstaIcon styleName="insta-img" />
           </Button>
-          <Button onClick={() => setIsCartActive(true)} isCircle isAction>
-            <div className="cart-icon-wrapper">
+          <Button onClick={openCart} isCircle isAction styleName="cart-btn">
+            <div styleName="cart-icon-wrapper">
               <CartIcon styleName="cart-img" />
             </div>
+            {cardCounterHtml}
           </Button>
         </div>
       </div>
@@ -91,34 +99,6 @@ function Header({
     </>
   );
 
-  const cartModal = isCartActive ? (
-    <AriaModal
-      titleText="Корзина"
-      onExit={() => setIsMobileMenuActive(false)}
-      getApplicationNode={() => {
-        return document.getElementById('___gatsby');
-      }}
-      underlayStyle={{ background: 'rgba(0, 0, 0, 0.63)' }}
-      verticallyCenter
-      dialogStyle={{
-        maxWidth: '857px',
-        width: '100%',
-        boxSizing: 'border-box',
-      }}
-    >
-      <div id="cart-modal" styleName="cart-modal">
-        <Cart
-          closeCart={closeCart}
-          cart={cart}
-          catalog={catalog}
-          addToCartBtnHandler={addToCartBtnHandler}
-          cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-          cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
-        />
-      </div>
-    </AriaModal>
-  ) : null;
-
   let browserWidth = 1200;
 
   if (typeof window !== 'undefined') {
@@ -134,7 +114,12 @@ function Header({
           <Logo />
 
           <Wrapper justifyContent="flex-end" styleName="Wrapper">
-            <CityPicker options={cityOptions} current="Москва" />
+            <CityPicker
+              links={cityOptions}
+              current="Москва"
+              isPickerActive={isPickerActive}
+              setIsPickerActive={setIsPickerActive}
+            />
 
             <Button
               href={`tel:${phone}`}
@@ -149,14 +134,14 @@ function Header({
               <InstaIcon styleName="insta-img" />
             </Button>
 
-            <Button onClick={() => setIsCartActive(true)} isCircle isAction>
-              <div className="cart-icon-wrapper">
+            <Button onClick={openCart} isCircle isAction styleName="cart-btn">
+              <div styleName="cart-icon-wrapper">
                 <CartIcon styleName="cart-img" />
               </div>
+              {cardCounterHtml}
             </Button>
           </Wrapper>
         </header>
-        {cartModal}
       </Headroom>
     );
   }
@@ -175,7 +160,6 @@ function Header({
         </button>
       </header>
       {mobileMenuModal}
-      {cartModal}
     </Headroom>
   );
 }
@@ -188,11 +172,12 @@ Header.defaultProps = {
 Header.propTypes = {
   phone: PropTypes.string,
   instaLink: PropTypes.string,
-  catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  // catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
-  addToCartBtnHandler: PropTypes.func.isRequired,
-  cartRemoveOneStackHandler: PropTypes.func.isRequired,
-  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  // addToCartBtnHandler: PropTypes.func.isRequired,
+  // cartRemoveOneStackHandler: PropTypes.func.isRequired,
+  // cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default Header;

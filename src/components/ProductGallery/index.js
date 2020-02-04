@@ -10,6 +10,7 @@ function ProductGallery({
   catalog,
   products,
   onClick,
+  openCart,
   isSlider,
   aimProductCount,
 }) {
@@ -17,18 +18,20 @@ function ProductGallery({
     return elem !== undefined;
   });
 
-  if (filtered.length < aimProductCount) {
-    const { length } = filtered;
-    let position = 0;
+  if (isSlider) {
+    if (filtered.length < aimProductCount) {
+      const { length } = filtered;
+      let position = 0;
 
-    for (let i = 0; i < aimProductCount - length; i += 1) {
-      while (catalog.includes(filtered[position])) {
+      for (let i = 0; i < aimProductCount - length; i += 1) {
+        while (catalog.includes(filtered[position])) {
+          position += 1;
+        }
+        if (catalog[position]) {
+          filtered.push(catalog[position]);
+        }
         position += 1;
       }
-      if (catalog[position]) {
-        filtered.push(catalog[position]);
-      }
-      position += 1;
     }
   }
 
@@ -44,13 +47,16 @@ function ProductGallery({
           id={product.id}
           slug={product.slug}
           onClick={onClick}
+          openCart={openCart}
         />
       </div>
     );
   });
 
-  for (let i = 0; i < aimProductCount - gallery.length; i += 0) {
-    gallery.push(gallery[0]);
+  if (isSlider) {
+    for (let i = 0; i < aimProductCount - gallery.length; i += 0) {
+      gallery.push(gallery[0]);
+    }
   }
 
   if (!isSlider) {
@@ -91,16 +97,43 @@ function ProductGallery({
             slidesToShow: 1,
             centerMode: true,
             dots: false,
-            centerPadding: '20px',
+            centerPadding: '45px',
           },
         },
         {
           breakpoint: 490,
           settings: {
             slidesToShow: 1,
-            centerMode: false,
+            centerMode: true,
             dots: false,
-            centerPadding: '0px',
+            centerPadding: '50px',
+          },
+        },
+        {
+          breakpoint: 430,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '40px',
+          },
+        },
+        {
+          breakpoint: 390,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '30px',
+          },
+        },
+        {
+          breakpoint: 340,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '20px',
           },
         },
       ],
@@ -112,13 +145,15 @@ function ProductGallery({
 
     if (browserWidth < 1254) {
       return (
-        <Slider
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...settings}
-          styleName="Slider"
-        >
-          {gallery}
-        </Slider>
+        <div styleName="slider-wrapper">
+          <Slider
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...settings}
+            styleName="Slider"
+          >
+            {gallery}
+          </Slider>
+        </div>
       );
     }
 
@@ -133,13 +168,15 @@ function ProductGallery({
   };
 
   return (
-    <Slider
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...settings}
-      styleName="Slider"
-    >
-      {gallery}
-    </Slider>
+    <div styleName="slider-wrapper">
+      <Slider
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...settings}
+        styleName="Slider"
+      >
+        {gallery}
+      </Slider>
+    </div>
   );
 }
 
@@ -183,6 +220,7 @@ ProductGallery.propTypes = {
     })
   ),
   onClick: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
   isSlider: PropTypes.bool,
   aimProductCount: PropTypes.number,
 };

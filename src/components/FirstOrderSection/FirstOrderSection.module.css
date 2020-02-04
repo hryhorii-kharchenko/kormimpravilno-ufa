@@ -1,0 +1,102 @@
+.FirstOrderSection {
+}
+
+.active {
+}
+
+.active .number-wrapper {
+  background-color: $white;
+}
+
+.active .number {
+  color: $black;
+}
+
+.active .redact {
+  display: none;
+}
+
+.active .content-wrapper {
+  display: block;
+}
+
+.heading-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.heading-text-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.number-wrapper {
+  max-width: 38px;
+  min-width: 38px;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  border: solid 1px $main;
+  background-color: $main;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number {
+  font-size: 20px;
+  font-weight: 800;
+  color: $white;
+}
+
+.heading {
+  margin: 0px 0px 0px 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: $black;
+  text-transform: uppercase;
+}
+
+.redact {
+  display: block;
+  margin-left: 15px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 14px;
+  line-height: 1.86;
+  color: #37b23a;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.line-heading {
+  width: 100%;
+  height: 1px;
+  margin: 20px 0px 0px;
+  background-color: #d1d1d1;
+}
+
+.content-wrapper {
+  display: none;
+}
+
+.form {
+}
+
+.first-form {
+  margin: 20px 0px 0px;
+}
+
+.continue-btn {
+  margin-top: 20px;
+  width: 160px;
+}
+
+@media screen and (max-width: 430px) {
+  .heading-wrapper {
+    flex-wrap: wrap;
+  }
+}

@@ -13,7 +13,8 @@ function ProductLayout({
   catalog,
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
-  cartRemoveWholeItemHandler,
+  // cartRemoveWholeItemHandler,
+  openCart,
   location,
 }) {
   const { id, universal } = pageContext;
@@ -35,10 +36,11 @@ function ProductLayout({
     <Layout
       data={universal}
       cart={cart}
-      catalog={catalog}
-      addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      // catalog={catalog}
+      // addToCartBtnHandler={addToCartBtnHandler}
+      // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      openCart={openCart}
     >
       <SEO title={productName} />
 
@@ -59,11 +61,13 @@ function ProductLayout({
         cart={cart}
         addToCartOnClick={addToCartBtnHandler}
         removeOneStackFromCartOnClick={cartRemoveOneStackHandler}
+        openCart={openCart}
       />
       <SimilarProductSection
         similar={similar}
         catalog={catalog}
         addToCartBtnHandler={addToCartBtnHandler}
+        openCart={openCart}
       />
     </Layout>
   );
@@ -86,6 +90,7 @@ ProductLayout.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,

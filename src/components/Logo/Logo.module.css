@@ -12,7 +12,8 @@
 
 @media screen and (max-width: 1220px) {
   .Logo {
-    top: 15px;
+    position: static;
+    transform: none;
   }
 }
 

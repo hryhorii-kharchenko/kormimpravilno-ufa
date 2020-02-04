@@ -64,7 +64,14 @@
 
 @media screen and (max-width: 490px) {
   .RecipeCard {
-    max-width: 300px;
+    max-width: 310px;
     margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .RecipeCard {
+    max-width: 280px;
+    margin: 0;
   }
 }

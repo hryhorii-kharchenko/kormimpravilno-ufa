@@ -12,6 +12,7 @@ function NotFoundPage({
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
+  openCart
 }) {
   const universal = data.wpgraphql.universalPage.universal_page;
 
@@ -19,10 +20,11 @@ function NotFoundPage({
     <Layout
       data={universal}
       cart={cart}
-      catalog={catalog}
-      addToCartBtnHandler={addToCartBtnHandler}
-      cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-      cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      // catalog={catalog}
+      // addToCartBtnHandler={addToCartBtnHandler}
+      // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+      // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+      openCart={openCart}
     >
       <SEO title="404" />
 
@@ -38,6 +40,7 @@ NotFoundPage.propTypes = {
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default NotFoundPage;

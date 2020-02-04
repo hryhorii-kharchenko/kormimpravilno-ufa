@@ -22,72 +22,117 @@ class ShopPage extends Component {
         { value: 5, label: 'Низкий вес' },
         { value: 6, label: 'Высокий вес' },
       ],
-      localCatalog: [...props.catalog].sort(
-        (a, b) => b.productId - a.productId
-      ),
+      allSortFunc: [
+        (a, b) => {
+          return b.productId - a.productId;
+        },
+        (a, b) => {
+          return a.product_post.productName.localeCompare(
+            b.product_post.productName
+          );
+        },
+        (a, b) => {
+          return b.productId - a.productId;
+        },
+        (a, b) => {
+          return (
+            parseInt(a.price.slice(1), 10) - parseInt(b.price.slice(1), 10)
+          );
+        },
+        (a, b) => {
+          return (
+            parseInt(b.price.slice(1), 10) - parseInt(a.price.slice(1), 10)
+          );
+        },
+        (a, b) => {
+          return (
+            parseInt(a.product_post.weight, 10) -
+            parseInt(b.product_post.weight, 10)
+          );
+        },
+        (a, b) => {
+          return (
+            parseInt(b.product_post.weight, 10) -
+            parseInt(a.product_post.weight, 10)
+          );
+        },
+      ],
+      currentCategory: 0,
+      possibleCategory: [
+        { value: 0, label: 'Все товары', slug: '' },
+        { value: 1, label: 'Сырники и вареники', slug: 'syrniki' },
+        { value: 2, label: 'Конфеты', slug: 'konfety' },
+        { value: 3, label: 'Пельмени', slug: 'pelmeni' },
+        { value: 4, label: 'Рубленные полуфабрикаты', slug: 'rublennye' },
+        { value: 5, label: 'Сосиски', slug: 'sosiski' },
+      ],
+      allFilterFunc: [
+        () => {
+          return true;
+        },
+        elem => {
+          const { possibleCategory } = this.state;
+          return elem.categories.nodes[0].slug === possibleCategory[1].slug;
+        },
+        elem => {
+          const { possibleCategory } = this.state;
+          return elem.categories.nodes[0].slug === possibleCategory[2].slug;
+        },
+        elem => {
+          const { possibleCategory } = this.state;
+          return elem.categories.nodes[0].slug === possibleCategory[3].slug;
+        },
+        elem => {
+          const { possibleCategory } = this.state;
+          return elem.categories.nodes[0].slug === possibleCategory[4].slug;
+        },
+        elem => {
+          const { possibleCategory } = this.state;
+          return elem.categories.nodes[0].slug === possibleCategory[5].slug;
+        },
+      ],
+      localCatalog: [...props.catalog],
+      isCategoryPickerOpen: false,
+      isSortPickerOpen: false,
     };
 
     this.sortChangeHandler = this.sortChangeHandler.bind(this);
+    this.categoryChangeHandler = this.categoryChangeHandler.bind(this);
+    this.categoryPickerOpenHandler = this.categoryPickerOpenHandler.bind(this);
+    this.categoryPickerCloseHandler = this.categoryPickerCloseHandler.bind(
+      this
+    );
+    this.sortPickerOpenHandler = this.sortPickerOpenHandler.bind(this);
+    this.sortPickerCloseHandler = this.sortPickerCloseHandler.bind(this);
+  }
+
+  categoryPickerOpenHandler() {
+    this.setState(() => {
+      return { isCategoryPickerOpen: true };
+    });
+  }
+
+  categoryPickerCloseHandler() {
+    this.setState(() => {
+      return { isCategoryPickerOpen: false };
+    });
+  }
+
+  sortPickerOpenHandler() {
+    this.setState(() => {
+      return { isSortPickerOpen: true };
+    });
+  }
+
+  sortPickerCloseHandler() {
+    this.setState(() => {
+      return { isSortPickerOpen: false };
+    });
   }
 
   sortChangeHandler(newSortId) {
     this.setState(state => {
-      let sortFunc;
-
-      switch (newSortId) {
-        case 0:
-          sortFunc = function(a, b) {
-            return b.productId - a.productId;
-          };
-          break;
-        case 1:
-          sortFunc = function(a, b) {
-            return a.product_post.productName.localeCompare(
-              b.product_post.productName
-            );
-          };
-          break;
-        case 2:
-          sortFunc = function(a, b) {
-            return b.productId - a.productId;
-          };
-          break;
-        case 3:
-          sortFunc = function(a, b) {
-            return (
-              parseInt(a.price.slice(1), 10) - parseInt(b.price.slice(1), 10)
-            );
-          };
-          break;
-        case 4:
-          sortFunc = function(a, b) {
-            return (
-              parseInt(b.price.slice(1), 10) - parseInt(a.price.slice(1), 10)
-            );
-          };
-          break;
-        case 5:
-          sortFunc = function(a, b) {
-            return (
-              parseInt(a.product_post.weight, 10) -
-              parseInt(b.product_post.weight, 10)
-            );
-          };
-          break;
-        case 6:
-          sortFunc = function(a, b) {
-            return (
-              parseInt(b.product_post.weight, 10) -
-              parseInt(a.product_post.weight, 10)
-            );
-          };
-          break;
-        default:
-          sortFunc = function(a, b) {
-            return b.productId - a.productId;
-          };
-          break;
-      }
+      const sortFunc = state.allSortFunc[newSortId];
 
       return {
         currentSort: newSortId,
@@ -96,17 +141,30 @@ class ShopPage extends Component {
     });
   }
 
+  categoryChangeHandler(newCategoryId) {
+    this.setState(state => {
+      const { catalog } = this.props;
+      const filterFunc = state.allFilterFunc[newCategoryId];
+      const sortFunc = state.allSortFunc[state.currentSort];
+
+      return {
+        currentCategory: newCategoryId,
+        localCatalog: [...catalog].filter(filterFunc).sort(sortFunc),
+      };
+    });
+  }
+
   render() {
+    const { data, cart, addToCartBtnHandler, openCart, location } = this.props;
     const {
-      data,
-      catalog,
-      cart,
-      addToCartBtnHandler,
-      cartRemoveOneStackHandler,
-      cartRemoveWholeItemHandler,
-      location,
-    } = this.props;
-    const { currentSort, possibleSort, localCatalog } = this.state;
+      currentSort,
+      possibleSort,
+      isSortPickerOpen,
+      currentCategory,
+      possibleCategory,
+      isCategoryPickerOpen,
+      localCatalog,
+    } = this.state;
 
     const universal = data.wpgraphql.universalPage.universal_page;
 
@@ -114,10 +172,11 @@ class ShopPage extends Component {
       <Layout
         data={universal}
         cart={cart}
-        catalog={catalog}
-        addToCartBtnHandler={addToCartBtnHandler}
-        cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-        cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+        // catalog={catalog}
+        // addToCartBtnHandler={addToCartBtnHandler}
+        // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+        // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+        openCart={openCart}
       >
         <SEO title="Магазин" />
 
@@ -126,11 +185,21 @@ class ShopPage extends Component {
           pathname={location.pathname}
           currentSort={currentSort}
           possibleSort={possibleSort}
+          isSortPickerOpen={isSortPickerOpen}
+          sortPickerOpenHandler={this.sortPickerOpenHandler}
+          sortPickerCloseHandler={this.sortPickerCloseHandler}
           onSortChange={this.sortChangeHandler}
+          currentCategory={currentCategory}
+          possibleCategory={possibleCategory}
+          isCategoryPickerOpen={isCategoryPickerOpen}
+          categoryPickerOpenHandler={this.categoryPickerOpenHandler}
+          categoryPickerCloseHandler={this.categoryPickerCloseHandler}
+          onCategoryChange={this.categoryChangeHandler}
         />
         <MainShopSection
           catalog={localCatalog}
           addToCartBtnHandler={addToCartBtnHandler}
+          openCart={openCart}
         />
       </Layout>
     );
@@ -142,8 +211,7 @@ ShopPage.propTypes = {
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
-  cartRemoveOneStackHandler: PropTypes.func.isRequired,
-  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,

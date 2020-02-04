@@ -1,0 +1,151 @@
+.Input {
+}
+
+.Input.error + .Input .text-input {
+  margin: 8px 0px 0px;
+}
+
+.Input-checkbox {
+}
+
+.Input.error + .Input-checkbox .checkbox-input {
+  margin: 8px 0px 0px;
+}
+
+.checkbox-label {
+  margin: 15px 0px 0px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkbox-input {
+  display: none;
+}
+
+.real-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border-radius: 3px;
+  border: solid 1px #e8e8e8;
+  background-color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.real-checkbox-img {
+  display: none;
+  pointer-events: none;
+  position: relative;
+}
+
+.checkbox-input:checked + .real-checkbox .real-checkbox-img {
+  display: block;
+}
+
+.text-input {
+  height: 50px;
+}
+
+.text-input {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  box-sizing: border-box;
+  display: block;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background-color: transparent;
+  position: relative;
+  z-index: 1;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  color: #000000;
+  transition: border 0.2s;
+}
+
+.text-input:focus {
+  border: 1px solid #54da83;
+}
+
+.text-input {
+  appearance: none;
+}
+
+.text-input.error {
+  border-color: #ff0000 !important;
+}
+
+.input-wrapper {
+  position: relative;
+  z-index: 0;
+}
+
+.input-tel-wrapper {
+  z-index: 1;
+}
+
+.input-wrapper:first-child {
+  margin-top: 0px;
+}
+
+.input-wrapper .label {
+  height: 28px;
+  padding: 0px 4px;
+  top: 11px;
+  left: 11px;
+  position: absolute;
+  line-height: 28px;
+  text-align: left;
+  background-color: #ffffff;
+  z-index: 0;
+  transition: all 0.2s;
+}
+
+.input-wrapper .text-input:focus ~ .label,
+.input-wrapper .text-input:not(:focus):not([value='']):valid ~ .label,
+.input-wrapper .label.error,
+.input-wrapper .label + .label {
+  height: 12px;
+  top: -5px;
+  left: 11px;
+  font-size: 12px;
+  line-height: 12px;
+  color: #54da83;
+  z-index: 2;
+}
+
+.form-label_active {
+  font-family: Montserrat, sans-serif;
+  font-size: 12px;
+  line-height: 22px;
+  color: #54da83;
+}
+
+.label {
+  font-family: Montserrat;
+  font-size: 14px;
+  color: #b4b4b4;
+}
+
+.label.error {
+  font-size: 12px;
+  color: #ff0000 !important;
+  z-index: 3 !important;
+}
+
+.label.error + .label {
+  z-index: 2;
+}
+
+p.error {
+  margin: 0px;
+  font-size: 12px;
+  line-height: 1.83;
+  color: #ff0000;
+}

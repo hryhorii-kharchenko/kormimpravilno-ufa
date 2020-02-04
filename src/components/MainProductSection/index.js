@@ -26,6 +26,7 @@ function MainProductSection({
   cart,
   addToCartOnClick,
   removeOneStackFromCartOnClick,
+  openCart,
 }) {
   let browserWidth = 1200;
   if (typeof window !== 'undefined') {
@@ -100,7 +101,10 @@ function MainProductSection({
                   isAction
                   isTextBlack
                   styleName="cart-btn"
-                  onClick={() => addToCartOnClick(id)}
+                  onClick={() => {
+                    addToCartOnClick(id);
+                    openCart();
+                  }}
                 >
                   <CartIcon styleName="cart-btn-img" />
                   <span>В корзину</span>
@@ -163,6 +167,7 @@ MainProductSection.propTypes = {
   cart: PropTypes.shape().isRequired,
   addToCartOnClick: PropTypes.func.isRequired,
   removeOneStackFromCartOnClick: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default MainProductSection;

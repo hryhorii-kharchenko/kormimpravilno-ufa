@@ -48,7 +48,7 @@ function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
   }
 
   if (isSlider && aimRecipeCount === 3) {
-    let browserWidth = 1220;
+    let browserWidth = 1366;
     const settings = {
       dots: false,
       infinite: true,
@@ -81,16 +81,43 @@ function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
             slidesToShow: 1,
             centerMode: true,
             dots: false,
-            centerPadding: '20px',
+            centerPadding: '45px',
           },
         },
         {
           breakpoint: 490,
           settings: {
             slidesToShow: 1,
-            centerMode: false,
+            centerMode: true,
             dots: false,
-            centerPadding: '0px',
+            centerPadding: '50px',
+          },
+        },
+        {
+          breakpoint: 430,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '40px',
+          },
+        },
+        {
+          breakpoint: 390,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '30px',
+          },
+        },
+        {
+          breakpoint: 340,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            dots: false,
+            centerPadding: '20px',
           },
         },
       ],
@@ -102,13 +129,15 @@ function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
 
     if (browserWidth < 1254) {
       return (
-        <Slider
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...settings}
-          styleName="Slider"
-        >
-          {gallery}
-        </Slider>
+        <div styleName="slider-wrapper">
+          <Slider
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...settings}
+            styleName="Slider"
+          >
+            {gallery}
+          </Slider>
+        </div>
       );
     }
 
@@ -123,13 +152,15 @@ function RecipeGallery({ posts, recipes, isSlider, aimRecipeCount }) {
   };
 
   return (
-    <Slider
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...settings}
-      styleName="Slider"
-    >
-      {gallery}
-    </Slider>
+    <div styleName="slider-wrapper">
+      <Slider
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...settings}
+        styleName="Slider"
+      >
+        {gallery}
+      </Slider>
+    </div>
   );
 }
 

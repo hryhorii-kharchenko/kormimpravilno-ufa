@@ -17,6 +17,7 @@ function ProductCard({
   id,
   slug,
   onClick,
+  openCart,
 }) {
   const compositionHtml = (
     <p styleName="composition">
@@ -53,7 +54,10 @@ function ProductCard({
             isAction
             isTextBlack
             styleName="cart-btn"
-            onClick={() => onClick(id)}
+            onClick={() => {
+              onClick(id);
+              openCart();
+            }}
           >
             <CartIcon styleName="cart-btn-img" />
             <span>В корзину</span>
@@ -78,6 +82,7 @@ ProductCard.propTypes = {
   id: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

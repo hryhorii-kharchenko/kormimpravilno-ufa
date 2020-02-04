@@ -1,22 +1,27 @@
 .Sorting {
+  position: relative;
 }
 
-.Sorting:hover .dropbtn {
+.open .dropbtn {
   border: solid 1px $main;
   border-radius: 22.5px 22.5px 0px 0px;
 }
 
-.Sorting:hover .options {
+.open .current {
+  color: $main;
+}
+
+.open .arrow {
+  transform: rotate(180deg);
+}
+
+.open .options {
   display: block;
 }
 
-.Sorting:hover .options-inner-wrapper {
+.open .options-inner-wrapper {
   bottom: 0%;
   top: 100%;
-}
-
-.Sorting:hover .arrow {
-  transform: rotate(180deg);
 }
 
 .dropdown {
@@ -34,38 +39,38 @@
 }
 
 .dropbtn {
-  width: 165px;
-  height: 45px;
-  margin-left: 5px;
-  border-radius: 22.5px;
+  width: 264px;
+  /* height: 45px; */
+  padding: 11px 21px 11px 19px;
+  margin-left: 11px;
+  /* padding: 0px 19px 0px 19px; */
   border: solid 1px #d8d8d8;
+  border-radius: 22.5px;
   background-color: $white;
   display: inline-flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   cursor: pointer;
   position: relative;
+  /* box-sizing: border-box; */
   z-index: 2;
 }
 
 .current {
   margin: 0;
-  font-weight: bold;
-  color: $main;
+  color: $black;
 }
 
 .arrow {
-  width: 10px;
-  height: 12px;
-  margin-left: 5px;
+  width: 12px;
+  height: 16px;
 }
 
 .options {
   display: none;
-  width: 167px;
+  width: 264px;
   top: 100%;
   right: 0;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
   /* max-height: 200px;
   overflow-y: auto; */
@@ -84,14 +89,16 @@
 
 .option {
   width: 100%;
-  height: 45px;
+  /* height: 45px; */
+  padding: 11px 19px;
   border-top: none;
   border-bottom: solid 1px $main;
   border-left: solid 1px $main;
   border-right: solid 1px $main;
   background-color: $white;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  text-align: left;
   cursor: pointer;
   font-size: 14px;
   line-height: 1.5;
@@ -105,4 +112,28 @@
 .option:last-child {
   border-radius: 0px 0px 22.5px 22.5px;
   background-clip: padding-box;
+}
+
+@media screen and (max-width: 430px) {
+  .dropbtn,
+  .options {
+    width: 240px;
+  }
+
+  .current,
+  .option {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .dropdown {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .dropbtn {
+    margin: 7px 0px 0px;
+  }
 }
