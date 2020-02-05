@@ -13,8 +13,16 @@ class MainShopSection extends Component {
 
     this.state = {
       productsOnPage: 9,
-      currentPage: 0,
+      currentPage: 1,
     };
+
+    this.currentPageSetter = this.currentPageSetter.bind(this);
+  }
+
+  currentPageSetter(value) {
+    this.setState(() => ({
+      currentPage: value,
+    }));
   }
 
   render() {
@@ -22,8 +30,8 @@ class MainShopSection extends Component {
     const { currentPage, productsOnPage } = this.state;
 
     const currentPageProducts = catalog.slice(
-      currentPage * productsOnPage,
-      (currentPage + 1) * productsOnPage
+      (currentPage - 1) * productsOnPage,
+      currentPage * productsOnPage
     );
 
     return (
@@ -36,8 +44,9 @@ class MainShopSection extends Component {
             openCart={openCart}
           />
           <Pagination
-            currentPage={currentPage + 1}
+            currentPage={currentPage}
             totalPages={Math.ceil(catalog.length / productsOnPage)}
+            setCurrentPage={this.currentPageSetter}
           />
         </ContentWrapper>
       </section>

@@ -259,11 +259,6 @@ class ShopProvider extends Component {
             </AriaModal>
           ) : null;
 
-          function idToProductId(id) {
-            const product = products.reduce(prod => prod.id === id);
-            return product.productId;
-          }
-
           return (
             <>
               {React.cloneElement(children, {
@@ -274,7 +269,6 @@ class ShopProvider extends Component {
                 addToCartBtnHandler,
                 cartRemoveOneStackHandler,
                 cartRemoveWholeItemHandler,
-                idToProductId,
               })}
               {cartModal}
             </>

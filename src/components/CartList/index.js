@@ -24,7 +24,7 @@ function CartList({
         cartRemoveOneStackHandler={cartRemoveOneStackHandler}
         cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
         key={product.id}
-        isOrder
+        isOrder={isOrder}
       />
     );
   });

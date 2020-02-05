@@ -9,6 +9,20 @@
 }
 
 .left-arrow {
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  border-color: $main;
+}
+
+.left-arrow path {
+  fill: $main;
+  stroke: $main;
+}
+
+.left-arrow:hover path {
+  fill: $white;
+  stroke: $white;
 }
 
 .arrow-prev-img {
@@ -17,6 +31,19 @@
 }
 
 .right-arrow {
+  width: 45px;
+  height: 45px;
+  border-color: $main;
+}
+
+.right-arrow path {
+  fill: $main;
+  stroke: $main;
+}
+
+.right-arrow:hover path {
+  fill: $white;
+  stroke: $white;
 }
 
 .arrow-next-img {
@@ -25,14 +52,46 @@
 }
 
 .arrow-inactive {
+  border-color: #e2e2e2;
+}
+
+.arrow-inactive:hover {
+  border-color: #e2e2e2;
+  background-color: initial;
+  box-shadow: initial;
+}
+
+.arrow-inactive path {
+  fill: #e2e2e2;
+  stroke: #e2e2e2;
+}
+
+.arrow-inactive:hover path {
+  fill: #e2e2e2;
+  stroke: #e2e2e2;
 }
 
 .number-btn {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  color: $black;
   margin-right: 15px;
+}
+
+.number-btn:hover {
+  color: $white;
+  background-color: $main;
 }
 
 .number-btn:last-child {
   margin-right: initial;
+}
+
+.active {
+  color: $white;
+  box-shadow: 0 6px 14px 0 rgba(55, 168, 54, 0.38);
+  background-color: $main;
 }
 
 .dots {
@@ -47,7 +106,7 @@
   height: 4px;
   margin-right: 4px;
   border-radius: 50%;
-  background-color: #37b23a;
+  background-color: $main;
 }
 
 .dot:last-child {

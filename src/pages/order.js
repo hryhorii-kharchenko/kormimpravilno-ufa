@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, navigate } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import Layout from '../components/Layout';
@@ -17,16 +17,29 @@ class OrderPage extends Component {
   constructor(props) {
     super(props);
 
+    let formData = {};
+    if (typeof window !== 'undefined') {
+      formData = JSON.parse(window.localStorage.getItem('orderFormData')) || {};
+    }
+
     this.state = {
       isFirstSectionActive: true,
-      fullName: { value: '', isError: false, errorMsg: '' },
-      phone: { value: '', isError: false, errorMsg: '' },
-      email: { value: '', isError: false, errorMsg: '' },
+      fullName: {
+        value: formData.fullName || '',
+        isError: false,
+        errorMsg: '',
+      },
+      phone: { value: formData.phone || '', isError: false, errorMsg: '' },
+      email: { value: formData.email || '', isError: false, errorMsg: '' },
       isSubscribeActive: { value: false, isError: false, errorMsg: '' },
       delivery: { value: 'first', isError: false, errorMsg: '' },
-      city: { value: '', isError: false, errorMsg: '' },
-      address: { value: '', isError: false, errorMsg: '' },
-      postIndex: { value: '', isError: false, errorMsg: '' },
+      city: { value: formData.city || '', isError: false, errorMsg: '' },
+      address: { value: formData.address || '', isError: false, errorMsg: '' },
+      postIndex: {
+        value: formData.postIndex || '',
+        isError: false,
+        errorMsg: '',
+      },
       // timeOfDelivery: '',
       promo: { value: '', isError: false, errorMsg: '' },
       comment: { value: '', isError: false, errorMsg: '' },
@@ -60,7 +73,7 @@ class OrderPage extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    const { cart, idToProductId } = this.props;
+    const { cart, catalog } = this.props;
 
     this.validatePage();
 
@@ -102,46 +115,47 @@ class OrderPage extends Component {
 
         const lineItems = Object.entries(cart).map(([key, value]) => {
           return {
-            product_id: idToProductId(key),
+            product_id: catalog.find(prod => prod.id === key).productId,
             quantity: value,
           };
         });
         firstFormData.set('line_items', JSON.stringify(lineItems));
 
-        fetch('http://kormimtest.loc/orde.php', {
+        const object = {};
+        firstFormData.forEach((value, key) => {
+          object[key] = value;
+        });
+        const json = JSON.stringify(object);
+
+        window.localStorage.setItem(
+          'orderFormData',
+          JSON.stringify({
+            fullName: fullName.value,
+            phone: phone.value,
+            email: email.value,
+            city: city.value,
+            address: address.value,
+            postIndex: postIndex.value,
+          })
+        );
+
+        fetch('https://kormimpravilno.loc/wp-json/kormimpravilno/v1/order', {
           method: 'POST',
-          body: firstFormData,
+          body: json,
         })
           .then(response => {
             if (response.ok) return response.text();
-
-            throw new Error('response not ok');
+            alert('error response not ok');
+            return null;
           })
           .then(url => {
-            if (/^https:/.test(url)) {
-              window.location.href = url;
-              return;
+            if (/http/.test(url)) {
+              const href = url.substring(1, url.length - 1);
+              window.location.href = href;
+            } else {
+              alert('error not url');
             }
-
-            throw new Error('response not url');
-          })
-          .catch(error => alert(error.message));
-
-        // fetch('http://kormimtest.loc/order.php', {
-        //   method: 'POST',
-        //   body: firstFormData,
-        // })
-        //   .then(response => {
-        //     if (response.ok) return response.text();
-        //     alert('error response not ok');
-        //     return null;
-        //   })
-        //   .then(url => {
-        //     if (/^https:/.test(url)) window.location.href = url;
-        //     else {
-        //       alert('error not url');
-        //     }
-        //   });
+          });
       }
     }, 200);
   }
@@ -306,7 +320,7 @@ class OrderPage extends Component {
   }
 
   validatePostIndex(value) {
-    const regExp = /^(\d{6})/;
+    const regExp = /^(\d{6})$/;
     let isError = false;
     const regExpRequired = /^.+/;
     let errorMsg = '';
@@ -435,11 +449,42 @@ class OrderPage extends Component {
       comment,
     } = this.state;
 
-    const deliveryPrice = '7 руб';
-    const totalPrice = '777 руб';
+    if (Object.keys(cart).length === 0) {
+      navigate('/shop');
+      return null;
+    }
 
     const universal = data.wpgraphql.universalPage.universal_page;
     const order = data.wpgraphql.orderPage.order_page;
+
+    let deliveryPrice;
+    if (delivery.value === 'first') {
+      deliveryPrice = order.deliveryWays.first.price;
+    }
+    if (delivery.value === 'second') {
+      deliveryPrice = order.deliveryWays.second.price;
+    }
+    if (delivery.value === 'third') {
+      deliveryPrice = order.deliveryWays.third.price;
+    }
+
+    let totalPrice = deliveryPrice;
+    const prodList = Object.entries(cart).map(([key, value]) => [
+      catalog.find(elem => elem.id === key).price,
+      value,
+    ]);
+
+    totalPrice += prodList.reduce(
+      (prev, [price, quantity]) =>
+        prev + parseInt(price.slice(1), 10) * quantity,
+      0
+    );
+
+    const totalPriceWithoutDelivery = totalPrice - deliveryPrice;
+
+    const deliveryPriceStr = `${deliveryPrice} руб`;
+    const totalPriceStr = `${totalPrice} руб`;
+    const totalPriceWithoutDeliveryStr = `${totalPriceWithoutDelivery} руб`;
 
     return (
       <Layout
@@ -508,14 +553,18 @@ class OrderPage extends Component {
                 >
                   <p styleName="delivery">
                     Доставка:
-                    <span styleName="delivery-price">{deliveryPrice}</span>
+                    <span styleName="delivery-price">{deliveryPriceStr}</span>
                   </p>
 
                   <div styleName="delivery-price-line" />
                 </div>
                 <p styleName="total">
                   Итого:
-                  <span styleName="total-price">{totalPrice}</span>
+                  <span styleName="total-price">
+                    {isFirstSectionActive
+                      ? totalPriceWithoutDeliveryStr
+                      : totalPriceStr}
+                  </span>
                 </p>
 
                 <Button
@@ -547,7 +596,6 @@ OrderPage.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string,
   }).isRequired,
-  idToProductId: PropTypes.func.isRequired,
 };
 
 export default OrderPage;

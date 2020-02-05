@@ -18,6 +18,7 @@ function ProductCard({
   slug,
   onClick,
   openCart,
+  isShop,
 }) {
   const compositionHtml = (
     <p styleName="composition">
@@ -31,6 +32,43 @@ function ProductCard({
       {weight}
     </p>
   );
+
+  if (isShop) {
+    return (
+      <article styleName="ProductCard ProductCard-shop">
+        <Link to={slug} styleName="link-wrapper">
+          <Img fluid={avatar} alt={heading} styleName="avatar" />
+
+          <div styleName="content-wrapper">
+            <header styleName="header">
+              <h3 styleName="heading">{heading}</h3>
+              {composition ? compositionHtml : null}
+              {weight ? weightHtml : null}
+            </header>
+          </div>
+        </Link>
+        <footer styleName="footer">
+          <div styleName="separator" />
+
+          <div styleName="footer-content-wrapper">
+            <p styleName="price">{`${price.slice(1)} руб`}</p>
+            <Button
+              isAction
+              isTextBlack
+              styleName="cart-btn"
+              onClick={() => {
+                onClick(id);
+                openCart();
+              }}
+            >
+              <CartIcon styleName="cart-btn-img" />
+              <span>В корзину</span>
+            </Button>
+          </div>
+        </footer>
+      </article>
+    );
+  }
 
   return (
     <article styleName="ProductCard">
@@ -71,6 +109,7 @@ function ProductCard({
 ProductCard.defaultProps = {
   composition: null,
   weight: null,
+  isShop: false,
 };
 
 ProductCard.propTypes = {
@@ -83,6 +122,7 @@ ProductCard.propTypes = {
   slug: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   openCart: PropTypes.func.isRequired,
+  isShop: PropTypes.bool,
 };
 
 export default ProductCard;
