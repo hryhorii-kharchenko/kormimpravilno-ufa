@@ -49,3 +49,33 @@
     margin: 0;
   }
 }
+
+.shop-ProductGallery {
+  margin: -12px -6px 0px;
+}
+
+.shop-ProductGallery .shop-product-wrapper {
+  margin-top: 12px;
+  padding: 0 6px;
+}
+
+.shop-product-wrapper {
+  max-width: 291px;
+  width: 100%;
+}
+
+@media screen and (max-width: 660px) {
+  .shop-ProductGallery {
+    margin: -7px -3px 0px;
+  }
+
+  .shop-ProductGallery .shop-product-wrapper {
+    margin-top: 7px;
+    padding: 0 3px;
+  }
+
+  .shop-product-wrapper {
+    max-width: 141px;
+    width: 100%;
+  }
+}

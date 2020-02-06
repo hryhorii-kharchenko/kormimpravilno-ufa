@@ -12,7 +12,7 @@ class MainShopSection extends Component {
     super(props);
 
     this.state = {
-      productsOnPage: 9,
+      productsOnPage: 12,
       currentPage: 1,
     };
 
@@ -42,6 +42,7 @@ class MainShopSection extends Component {
             catalog={currentPageProducts}
             onClick={addToCartBtnHandler}
             openCart={openCart}
+            isShop
           />
           <Pagination
             currentPage={currentPage}

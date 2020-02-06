@@ -13,6 +13,7 @@ function ProductGallery({
   openCart,
   isSlider,
   aimProductCount,
+  isShop,
 }) {
   const filtered = products.filter(elem => {
     return elem !== undefined;
@@ -35,9 +36,12 @@ function ProductGallery({
     }
   }
 
-  const gallery = filtered.map(product => {
+  const gallery = filtered.map((product, i) => {
     return (
-      <div styleName="product-wrapper" key={product.id}>
+      <div
+        styleName={`product-wrapper ${isShop ? ' shop-product-wrapper' : ''}`}
+        key={product.id}
+      >
         <ProductCard
           avatar={product.imageSmall.imageFile.childImageSharp.fluid}
           heading={product.product_post.productName}
@@ -48,6 +52,8 @@ function ProductGallery({
           slug={product.slug}
           onClick={onClick}
           openCart={openCart}
+          isShop={isShop}
+          style={{ position: 'relative', zIndex: filtered.length - i }}
         />
       </div>
     );
@@ -60,7 +66,13 @@ function ProductGallery({
   }
 
   if (!isSlider) {
-    return <section styleName="ProductGallery">{gallery}</section>;
+    return (
+      <section
+        styleName={`ProductGallery ${isShop ? ' shop-ProductGallery' : ''}`}
+      >
+        {gallery}
+      </section>
+    );
   }
 
   if (isSlider && aimProductCount === 3) {
@@ -184,6 +196,7 @@ ProductGallery.defaultProps = {
   products: [],
   isSlider: false,
   aimProductCount: 3,
+  isShop: false,
 };
 
 ProductGallery.propTypes = {
@@ -223,6 +236,7 @@ ProductGallery.propTypes = {
   openCart: PropTypes.func.isRequired,
   isSlider: PropTypes.bool,
   aimProductCount: PropTypes.number,
+  isShop: PropTypes.bool,
 };
 
 export default ProductGallery;

@@ -3,3 +3,9 @@
   position: relative;
   z-index: 0;
 }
+
+@media screen and (max-width: 660px) {
+  .MainShopSection > div {
+    padding: 0px 15px;
+  }
+}

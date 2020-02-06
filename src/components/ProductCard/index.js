@@ -19,6 +19,7 @@ function ProductCard({
   onClick,
   openCart,
   isShop,
+  style,
 }) {
   const compositionHtml = (
     <p styleName="composition">
@@ -35,27 +36,27 @@ function ProductCard({
 
   if (isShop) {
     return (
-      <article styleName="ProductCard ProductCard-shop">
+      <article styleName="ProductCard shop-ProductCard" style={style}>
         <Link to={slug} styleName="link-wrapper">
           <Img fluid={avatar} alt={heading} styleName="avatar" />
 
-          <div styleName="content-wrapper">
-            <header styleName="header">
-              <h3 styleName="heading">{heading}</h3>
-              {composition ? compositionHtml : null}
-              {weight ? weightHtml : null}
+          <div styleName="content-wrapper shop-content-wrapper">
+            <header styleName="header shop-header">
+              <h3 styleName={`heading ${isShop ? ' shop-heading' : ''}`}>
+                {heading}
+              </h3>
             </header>
           </div>
         </Link>
-        <footer styleName="footer">
-          <div styleName="separator" />
-
-          <div styleName="footer-content-wrapper">
-            <p styleName="price">{`${price.slice(1)} руб`}</p>
+        <footer styleName="footer shop-footer">
+          <div styleName="content-wrapper shop-content-wrapper">
+            <p styleName="price shop-price">
+              {`${parseInt(price.slice(1), 10)} РУБ`}
+            </p>
             <Button
               isAction
               isTextBlack
-              styleName="cart-btn"
+              styleName="cart-btn shop-cart-btn"
               onClick={() => {
                 onClick(id);
                 openCart();
@@ -65,6 +66,11 @@ function ProductCard({
               <span>В корзину</span>
             </Button>
           </div>
+        </footer>
+        <footer styleName="hover-footer">
+          <div styleName="separator" />
+          {composition ? compositionHtml : null}
+          {weight ? weightHtml : null}
         </footer>
       </article>
     );
@@ -123,6 +129,7 @@ ProductCard.propTypes = {
   onClick: PropTypes.func.isRequired,
   openCart: PropTypes.func.isRequired,
   isShop: PropTypes.bool,
+  style: PropTypes.shape().isRequired,
 };
 
 export default ProductCard;
