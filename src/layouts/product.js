@@ -67,7 +67,7 @@ function ProductLayout({
       />
       <SimilarProductSection
         similar={similar}
-        catalog={catalog}
+        catalog={catalogFull}
         addToCartBtnHandler={addToCartBtnHandler}
         openCart={openCart}
       />
