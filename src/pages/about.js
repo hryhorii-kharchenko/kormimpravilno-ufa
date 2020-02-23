@@ -2,6 +2,8 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 
+import fromEntries from 'object.fromentries';
+
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import SecondaryBanner from '../components/SecondaryBanner';
@@ -19,6 +21,10 @@ function AboutPage({
   location,
 }) {
   function getSectionEntriesFromPage(sectionName, sourceObject) {
+    if (!Object.fromEntries) {
+      fromEntries.shim();
+    }
+
     return Object.fromEntries(
       Object.entries(sourceObject).filter(field =>
         field[0].includes(sectionName)

@@ -3,9 +3,10 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import AriaModal from 'react-aria-modal';
+import fromEntries from 'object.fromentries';
+
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-
 import BannerSection from '../components/BannerSection';
 import CompanySection from '../components/CompanySection';
 import HowSection from '../components/HowSection';
@@ -61,6 +62,10 @@ class IndexPage extends Component {
     } = this.props;
 
     function getSectionEntriesFromPage(sectionName, sourceObject) {
+      if (!Object.fromEntries) {
+        fromEntries.shim();
+      }
+
       return Object.fromEntries(
         Object.entries(sourceObject).filter(field =>
           field[0].includes(sectionName)
