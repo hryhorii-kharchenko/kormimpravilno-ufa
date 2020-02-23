@@ -10,7 +10,8 @@ import SimilarProductSection from '../components/SimilarProductSection';
 function ProductLayout({
   pageContext,
   cart,
-  catalog,
+  // catalog,
+  catalogFull,
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   // cartRemoveWholeItemHandler,
@@ -18,7 +19,8 @@ function ProductLayout({
   location,
 }) {
   const { id, universal } = pageContext;
-  const product = catalog.find(prod => prod.id === id);
+  const product = catalogFull.find(prod => prod.id === id);
+  // const product = catalog.find(prod => prod.id === id);
   const { price, imageFull } = product;
   const {
     productName,
@@ -36,7 +38,7 @@ function ProductLayout({
     <Layout
       data={universal}
       cart={cart}
-      // catalog={catalog}
+      // catalogFull={catalogFull}
       // addToCartBtnHandler={addToCartBtnHandler}
       // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
       // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
@@ -86,6 +88,7 @@ ProductLayout.propTypes = {
     universal: PropTypes.shape().isRequired,
   }).isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  catalogFull: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,

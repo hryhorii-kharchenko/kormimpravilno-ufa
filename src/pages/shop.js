@@ -91,7 +91,7 @@ class ShopPage extends Component {
           return elem.categories.nodes[0].slug === possibleCategory[5].slug;
         },
       ],
-      localCatalog: [...props.catalog],
+      // localCatalog: [...props.catalog],
       isCategoryPickerOpen: false,
       isSortPickerOpen: false,
     };
@@ -132,30 +132,37 @@ class ShopPage extends Component {
 
   sortChangeHandler(newSortId) {
     this.setState(state => {
-      const sortFunc = state.allSortFunc[newSortId];
+      // const sortFunc = state.allSortFunc[newSortId];
 
       return {
         currentSort: newSortId,
-        localCatalog: [...state.localCatalog].sort(sortFunc),
+        // localCatalog: [...state.localCatalog].sort(sortFunc),
       };
     });
   }
 
   categoryChangeHandler(newCategoryId) {
     this.setState(state => {
-      const { catalog } = this.props;
-      const filterFunc = state.allFilterFunc[newCategoryId];
-      const sortFunc = state.allSortFunc[state.currentSort];
+      // const { catalog } = this.props;
+      // const filterFunc = state.allFilterFunc[newCategoryId];
+      // const sortFunc = state.allSortFunc[state.currentSort];
 
       return {
         currentCategory: newCategoryId,
-        localCatalog: [...catalog].filter(filterFunc).sort(sortFunc),
+        // localCatalog: [...catalog].filter(filterFunc).sort(sortFunc),
       };
     });
   }
 
   render() {
-    const { data, cart, addToCartBtnHandler, openCart, location } = this.props;
+    const {
+      data,
+      cart,
+      catalog,
+      addToCartBtnHandler,
+      openCart,
+      location,
+    } = this.props;
     const {
       currentSort,
       possibleSort,
@@ -163,17 +170,23 @@ class ShopPage extends Component {
       currentCategory,
       possibleCategory,
       isCategoryPickerOpen,
-      localCatalog,
+      // localCatalog,
+      allFilterFunc,
+      allSortFunc,
     } = this.state;
 
     const universal = data.wpgraphql.universalPage.universal_page;
+
+    const filterFunc = allFilterFunc[currentCategory];
+    const sortFunc = allSortFunc[currentSort];
+    const newCatalog = [...catalog].filter(filterFunc).sort(sortFunc);
 
     return (
       <Layout
         data={universal}
         cart={cart}
         // catalog={catalog}
-        // addToCartBtnHandler={addToCartBtnHandler}
+        // addToCartBtnHandler={addToCartBtnHandler}localCatalog
         // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
         // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
         openCart={openCart}
@@ -197,7 +210,7 @@ class ShopPage extends Component {
           onCategoryChange={this.categoryChangeHandler}
         />
         <MainShopSection
-          catalog={localCatalog}
+          catalog={newCatalog}
           addToCartBtnHandler={addToCartBtnHandler}
           openCart={openCart}
         />

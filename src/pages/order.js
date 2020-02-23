@@ -35,11 +35,11 @@ class OrderPage extends Component {
       delivery: { value: 'first', isError: false, errorMsg: '' },
       city: { value: formData.city || '', isError: false, errorMsg: '' },
       address: { value: formData.address || '', isError: false, errorMsg: '' },
-      postIndex: {
-        value: formData.postIndex || '',
-        isError: false,
-        errorMsg: '',
-      },
+      // postIndex: {
+      //   value: formData.postIndex || '',
+      //   isError: false,
+      //   errorMsg: '',
+      // },
       // timeOfDelivery: '',
       promo: { value: '', isError: false, errorMsg: '' },
       comment: { value: '', isError: false, errorMsg: '' },
@@ -60,7 +60,7 @@ class OrderPage extends Component {
     this.deliveryChangeHandler = this.deliveryChangeHandler.bind(this);
     this.cityChangeHandler = this.cityChangeHandler.bind(this);
     this.addressChangeHandler = this.addressChangeHandler.bind(this);
-    this.postIndexChangeHandler = this.postIndexChangeHandler.bind(this);
+    // this.postIndexChangeHandler = this.postIndexChangeHandler.bind(this);
     this.promoChangeHandler = this.promoChangeHandler.bind(this);
     this.commentChangeHandler = this.commentChangeHandler.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -78,16 +78,25 @@ class OrderPage extends Component {
     this.validatePage();
 
     setTimeout(() => {
-      const { fullName, phone, email, city, address, postIndex } = this.state;
+      const {
+        fullName,
+        phone,
+        email,
+        city,
+        address,
+        // postIndex
+      } = this.state;
 
       if (
         !(
-          fullName.isError ||
-          phone.isError ||
-          email.isError ||
-          city.isError ||
-          address.isError ||
-          postIndex.isError
+          (
+            fullName.isError ||
+            phone.isError ||
+            email.isError ||
+            city.isError ||
+            address.isError
+          )
+          // || postIndex.isError
         )
       ) {
         const firstForm = document.getElementById('first-form');
@@ -135,14 +144,17 @@ class OrderPage extends Component {
             email: email.value,
             city: city.value,
             address: address.value,
-            postIndex: postIndex.value,
+            // postIndex: postIndex.value,
           })
         );
 
-        fetch('https://kormimpravilno.loc/wp-json/kormimpravilno/v1/order', {
-          method: 'POST',
-          body: json,
-        })
+        fetch(
+          'https://kormimpravilnowp.yevdokimov.pro/wp-json/kormimpravilno/v1/order',
+          {
+            method: 'POST',
+            body: json,
+          }
+        )
           .then(response => {
             if (response.ok) return response.text();
             alert('error response not ok');
@@ -150,12 +162,14 @@ class OrderPage extends Component {
           })
           .then(url => {
             if (/http/.test(url)) {
+              window.localStorage.clear('cart');
               const href = url.substring(1, url.length - 1);
               window.location.href = href;
             } else {
               alert('error not url');
             }
-          });
+          })
+          .catch(error => console.error(error));
       }
     }, 200);
   }
@@ -192,14 +206,18 @@ class OrderPage extends Component {
   }
 
   validateSecondForm() {
-    const { city, address, postIndex } = this.state;
+    const {
+      city,
+      address,
+      // postIndex
+    } = this.state;
     this.validateCity(city.value);
     this.validateAddress(address.value);
-    this.validatePostIndex(postIndex.value);
+    // this.validatePostIndex(postIndex.value);
   }
 
   validateFullName(value) {
-    const regExp = /^([А-Я][а-я]+\s*){2}/;
+    const regExp = /^([А-ЯA-Z][а-яa-z]+\s*){2}/;
     let isError = false;
     const regExpRequired = /^.+/;
     let errorMsg = '';
@@ -319,30 +337,30 @@ class OrderPage extends Component {
     }));
   }
 
-  validatePostIndex(value) {
-    const regExp = /^(\d{6})$/;
-    let isError = false;
-    const regExpRequired = /^.+/;
-    let errorMsg = '';
+  // validatePostIndex(value) {
+  //   const regExp = /^(\d{6})$/;
+  //   let isError = false;
+  //   const regExpRequired = /^.+/;
+  //   let errorMsg = '';
 
-    if (!regExp.test(value)) {
-      isError = true;
-      errorMsg = 'Введите правильный индекс';
-    }
+  //   if (!regExp.test(value)) {
+  //     isError = true;
+  //     errorMsg = 'Введите правильный индекс';
+  //   }
 
-    if (!regExpRequired.test(value)) {
-      isError = true;
-      errorMsg = 'Заполните поле';
-    }
+  //   if (!regExpRequired.test(value)) {
+  //     isError = true;
+  //     errorMsg = 'Заполните поле';
+  //   }
 
-    this.setState(() => ({
-      postIndex: {
-        value,
-        isError,
-        errorMsg,
-      },
-    }));
-  }
+  //   this.setState(() => ({
+  //     postIndex: {
+  //       value,
+  //       isError,
+  //       errorMsg,
+  //     },
+  //   }));
+  // }
 
   fullNameChangeHandler(event) {
     const { value } = event.target;
@@ -391,10 +409,10 @@ class OrderPage extends Component {
     this.validateAddress(value);
   }
 
-  postIndexChangeHandler(event) {
-    const { value } = event.target;
-    this.validatePostIndex(value);
-  }
+  // postIndexChangeHandler(event) {
+  //   const { value } = event.target;
+  //   this.validatePostIndex(value);
+  // }
 
   promoChangeHandler(event) {
     const { value } = event.target;
@@ -444,14 +462,16 @@ class OrderPage extends Component {
       delivery,
       city,
       address,
-      postIndex,
+      // postIndex,
       promo,
       comment,
     } = this.state;
 
-    if (Object.keys(cart).length === 0) {
-      navigate('/shop');
-      return null;
+    if (typeof window !== 'undefined') {
+      if (Object.keys(cart).length === 0) {
+        navigate('/shop');
+        return null;
+      }
     }
 
     const universal = data.wpgraphql.universalPage.universal_page;
@@ -525,8 +545,8 @@ class OrderPage extends Component {
                 cityOnChange={this.cityChangeHandler}
                 address={address}
                 addressOnChange={this.addressChangeHandler}
-                postIndex={postIndex}
-                postIndexOnChange={this.postIndexChangeHandler}
+                // postIndex={postIndex}
+                // postIndexOnChange={this.postIndexChangeHandler}
                 promo={promo}
                 promoOnChange={this.promoChangeHandler}
                 comment={comment}
@@ -571,7 +591,9 @@ class OrderPage extends Component {
                   isAction
                   isTextBlack
                   onClick={this.submitForm}
-                  styleName="submit-btn"
+                  styleName={`submit-btn ${
+                    isFirstSectionActive ? 'submit-btn-inactive' : ''
+                  }`}
                 >
                   Подтвердить заказ
                 </Button>

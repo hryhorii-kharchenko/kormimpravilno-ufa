@@ -32,7 +32,8 @@ module.exports = {
       options: {
         typeName: 'WPGraphQL',
         fieldName: 'wpgraphql',
-        url: 'http://kormimpravilno.loc/graphql',
+        url: 'https://kormimpravilnowp.yevdokimov.pro/graphql',
+        // url: 'http://kormimpravilno.loc/graphql',
       },
     },
     {
@@ -68,17 +69,17 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'kormim-pravilno',
-        short_name: 'kormimpravilno',
+        name: 'Кормим правильно',
+        short_name: 'Кормим правильно',
         start_url: '/',
-        // background_color: '#663399',
-        // theme_color: '#663399',
-        display: 'minimal-ui',
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        background_color: '#ffffff',
+        theme_color: '#37b23a',
+        display: `standalone`,
+        icon: `src/images/favicon.svg`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 };

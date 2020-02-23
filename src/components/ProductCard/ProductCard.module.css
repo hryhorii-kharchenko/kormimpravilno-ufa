@@ -168,7 +168,7 @@ svg.cart-btn-img {
 }
 
 .shop-price {
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .shop-cart-btn {
@@ -224,4 +224,8 @@ svg.cart-btn-img {
     position: relative;
     display: inline-block;
   }
+}
+
+.no-hover-footer {
+  display: none !important;
 }

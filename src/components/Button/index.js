@@ -15,6 +15,7 @@ function Button({
   isFilled,
   isExternal,
   isAction,
+  style,
 }) {
   const btnStyles = ['Button'];
   let element;
@@ -50,6 +51,7 @@ function Button({
         type="button"
         styleName={btnStyles.join(' ')}
         className={className}
+        style={style}
       >
         {children}
       </button>

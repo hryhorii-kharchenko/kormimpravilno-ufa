@@ -39,7 +39,9 @@ function ProductGallery({
   const gallery = filtered.map((product, i) => {
     return (
       <div
-        styleName={`product-wrapper ${isShop ? ' shop-product-wrapper' : ''}`}
+        styleName={`product-wrapper ${isShop ? ' shop-product-wrapper' : ''} ${
+          aimProductCount ? 'slider-4-product-wrapper' : ''
+        }`}
         key={product.id}
       >
         <ProductCard
@@ -53,6 +55,7 @@ function ProductGallery({
           onClick={onClick}
           openCart={openCart}
           isShop={isShop}
+          aimProductCount={aimProductCount}
           style={{ position: 'relative', zIndex: filtered.length - i }}
         />
       </div>
@@ -75,87 +78,87 @@ function ProductGallery({
     );
   }
 
-  if (isSlider && aimProductCount === 3) {
-    let browserWidth = 1366;
-    const settings = {
-      dots: false,
-      infinite: true,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      centerMode: true,
-      centerPadding: '50px',
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '150px',
-          },
+  let browserWidth = 1366;
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '50px',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '150px',
         },
-        {
-          breakpoint: 815,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '60px',
-          },
+      },
+      {
+        breakpoint: 815,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '60px',
         },
-        {
-          breakpoint: 568,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '45px',
-          },
+      },
+      {
+        breakpoint: 568,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '45px',
         },
-        {
-          breakpoint: 490,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '50px',
-          },
+      },
+      {
+        breakpoint: 490,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '50px',
         },
-        {
-          breakpoint: 430,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '40px',
-          },
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '40px',
         },
-        {
-          breakpoint: 390,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '30px',
-          },
+      },
+      {
+        breakpoint: 390,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '30px',
         },
-        {
-          breakpoint: 340,
-          settings: {
-            slidesToShow: 1,
-            centerMode: true,
-            dots: false,
-            centerPadding: '20px',
-          },
+      },
+      {
+        breakpoint: 340,
+        settings: {
+          slidesToShow: 1,
+          centerMode: true,
+          dots: false,
+          centerPadding: '20px',
         },
-      ],
-    };
+      },
+    ],
+  };
 
-    if (typeof window !== `undefined`) {
-      browserWidth = window.innerWidth;
-    }
+  if (typeof window !== `undefined`) {
+    browserWidth = window.innerWidth;
+  }
 
-    if (browserWidth < 1254) {
+  if (browserWidth <= 1254) {
+    if (aimProductCount === 4) {
       return (
         <div styleName="slider-wrapper">
           <Slider
@@ -169,26 +172,21 @@ function ProductGallery({
       );
     }
 
-    return <section styleName="ProductGallery">{gallery}</section>;
+    return (
+      <div styleName="slider-wrapper">
+        <Slider
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...settings}
+          styleName="Slider"
+        >
+          {gallery}
+        </Slider>
+      </div>
+    );
   }
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-  };
-
   return (
-    <div styleName="slider-wrapper">
-      <Slider
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...settings}
-        styleName="Slider"
-      >
-        {gallery}
-      </Slider>
-    </div>
+    <section styleName="ProductGallery slider-4-wrapper">{gallery}</section>
   );
 }
 

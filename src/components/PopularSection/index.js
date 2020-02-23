@@ -19,6 +19,7 @@ function PopularSection({ data, products, onClick, openCart, shopBtnText }) {
           catalog={products}
           onClick={onClick}
           openCart={openCart}
+          aimProductCount={4}
           isSlider
         />
       </ContentWrapper>

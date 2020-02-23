@@ -18,8 +18,8 @@ function SecondOrderSection({
   cityOnChange,
   address,
   addressOnChange,
-  postIndex,
-  postIndexOnChange,
+  // postIndex,
+  // postIndexOnChange,
   promo,
   promoOnChange,
   comment,
@@ -187,13 +187,13 @@ function SecondOrderSection({
             onChange={addressOnChange}
             isRequired
           />
-          <Input
+          {/* <Input
             text="Почтовый индекс"
             name="postIndex"
             data={postIndex}
             onChange={postIndexOnChange}
             isRequired
-          />
+          /> */}
         </form>
 
         <div styleName="line-payment" />
@@ -274,8 +274,8 @@ SecondOrderSection.propTypes = {
   cityOnChange: PropTypes.func.isRequired,
   address: PropTypes.shape().isRequired,
   addressOnChange: PropTypes.func.isRequired,
-  postIndex: PropTypes.shape().isRequired,
-  postIndexOnChange: PropTypes.func.isRequired,
+  // postIndex: PropTypes.shape().isRequired,
+  // postIndexOnChange: PropTypes.func.isRequired,
   promo: PropTypes.shape().isRequired,
   promoOnChange: PropTypes.func.isRequired,
   comment: PropTypes.shape().isRequired,

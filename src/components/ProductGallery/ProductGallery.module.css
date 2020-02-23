@@ -25,9 +25,37 @@
   padding: 0 11px;
 }
 
-@media screen and (max-width: 1253px) {
+.slider-4-wrapper {
+  margin: -22px -6px 0px;
+}
+
+.slider-4-product-wrapper {
+  max-width: 291px;
+  width: 100%;
+}
+
+.ProductGallery .slider-4-product-wrapper {
+  margin-top: 22px;
+  padding: 0 6px;
+}
+
+@media screen and (max-width: 1254px) {
   .slider-wrapper {
     margin: 0px -20px;
+  }
+
+  .product-wrapper {
+    max-width: 385px;
+    width: 100%;
+  }
+
+  .Slider .product-wrapper {
+    margin-left: 20px;
+  }
+
+  .ProductGallery .product-wrapper {
+    margin-top: 22px;
+    padding: 0 11px;
   }
 }
 
