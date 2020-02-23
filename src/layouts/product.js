@@ -10,7 +10,7 @@ import SimilarProductSection from '../components/SimilarProductSection';
 function ProductLayout({
   pageContext,
   cart,
-  // catalog,
+  catalog,
   catalogFull,
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
@@ -67,7 +67,7 @@ function ProductLayout({
       />
       <SimilarProductSection
         similar={similar}
-        catalog={catalogFull}
+        catalog={catalog}
         addToCartBtnHandler={addToCartBtnHandler}
         openCart={openCart}
       />
