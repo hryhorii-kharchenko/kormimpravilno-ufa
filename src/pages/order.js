@@ -84,6 +84,7 @@ class OrderPage extends Component {
         email,
         city,
         address,
+        delivery,
         // postIndex
       } = this.state;
 
@@ -109,6 +110,16 @@ class OrderPage extends Component {
         const promoFormData = new FormData(promoForm);
         const commentFormData = commentForm ? new FormData(commentForm) : null;
 
+        const prodList = Object.entries(cart).map(([key, value]) => [
+          catalog.find(elem => elem.id === key).price,
+          value,
+        ]);
+        const totalPrice = prodList.reduce(
+          (prev, [price, quantity]) =>
+            prev + parseInt(price.slice(1), 10) * quantity,
+          0
+        );
+
         Array.from(secondFormData).forEach(([name, value]) => {
           firstFormData.set(name, value);
         });
@@ -128,6 +139,27 @@ class OrderPage extends Component {
             quantity: value,
           };
         });
+
+        if (delivery.value === 'first') {
+          if (totalPrice < 5000) {
+            lineItems.push({
+              product_id: 1381,
+              quantity: 1,
+            });
+          } else {
+            lineItems.push({
+              product_id: 1379,
+              quantity: 1,
+            });
+          }
+        }
+
+        if (delivery.value === 'second')
+          lineItems.push({
+            product_id: 1383,
+            quantity: 1,
+          });
+
         firstFormData.set('line_items', JSON.stringify(lineItems));
 
         const object = {};
@@ -149,7 +181,7 @@ class OrderPage extends Component {
         );
 
         fetch(
-          'https://kormimpravilnowp.yevdokimov.pro/wp-json/kormimpravilno/v1/order',
+          'http://wp.spb.kormimpravilno.com/wp-json/kormimpravilno/v1/order',
           {
             method: 'POST',
             body: json,
@@ -162,7 +194,7 @@ class OrderPage extends Component {
           })
           .then(url => {
             if (/http/.test(url)) {
-              window.localStorage.clear('cart');
+              window.sessionStorage.clear('cart');
               const href = url.substring(1, url.length - 1);
               window.location.href = href;
             } else {
@@ -477,9 +509,26 @@ class OrderPage extends Component {
     const universal = data.wpgraphql.universalPage.universal_page;
     const order = data.wpgraphql.orderPage.order_page;
 
+    const prodList = Object.entries(cart).map(([key, value]) => [
+      catalog.find(elem => elem.id === key).price,
+      value,
+    ]);
+
+    let totalPrice = prodList.reduce(
+      (prev, [price, quantity]) =>
+        prev + parseInt(price.slice(1), 10) * quantity,
+      0
+    );
+
+    const totalPriceWithoutDelivery = totalPrice;
+
     let deliveryPrice;
     if (delivery.value === 'first') {
-      deliveryPrice = order.deliveryWays.first.price;
+      if (totalPrice < 5000) {
+        deliveryPrice = order.deliveryWays.first.price;
+      } else {
+        deliveryPrice = 0;
+      }
     }
     if (delivery.value === 'second') {
       deliveryPrice = order.deliveryWays.second.price;
@@ -488,19 +537,7 @@ class OrderPage extends Component {
       deliveryPrice = order.deliveryWays.third.price;
     }
 
-    let totalPrice = deliveryPrice;
-    const prodList = Object.entries(cart).map(([key, value]) => [
-      catalog.find(elem => elem.id === key).price,
-      value,
-    ]);
-
-    totalPrice += prodList.reduce(
-      (prev, [price, quantity]) =>
-        prev + parseInt(price.slice(1), 10) * quantity,
-      0
-    );
-
-    const totalPriceWithoutDelivery = totalPrice - deliveryPrice;
+    totalPrice += deliveryPrice;
 
     const deliveryPriceStr = `${deliveryPrice} руб`;
     const totalPriceStr = `${totalPrice} руб`;
@@ -552,6 +589,7 @@ class OrderPage extends Component {
                 comment={comment}
                 commentOnChange={this.commentChangeHandler}
                 submitForm={this.submitForm}
+                totalPriceWithoutDelivery={totalPriceWithoutDelivery}
               />
             </main>
             <aside styleName="aside">

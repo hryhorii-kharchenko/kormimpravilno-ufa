@@ -25,6 +25,7 @@ function SecondOrderSection({
   comment,
   commentOnChange,
   submitForm,
+  totalPriceWithoutDelivery,
 }) {
   const [commentIsActive, setCommentIsActive] = useState(false);
 
@@ -81,7 +82,7 @@ function SecondOrderSection({
           </p>
           <p styleName="price">
             <span styleName="gray">Стоимость:</span>
-            {`${first.price}р`}
+            {totalPriceWithoutDelivery < 5000 ? `${first.price}р` : '0р'}
           </p>
         </div>
       </label>
@@ -281,6 +282,7 @@ SecondOrderSection.propTypes = {
   comment: PropTypes.shape().isRequired,
   commentOnChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
+  totalPriceWithoutDelivery: PropTypes.number.isRequired,
 };
 
 export default SecondOrderSection;

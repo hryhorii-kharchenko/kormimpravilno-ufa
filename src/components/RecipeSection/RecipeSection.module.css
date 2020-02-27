@@ -2,6 +2,7 @@
   margin: 20px 0px 0px;
   padding: 70px 0px 70px;
   position: relative;
+  z-index: 0;
 }
 
 .RecipeSection:after {

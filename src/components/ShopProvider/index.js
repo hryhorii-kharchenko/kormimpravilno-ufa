@@ -60,7 +60,7 @@ class ShopProvider extends Component {
       }),
       () => {
         const { cart } = this.state;
-        window.localStorage.setItem('cart', JSON.stringify(cart));
+        window.sessionStorage.setItem('cart', JSON.stringify(cart));
       }
     );
   }
@@ -78,7 +78,7 @@ class ShopProvider extends Component {
       },
       () => {
         const { cart } = this.state;
-        window.localStorage.setItem('cart', JSON.stringify(cart));
+        window.sessionStorage.setItem('cart', JSON.stringify(cart));
       }
     );
   }
@@ -90,14 +90,14 @@ class ShopProvider extends Component {
       }),
       () => {
         const { cart } = this.state;
-        window.localStorage.setItem('cart', JSON.stringify(cart));
+        window.sessionStorage.setItem('cart', JSON.stringify(cart));
       }
     );
   }
 
   clearCart() {
     this.setState({ cart: [] });
-    window.localStorage.clear();
+    window.sessionStorage.clear('cart');
   }
 
   render() {
@@ -134,6 +134,7 @@ class ShopProvider extends Component {
                       first
                       second
                       third
+                      fourth
                     }
                   }
                   categories {
@@ -224,7 +225,11 @@ class ShopProvider extends Component {
             if (products[i].slug[0] !== '/') {
               products[i].slug = `/${products[i].slug}`;
             }
-            products[i].price = products[i].price.replace(/\./g, '');
+            if (products[i].price) {
+              products[i].price = products[i].price.replace(/\./g, '');
+            } else {
+              products[i].price = '₽0,00';
+            }
           }
 
           const catalogFull = products.sort(

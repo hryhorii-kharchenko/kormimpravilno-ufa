@@ -1,7 +1,8 @@
 const path = require(`path`);
+
 const {
   createRemoteFileNode,
-  createFilePath,
+  // createFilePath,
 } = require(`gatsby-source-filesystem`);
 
 if (process.NODE_ENV === 'development') {

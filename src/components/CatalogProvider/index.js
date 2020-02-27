@@ -15,7 +15,7 @@ function CatalogProvider({
   const [availableProducts, setAvailableProducts] = useState(null);
   useEffect(() => {
     fetch(
-      `https://kormimpravilnowp.yevdokimov.pro/wp-json/kormimpravilno/v1/available_products/${shopId.toString()}`,
+      `http://wp.spb.kormimpravilno.com/wp-json/kormimpravilno/v1/available_products/${shopId.toString()}`,
       {
         method: 'GET',
       }

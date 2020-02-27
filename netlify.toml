@@ -1,0 +1,18 @@
+[[redirects]]
+  from = "/success"
+  to = "/?popup=success"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/fail"
+  to = "/?popup=fail"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/success"
+  to = "http://wp.spb.kormimpravilno.com/wp-json/kormimpravilno/v1/?OutSum=:outsum&InvId=:invid&SignatureValue=:signaturevalue"
+  status = 302
+  force = true
+  query = {OutSum = ":outsum", InvId = ":invid", SignatureValue = ":signaturevalue"}

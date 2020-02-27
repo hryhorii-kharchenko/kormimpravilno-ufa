@@ -19,6 +19,7 @@ function SimilarProductSection({
   products.push(catalog.find(() => catalog.productId === similar.first));
   products.push(catalog.find(() => catalog.productId === similar.second));
   products.push(catalog.find(() => catalog.productId === similar.third));
+  products.push(catalog.find(() => catalog.productId === similar.fourth));
 
   return (
     <section styleName="SimilarProductSection" id="similar">
@@ -30,6 +31,7 @@ function SimilarProductSection({
           products={products}
           onClick={addToCartBtnHandler}
           openCart={openCart}
+          aimProductCount={4}
           isSlider
         />
 
@@ -50,6 +52,7 @@ SimilarProductSection.propTypes = {
     first: PropTypes.number,
     second: PropTypes.number,
     third: PropTypes.number,
+    fourth: PropTypes.number,
   }).isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
