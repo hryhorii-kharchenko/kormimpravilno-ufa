@@ -11,8 +11,8 @@
   force = true
 
 [[redirects]]
-  from = "/success"
-  to = "https://spb.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/?OutSum=:outsum&InvId=:invid&SignatureValue=:signaturevalue"
+  from = "/result"
+  to = "https://spb.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/result?OutSum=:outsum&InvId=:invid&SignatureValue=:signaturevalue"
   status = 302
   force = true
   query = {OutSum = ":outsum", InvId = ":invid", SignatureValue = ":signaturevalue"}
