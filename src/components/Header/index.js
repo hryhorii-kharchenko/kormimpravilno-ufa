@@ -61,7 +61,7 @@ function Header({
         <Menu items={menuItems} firstItemId={mobileMenuInitialFocusId} />
         <CityPicker
           links={cityOptions}
-          current="Москва"
+          current="Петербург"
           isPickerActive={isPickerActive}
           setIsPickerActive={setIsPickerActive}
         />
@@ -116,7 +116,7 @@ function Header({
           <Wrapper justifyContent="flex-end" styleName="Wrapper">
             <CityPicker
               links={cityOptions}
-              current="Москва"
+              current="Петербург"
               isPickerActive={isPickerActive}
               setIsPickerActive={setIsPickerActive}
             />
