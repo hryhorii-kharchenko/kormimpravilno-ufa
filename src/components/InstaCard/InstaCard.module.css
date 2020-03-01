@@ -1,13 +1,16 @@
 .InstaCard {
   max-width: 290px;
+  min-width: 290px;
   max-height: 290px;
-  width: 100%;
-  height: auto;
+  min-height: 290px;
   margin: 6px;
   border-radius: 6px;
   cursor: pointer;
   box-sizing: border-box;
   transition: border 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .InstaCard:hover {
@@ -15,5 +18,6 @@
 }
 
 .image {
-  width: 100%;
+  /* width: 100%; */
+  border-radius: 6px;
 }

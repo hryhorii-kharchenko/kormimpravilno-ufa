@@ -671,6 +671,7 @@ export const query = graphql`
           orgn
           ooo
           phone
+          city
         }
       }
       orderPage: page(id: "cGFnZTo0NjI=") {

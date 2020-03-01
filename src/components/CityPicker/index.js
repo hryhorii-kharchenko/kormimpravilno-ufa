@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
 
 import './CityPicker.module.css';
 import arrowDownSvg from '../../images/icons/arrow-down.svg';
 
 function CityPicker({ links, current, isPickerActive, setIsPickerActive }) {
   const options = links.map(option => (
-    <Link to={option.value} styleName="option" key={option.value}>
+    <a href={option.value} styleName="option" key={option.value}>
       {option.label}
-    </Link>
+    </a>
   ));
 
   return (

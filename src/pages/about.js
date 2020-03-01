@@ -97,6 +97,7 @@ export const query = graphql`
           orgn
           ooo
           phone
+          city
         }
       }
       aboutPage: page(id: "cGFnZToyMw==") {
@@ -108,6 +109,7 @@ export const query = graphql`
           contactsOferta
           contactsPhone
           contactsSubheading
+          contactsMap
           pageTitle
           weText
           weTitle

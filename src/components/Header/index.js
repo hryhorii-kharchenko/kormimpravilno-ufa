@@ -24,6 +24,7 @@ function Header({
   // cartRemoveOneStackHandler,
   // cartRemoveWholeItemHandler,
   openCart,
+  city,
 }) {
   const cartLength = Object.values(cart).reduce((prev, curr) => prev + curr, 0);
   const cardCounterHtml =
@@ -39,10 +40,9 @@ function Header({
     { title: 'О нас', url: '/about' },
   ];
   const cityOptions = [
-    { value: '/moscow', label: 'Москва' },
-    { value: '/kazan', label: 'Казань' },
-    { value: '/ekaterinburg', label: 'Екатеринбург' },
-    { value: '/peterburg', label: 'Петербург' },
+    { value: 'https://msk.kormimpravilno.com', label: 'Москва' },
+    { value: 'https://spb.kormimpravilno.com', label: 'Петербург' },
+    { value: 'https://ufa.kormimpravilno.com', label: 'Уфа' },
   ];
 
   const mobileMenuInitialFocusId = 'initial-focus-menu-modal';
@@ -61,7 +61,7 @@ function Header({
         <Menu items={menuItems} firstItemId={mobileMenuInitialFocusId} />
         <CityPicker
           links={cityOptions}
-          current="Петербург"
+          current={city}
           isPickerActive={isPickerActive}
           setIsPickerActive={setIsPickerActive}
         />
@@ -178,6 +178,7 @@ Header.propTypes = {
   // cartRemoveOneStackHandler: PropTypes.func.isRequired,
   // cartRemoveWholeItemHandler: PropTypes.func.isRequired,
   openCart: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
 export default Header;

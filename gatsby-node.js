@@ -1,4 +1,5 @@
 const path = require(`path`);
+const fetch = require('node-fetch');
 
 const {
   createRemoteFileNode,
@@ -28,17 +29,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   }
 };
 
-// exports.onCreateNode = ({ node, getNode, actions }) => {
-//   const { createNodeField } = actions;
-//   if (node.internal.type === `WPGraphQL`) {
-//     const slug = createFilePath({ node, getNode, basePath: `pages` });
-//     createNodeField({
-//       node,
-//       name: `slug`,
-//       value: slug,
-//     });
-//   }
-// };
 exports.createPages = async ({ graphql, actions }) => {
   const { data } = await graphql(`
     query {
@@ -108,6 +98,7 @@ exports.createPages = async ({ graphql, actions }) => {
             orgn
             ooo
             phone
+            city
           }
         }
       }
@@ -265,4 +256,78 @@ exports.createResolvers = ({
       },
     },
   });
+};
+
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
+  const { createNode } = actions;
+
+  const response = await fetch(
+    `https://graph.instagram.com/me/media?fields=id,permalink,media_url,thumbnail_url&access_token=IGQVJYVTFqenVQcEh6Q05aN1FIN2haaThTY01uaTRTVTV6N1F6elhSMF95QmFrU21FOHVnR1VtTlB1bUNQbGxkSjVPWHVIMFdfZAWhCMnZAZAMnh3alQzTm1VVEo5b2lKbW5TMk1tOTdR`,
+    {
+      method: 'GET',
+    }
+  );
+
+  if (!response.ok) {
+    console.log('insta response bad');
+    return;
+  }
+
+  const json = await response.json();
+  const { data } = json;
+
+  for (let i = 0; i < 8; i += 1) {
+    const myData = data[i];
+    myData.position = i;
+
+    if (myData.thumbnail_url) {
+      myData.media_url = myData.thumbnail_url;
+      delete myData.thumbnail_url;
+    }
+
+    const nodeContent = JSON.stringify(myData);
+
+    const nodeMeta = {
+      id: createNodeId(`insta-data-${myData.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: `InstaNode`,
+        mediaType: `text/html`,
+        content: nodeContent,
+        contentDigest: createContentDigest(myData),
+      },
+    };
+
+    const node = { ...myData, ...nodeMeta };
+    createNode(node);
+  }
+};
+
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode },
+  store,
+  cache,
+  createNodeId,
+}) => {
+  // For all MarkdownRemark nodes that have a featured image url, call createRemoteFileNode
+  if (node.internal.type === 'InstaNode' && node.media_url !== null) {
+    const fileNode = await createRemoteFileNode({
+      url: node.media_url, // string that points to the URL of the image
+      parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
+      createNode, // helper function in gatsby-node to generate the node
+      createNodeId, // helper function in gatsby-node to generate the node id
+      cache, // Gatsby's cache
+      store, // Gatsby's redux store
+    });
+    // if the file was created, attach the new node to the parent node
+    if (fileNode) {
+      node.featuredImg___NODE = fileNode.id;
+    }
+  }
 };

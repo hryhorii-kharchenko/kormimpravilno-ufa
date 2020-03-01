@@ -76,6 +76,7 @@ class IndexPage extends Component {
     const page = data.wpgraphql.mainPage.main_page;
     const universal = data.wpgraphql.universalPage.universal_page;
     const posts = data.wpgraphql.posts.nodes;
+    const instaNodes = data.allInstaNode.nodes;
 
     const banner = getSectionEntriesFromPage('banner', page);
     const company = getSectionEntriesFromPage('company', page);
@@ -196,7 +197,7 @@ class IndexPage extends Component {
           shopBtnText={banner.bannerBtnStore}
         />
         <RecipeSection data={recipe} recipes={posts} />
-        <InstaSection data={instagram} />
+        <InstaSection data={instagram} instaNodes={instaNodes} />
         {successPopup}
         {failPopup}
       </Layout>
@@ -247,6 +248,19 @@ export const query = graphql`
           srcSet
           sizes
         }
+      }
+    }
+    allInstaNode {
+      nodes {
+        featuredImg {
+          childImageSharp {
+            fixed(width: 288, height: 288) {
+              ...GatsbyImageSharpFixed_withWebp
+            }
+          }
+        }
+        permalink
+        position
       }
     }
     wpgraphql {
@@ -304,6 +318,7 @@ export const query = graphql`
           orgn
           ooo
           phone
+          city
         }
       }
       posts {

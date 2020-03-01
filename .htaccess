@@ -1,7 +1,0 @@
-<IfModule mod_rewrite.c>
-Options +FollowSymLinks
-RewriteEngine On
-RewriteRule ^result https://spb.wpkormimpravilno.ru/wp-json/kormimpravilno/v1%{REQUEST_URI} [R=302,NC]
-
-Redirect 302 /success /?popup=success
-Redirect 302 /fail /?popup=fail

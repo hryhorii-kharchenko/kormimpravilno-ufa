@@ -68,7 +68,7 @@ function ContactsAboutSection({ data }) {
               height="473"
               frameBorder="0"
               style={{ border: 0 }}
-              src="https://www.google.com/maps/embed/v1/place?q=place_id:EjtLcmVtZW5jaHVnc2theWEgVWxpdHNhLCAyMSwgU2Fua3QtUGV0ZXJidXJnLCBSdXNzaWEsIDE5MTE2NyIwEi4KFAoSCUtNPDPIMZZGEcbsOnVGBkmaEBUqFAoSCQ0Yey7IMZZGES6cHjunpVNe&key=AIzaSyCCY8rnlUPqE6_GszGd3lRbLOMf9-nR-So"
+              src={data.contactsMap}
               allowFullScreen
             />
           </div>
@@ -87,6 +87,7 @@ ContactsAboutSection.propTypes = {
     contactsEmail: PropTypes.string,
     contactsOferta: PropTypes.string,
     contactsPhone: PropTypes.string,
+    contactsMap: PropTypes.string,
   }).isRequired,
 };
 

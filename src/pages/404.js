@@ -12,7 +12,7 @@ function NotFoundPage({
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
-  openCart
+  openCart,
 }) {
   const universal = data.wpgraphql.universalPage.universal_page;
 
@@ -56,6 +56,7 @@ export const query = graphql`
           orgn
           ooo
           phone
+          city
         }
       }
     }

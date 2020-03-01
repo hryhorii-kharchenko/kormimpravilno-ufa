@@ -243,6 +243,7 @@ export const query = graphql`
           orgn
           ooo
           phone
+          city
         }
       }
     }

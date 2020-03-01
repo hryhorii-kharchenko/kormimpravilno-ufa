@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Img from 'gatsby-image';
 
 import './InstaCard.module.css';
 
 function InstaCard({ imgSrc, link }) {
   return (
     <a href={link} styleName="InstaCard">
-      <img src={imgSrc} alt="Пост из Инстаграма" styleName="image" />
+      <Img fixed={imgSrc} alt="Пост из Инстаграма" styleName="image" />
     </a>
   );
 }

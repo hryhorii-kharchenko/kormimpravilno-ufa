@@ -25,6 +25,7 @@ function Layout({
         // cartRemoveOneStackHandler={cartRemoveOneStackHandler}
         // cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
         openCart={openCart}
+        city={data.city}
       />
 
       <main>{children}</main>

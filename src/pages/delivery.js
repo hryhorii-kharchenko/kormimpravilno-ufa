@@ -111,6 +111,7 @@ export const query = graphql`
           orgn
           ooo
           phone
+          city
         }
       }
       deliveryPage: page(id: "cGFnZToyMQ==") {
