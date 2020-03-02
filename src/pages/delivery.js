@@ -130,7 +130,6 @@ export const query = graphql`
           priceHeading
           priceSubheading
           priceWysiwyg
-          whereHeading
           whereWysiwyg
           orderImg {
             sourceUrl

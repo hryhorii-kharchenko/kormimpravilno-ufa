@@ -11,6 +11,7 @@ function CatalogProvider({
   addToCartBtnHandler,
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
+  openCityModal,
 }) {
   const [availableProducts, setAvailableProducts] = useState(null);
   useEffect(() => {
@@ -51,6 +52,7 @@ function CatalogProvider({
         addToCartBtnHandler,
         cartRemoveOneStackHandler,
         cartRemoveWholeItemHandler,
+        openCityModal,
         shopId,
       })}
     </>

@@ -6,6 +6,7 @@ import AriaModal from 'react-aria-modal';
 
 import CatalogProvider from '../CatalogProvider';
 import Cart from '../Cart';
+import CityModal from '../CityModal';
 
 import './ShopProvider.module.css';
 
@@ -22,6 +23,7 @@ class ShopProvider extends Component {
       cart,
       shopId: 1,
       isCartActive: false,
+      isCityModalActive: false,
     };
 
     this.openCart = this.openCart.bind(this);
@@ -31,6 +33,8 @@ class ShopProvider extends Component {
     this.cartRemoveWholeItemHandler = this.cartRemoveWholeItemHandler.bind(
       this
     );
+    this.openCityModal = this.openCityModal.bind(this);
+    this.closeCityModal = this.closeCityModal.bind(this);
   }
 
   openCart() {
@@ -100,15 +104,25 @@ class ShopProvider extends Component {
     window.sessionStorage.clear('cart');
   }
 
+  openCityModal() {
+    this.setState({ isCityModalActive: true });
+  }
+
+  closeCityModal() {
+    this.setState({ isCityModalActive: false });
+  }
+
   render() {
     const { children } = this.props;
-    const { cart, shopId, isCartActive } = this.state;
+    const { cart, shopId, isCartActive, isCityModalActive } = this.state;
     const {
       openCart,
       closeCart,
       addToCartBtnHandler,
       cartRemoveOneStackHandler,
       cartRemoveWholeItemHandler,
+      openCityModal,
+      closeCityModal,
     } = this;
     const structuredCart = {};
 
@@ -296,6 +310,27 @@ class ShopProvider extends Component {
             </AriaModal>
           ) : null;
 
+          const cityModal = isCityModalActive ? (
+            <AriaModal
+              titleText="Из какого вы города?"
+              onExit={closeCart}
+              getApplicationNode={() => {
+                return document.getElementById('___gatsby');
+              }}
+              underlayStyle={{ background: 'rgba(0, 0, 0, 0.63)' }}
+              verticallyCenter
+              dialogStyle={{
+                maxWidth: '510px',
+                width: '100%',
+                boxSizing: 'border-box',
+              }}
+            >
+              <div id="city-modal" styleName="city-modal">
+                <CityModal close={closeCityModal} />
+              </div>
+            </AriaModal>
+          ) : null;
+
           return (
             <>
               <CatalogProvider
@@ -307,6 +342,7 @@ class ShopProvider extends Component {
                 addToCartBtnHandler={addToCartBtnHandler}
                 cartRemoveOneStackHandler={cartRemoveOneStackHandler}
                 cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+                openCityModal={openCityModal}
               >
                 {/* {React.cloneElement(children, {
                 cart: structuredCart,
@@ -322,6 +358,7 @@ class ShopProvider extends Component {
                 {children}
               </CatalogProvider>
               {cartModal}
+              {cityModal}
             </>
           );
         }}

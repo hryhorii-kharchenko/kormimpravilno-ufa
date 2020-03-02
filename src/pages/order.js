@@ -31,7 +31,7 @@ class OrderPage extends Component {
       },
       phone: { value: formData.phone || '', isError: false, errorMsg: '' },
       email: { value: formData.email || '', isError: false, errorMsg: '' },
-      isSubscribeActive: { value: false, isError: false, errorMsg: '' },
+      isSubscribeActive: { value: true, isError: false, errorMsg: '' },
       delivery: { value: 'first', isError: false, errorMsg: '' },
       city: { value: formData.city || '', isError: false, errorMsg: '' },
       address: { value: formData.address || '', isError: false, errorMsg: '' },

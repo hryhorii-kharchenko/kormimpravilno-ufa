@@ -70,6 +70,13 @@ function FirstOrderSection({
             onChange={isSubscribeActiveOnChange}
             isCheckbox
           />
+          <Input
+            text="Я даю согласие на обработку, хранение и использование своих персональных данных на основании ФЗ № 152-ФЗ «О персональных данных» от 27.07.2006"
+            name="permission"
+            data={{ value: true, isError: false, errorMsg: '' }}
+            isCheckbox
+            isAlwaysChecked
+          />
         </form>
 
         <Button

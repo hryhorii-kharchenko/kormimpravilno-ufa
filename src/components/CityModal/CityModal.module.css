@@ -1,0 +1,69 @@
+.CityModal {
+  max-width: 510px;
+  width: 100%;
+  padding: 30px;
+  position: relative;
+  background-color: $white;
+  box-sizing: border-box;
+}
+
+.heading {
+  margin: 0px auto 8px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.line {
+  width: 100px;
+  height: 4px;
+  margin: 0px auto 12px;
+  background-image: linear-gradient(86deg, #41914c -38%, #69e579 139%);
+}
+
+.subheading {
+  max-width: 290px;
+  margin: 0px auto 20px;
+  text-align: center;
+}
+
+.link-wrapper {
+  margin: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  width: 140px;
+  margin: 10px 7.5px 0px;
+}
+
+.cross-btn {
+  width: 20px;
+  height: 20px;
+  top: 20px;
+  right: 20px;
+  border: 0;
+  padding: 0;
+  position: absolute;
+  background-color: $white;
+  cursor: pointer;
+}
+
+.cross-btn path {
+  fill: #cccccc;
+  transition: fill 0.2s ease-in-out;
+}
+
+.cross-btn:hover path {
+  fill: $main;
+}
+
+.cross-img {
+  width: 20px;
+}
+
+@media screen and (max-width: 450px) {
+}

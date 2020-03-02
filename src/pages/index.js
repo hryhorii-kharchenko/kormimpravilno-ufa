@@ -32,6 +32,17 @@ class IndexPage extends Component {
     const tempSuccess = getVar === 'success';
     const tempFail = getVar === 'fail';
 
+    const saveCity = gup('saveCity', props.location.href);
+    if (saveCity) {
+      window.localStorage.setItem('saveCity', true);
+    }
+
+    if (typeof window !== 'undefined') {
+      if (!window.localStorage.getItem('saveCity')) {
+        props.openCityModal();
+      }
+    }
+
     this.state = {
       isSuccess: tempSuccess,
       isFail: tempFail,

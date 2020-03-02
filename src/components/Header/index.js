@@ -116,7 +116,7 @@ function Header({
           <Wrapper justifyContent="flex-end" styleName="Wrapper">
             <CityPicker
               links={cityOptions}
-              current="Петербург"
+              current={city}
               isPickerActive={isPickerActive}
               setIsPickerActive={setIsPickerActive}
             />

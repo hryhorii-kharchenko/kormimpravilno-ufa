@@ -14,7 +14,7 @@ function WhereDeliverySection({ data }) {
       <ContentWrapper>
         <div styleName="wrapper">
           <div styleName="text-wrapper">
-            <SectionHeading text={data.whereHeading} isAlignedLeft />
+            {/* <SectionHeading text={data.whereHeading} isAlignedLeft /> */}
             <div styleName="text">
               <SanitizeHTML html={data.whereWysiwyg} />
             </div>
@@ -33,7 +33,7 @@ function WhereDeliverySection({ data }) {
 
 WhereDeliverySection.propTypes = {
   data: PropTypes.shape({
-    whereHeading: PropTypes.string,
+    // whereHeading: PropTypes.string,
     whereWysiwyg: PropTypes.string,
     whereImg: PropTypes.shape({
       imageFile: PropTypes.shape({

@@ -14,11 +14,33 @@ function Input({
   isRequired,
   isCheckbox,
   isPhone,
+  isAlwaysChecked,
 }) {
   const { value, isError, errorMsg } = data;
   const errorHtml = isError ? <p styleName="error">{errorMsg}</p> : null;
 
   if (isCheckbox) {
+    if (isAlwaysChecked) {
+      return (
+        <article styleName="Input Input-checkbox">
+          <label htmlFor={name} styleName="checkbox-label">
+            <input
+              type="checkbox"
+              id={name}
+              name={name}
+              checked={value}
+              styleName="checkbox-input"
+              className="checkbox"
+              onChange={onChange}
+            />
+            <div styleName="real-checkbox">
+              <img src={tickIcon} alt="&#10003" styleName="real-checkbox-img" />
+            </div>
+            {text}
+          </label>
+        </article>
+      );
+    }
     return (
       <article styleName="Input Input-checkbox">
         <label
@@ -42,7 +64,7 @@ function Input({
           <div styleName="real-checkbox">
             <img src={tickIcon} alt="&#10003" styleName="real-checkbox-img" />
           </div>
-          Подписаться на новости и эксклюзивные предложения
+          {text}
         </label>
       </article>
     );
@@ -96,6 +118,7 @@ Input.defaultProps = {
   isRequired: false,
   isCheckbox: false,
   isPhone: false,
+  isAlwaysChecked: false,
 };
 
 Input.propTypes = {
@@ -110,6 +133,7 @@ Input.propTypes = {
   isRequired: PropTypes.bool,
   isCheckbox: PropTypes.bool,
   isPhone: PropTypes.bool,
+  isAlwaysChecked: PropTypes.bool,
 };
 
 export default Input;
