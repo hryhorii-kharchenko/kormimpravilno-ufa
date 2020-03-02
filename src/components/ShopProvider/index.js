@@ -16,7 +16,7 @@ class ShopProvider extends Component {
   constructor(props) {
     super(props);
 
-    const cart = lscache.get('cart') || [];
+    const cart = JSON.parse(lscache.get('cart')) || [];
 
     this.state = {
       cart,
