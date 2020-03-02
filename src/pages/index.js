@@ -33,7 +33,7 @@ class IndexPage extends Component {
     const tempFail = getVar === 'fail';
 
     if (typeof window !== 'undefined') {
-      if (tempSuccess || !window.sessionStorage.getItem('success')) {
+      if (tempSuccess && !window.sessionStorage.getItem('success')) {
         props.clearCart();
         window.sessionStorage.setItem('success', 'true');
       }
