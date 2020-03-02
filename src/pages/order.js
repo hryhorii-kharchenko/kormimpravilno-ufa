@@ -194,7 +194,7 @@ class OrderPage extends Component {
           })
           .then(url => {
             if (/http/.test(url)) {
-              window.sessionStorage.clear('cart');
+              // window.sessionStorage.clear('cart');
               const href = url.substring(1, url.length - 1);
               window.location.href = href;
             } else {

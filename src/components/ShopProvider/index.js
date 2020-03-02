@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import AriaModal from 'react-aria-modal';
 
+import lscache from 'lscache';
+
 import CatalogProvider from '../CatalogProvider';
 import Cart from '../Cart';
 import CityModal from '../CityModal';
@@ -14,9 +16,28 @@ class ShopProvider extends Component {
   constructor(props) {
     super(props);
 
+    function gup(name, url) {
+      if (!url) url = props.location.href;
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      const regexS = `[\\?&]${name}=([^&#]*)`;
+      const regex = new RegExp(regexS);
+      const results = regex.exec(url);
+      return results == null ? null : results[1];
+    }
+    const getVar = gup('popup', props.location.href);
+
+    const tempSuccess = getVar === 'success';
+    const tempFail = getVar === 'fail';
+
     let cart = [];
     if (typeof window !== 'undefined') {
-      cart = JSON.parse(window.localStorage.getItem('cart')) || [];
+      if (!tempSuccess || window.sessionStorage.getItem('success')) {
+        cart = JSON.parse(lscache.get('cart') || []);
+      } else {
+        cart = [];
+        lscache.remove('cart');
+        window.sessionStorage.setItem('success', 'true');
+      }
     }
 
     this.state = {
@@ -64,7 +85,8 @@ class ShopProvider extends Component {
       }),
       () => {
         const { cart } = this.state;
-        window.sessionStorage.setItem('cart', JSON.stringify(cart));
+        lscache.set('cart', JSON.stringify(cart), 15);
+        // window.sessionStorage.setItem('cart', JSON.stringify(cart));
       }
     );
   }
@@ -82,7 +104,8 @@ class ShopProvider extends Component {
       },
       () => {
         const { cart } = this.state;
-        window.sessionStorage.setItem('cart', JSON.stringify(cart));
+        lscache.set('cart', JSON.stringify(cart), 15);
+        // window.sessionStorage.setItem('cart', JSON.stringify(cart));
       }
     );
   }
@@ -94,14 +117,16 @@ class ShopProvider extends Component {
       }),
       () => {
         const { cart } = this.state;
-        window.sessionStorage.setItem('cart', JSON.stringify(cart));
+        lscache.set('cart', JSON.stringify(cart), 15);
+        // window.sessionStorage.setItem('cart', JSON.stringify(cart));
       }
     );
   }
 
   clearCart() {
     this.setState({ cart: [] });
-    window.sessionStorage.clear('cart');
+    lscache.remove('cart');
+    // window.sessionStorage.clear('cart');
   }
 
   openCityModal() {
