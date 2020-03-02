@@ -16,29 +16,7 @@ class ShopProvider extends Component {
   constructor(props) {
     super(props);
 
-    function gup(name, url) {
-      if (!url) url = props.location.href;
-      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-      const regexS = `[\\?&]${name}=([^&#]*)`;
-      const regex = new RegExp(regexS);
-      const results = regex.exec(url);
-      return results == null ? null : results[1];
-    }
-    const getVar = gup('popup', props.location.href);
-
-    const tempSuccess = getVar === 'success';
-    const tempFail = getVar === 'fail';
-
-    let cart = [];
-    if (typeof window !== 'undefined') {
-      if (!tempSuccess || window.sessionStorage.getItem('success')) {
-        cart = JSON.parse(lscache.get('cart') || []);
-      } else {
-        cart = [];
-        lscache.remove('cart');
-        window.sessionStorage.setItem('success', 'true');
-      }
-    }
+    const cart = JSON.parse(lscache.get('cart') || []);
 
     this.state = {
       cart,
@@ -56,6 +34,7 @@ class ShopProvider extends Component {
     );
     this.openCityModal = this.openCityModal.bind(this);
     this.closeCityModal = this.closeCityModal.bind(this);
+    this.clearCart = this.clearCart.bind(this);
   }
 
   openCart() {
@@ -148,6 +127,7 @@ class ShopProvider extends Component {
       cartRemoveWholeItemHandler,
       openCityModal,
       closeCityModal,
+      clearCart,
     } = this;
     const structuredCart = {};
 
@@ -368,6 +348,7 @@ class ShopProvider extends Component {
                 cartRemoveOneStackHandler={cartRemoveOneStackHandler}
                 cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
                 openCityModal={openCityModal}
+                clearCart={clearCart}
               >
                 {/* {React.cloneElement(children, {
                 cart: structuredCart,

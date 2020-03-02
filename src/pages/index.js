@@ -32,6 +32,13 @@ class IndexPage extends Component {
     const tempSuccess = getVar === 'success';
     const tempFail = getVar === 'fail';
 
+    if (typeof window !== 'undefined') {
+      if (tempSuccess || !window.sessionStorage.getItem('success')) {
+        props.clearCart();
+        window.sessionStorage.setItem('success', 'true');
+      }
+    }
+
     const saveCity = gup('saveCity', props.location.href);
     if (saveCity) {
       window.localStorage.setItem('saveCity', true);
