@@ -15,7 +15,7 @@ function Footer({ copyright, ooo, inn, orgn }) {
         <div styleName="wrapper">
           <p styleName="info">{copyright}</p>
           <p styleName="info">
-            <strong>ИП </strong>
+            <strong>ООО </strong>
             {ooo}
           </p>
           <p styleName="info">
@@ -23,7 +23,7 @@ function Footer({ copyright, ooo, inn, orgn }) {
             {inn}
           </p>
           <p styleName="info">
-            <strong>ОРГНИП </strong>
+            <strong>ОРГН </strong>
             {orgn}
           </p>
         </div>

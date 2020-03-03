@@ -32,7 +32,7 @@ module.exports = {
       options: {
         typeName: 'WPGraphQL',
         fieldName: 'wpgraphql',
-        url: 'https://spb.wpkormimpravilno.ru/graphql',
+        url: 'https://ufa.wpkormimpravilno.ru/graphql',
         // url: 'http://kormimpravilno.loc/graphql',
       },
     },

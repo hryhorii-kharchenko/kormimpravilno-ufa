@@ -16,11 +16,14 @@ class ShopProvider extends Component {
   constructor(props) {
     super(props);
 
-    const cart = JSON.parse(lscache.get('cart')) || [];
+    let cart = [];
+    if (typeof window !== 'undefined') {
+      cart = JSON.parse(lscache.get('cart')) || [];
+    }
 
     this.state = {
       cart,
-      shopId: 1,
+      shopId: 3,
       isCartActive: false,
       isCityModalActive: false,
     };

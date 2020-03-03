@@ -181,7 +181,7 @@ class OrderPage extends Component {
         );
 
         fetch(
-          'https://spb.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/order',
+          'https://ufa.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/order',
           {
             method: 'POST',
             body: json,
