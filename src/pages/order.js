@@ -73,7 +73,12 @@ class OrderPage extends Component {
 
   submitForm(e) {
     e.preventDefault();
-    const { cart, catalog } = this.props;
+    const { cart, catalog, data } = this.props;
+    const {
+      first,
+      second,
+      third,
+    } = data.wpgraphql.orderPage.order_page.deliveryWays;
 
     this.validatePage();
 
@@ -141,24 +146,67 @@ class OrderPage extends Component {
         });
 
         if (delivery.value === 'first') {
-          if (totalPrice < 5000) {
-            lineItems.push({
-              product_id: 1381,
-              quantity: 1,
-            });
+          if (first.minimalFreeDeliverySum && first.freeDeliveryProductId) {
+            if (totalPrice < first.minimalFreeDeliverySum) {
+              lineItems.push({
+                product_id: Number(first.paidDeliveryProductId),
+                quantity: 1,
+              });
+            } else {
+              lineItems.push({
+                product_id: Number(first.freeDeliveryProductId),
+                quantity: 1,
+              });
+            }
           } else {
             lineItems.push({
-              product_id: 1379,
+              product_id: Number(first.paidDeliveryProductId),
               quantity: 1,
             });
           }
         }
 
-        if (delivery.value === 'second')
-          lineItems.push({
-            product_id: 1383,
-            quantity: 1,
-          });
+        if (delivery.value === 'second') {
+          if (second.minimalFreeDeliverySum && second.freeDeliveryProductId) {
+            if (totalPrice < second.minimalFreeDeliverySum) {
+              lineItems.push({
+                product_id: Number(second.paidDeliveryProductId),
+                quantity: 1,
+              });
+            } else {
+              lineItems.push({
+                product_id: Number(second.freeDeliveryProductId),
+                quantity: 1,
+              });
+            }
+          } else {
+            lineItems.push({
+              product_id: Number(second.paidDeliveryProductId),
+              quantity: 1,
+            });
+          }
+        }
+
+        if (delivery.value === 'third' && third.paidDeliveryProductId) {
+          if (third.minimalFreeDeliverySum && third.freeDeliveryProductId) {
+            if (totalPrice < third.minimalFreeDeliverySum) {
+              lineItems.push({
+                product_id: Number(third.paidDeliveryProductId),
+                quantity: 1,
+              });
+            } else {
+              lineItems.push({
+                product_id: Number(third.freeDeliveryProductId),
+                quantity: 1,
+              });
+            }
+          } else {
+            lineItems.push({
+              product_id: Number(third.paidDeliveryProductId),
+              quantity: 1,
+            });
+          }
+        }
 
         firstFormData.set('line_items', JSON.stringify(lineItems));
 
@@ -479,6 +527,7 @@ class OrderPage extends Component {
     const {
       data,
       catalog,
+      catalogFull,
       cart,
       addToCartBtnHandler,
       cartRemoveOneStackHandler,
@@ -508,6 +557,7 @@ class OrderPage extends Component {
 
     const universal = data.wpgraphql.universalPage.universal_page;
     const order = data.wpgraphql.orderPage.order_page;
+    const { first, second, third } = order.deliveryWays;
 
     const prodList = Object.entries(cart).map(([key, value]) => [
       catalog.find(elem => elem.id === key).price,
@@ -522,19 +572,70 @@ class OrderPage extends Component {
 
     const totalPriceWithoutDelivery = totalPrice;
 
-    let deliveryPrice;
-    if (delivery.value === 'first') {
-      if (totalPrice < 5000) {
-        deliveryPrice = order.deliveryWays.first.price;
-      } else {
-        deliveryPrice = 0;
+    let firstPaidDeliveryProductPrice;
+    let secondPaidDeliveryProductPrice;
+    let thirdPaidDeliveryProductPrice;
+
+    if (first.paidDeliveryProductId) {
+      const product = catalogFull.find(
+        ({ productId }) => productId === first.paidDeliveryProductId
+      );
+      if (product) {
+        firstPaidDeliveryProductPrice = parseInt(product.price.slice(1), 10);
       }
     }
-    if (delivery.value === 'second') {
-      deliveryPrice = order.deliveryWays.second.price;
+
+    if (second.paidDeliveryProductId) {
+      const product = catalogFull.find(
+        ({ productId }) => productId === second.paidDeliveryProductId
+      );
+      if (product) {
+        secondPaidDeliveryProductPrice = parseInt(product.price.slice(1), 10);
+      }
     }
-    if (delivery.value === 'third') {
-      deliveryPrice = order.deliveryWays.third.price;
+
+    if (third.paidDeliveryProductId) {
+      const product = catalogFull.find(
+        ({ productId }) => productId === third.paidDeliveryProductId
+      );
+      if (product) {
+        thirdPaidDeliveryProductPrice = parseInt(product.price.slice(1), 10);
+      }
+    }
+
+    let deliveryPrice;
+    if (delivery.value === 'first' && firstPaidDeliveryProductPrice) {
+      if (first.minimalFreeDeliverySum && first.freeDeliveryProductId) {
+        if (totalPrice < first.minimalFreeDeliverySum) {
+          deliveryPrice = firstPaidDeliveryProductPrice;
+        } else {
+          deliveryPrice = 0;
+        }
+      } else {
+        deliveryPrice = firstPaidDeliveryProductPrice;
+      }
+    }
+    if (delivery.value === 'second' && secondPaidDeliveryProductPrice) {
+      if (second.minimalFreeDeliverySum && second.freeDeliveryProductId) {
+        if (totalPrice < second.minimalFreeDeliverySum) {
+          deliveryPrice = secondPaidDeliveryProductPrice;
+        } else {
+          deliveryPrice = 0;
+        }
+      } else {
+        deliveryPrice = secondPaidDeliveryProductPrice;
+      }
+    }
+    if (delivery.value === 'third' && thirdPaidDeliveryProductPrice) {
+      if (third.minimalFreeDeliverySum && third.freeDeliveryProductId) {
+        if (totalPrice < third.minimalFreeDeliverySum) {
+          deliveryPrice = thirdPaidDeliveryProductPrice;
+        } else {
+          deliveryPrice = 0;
+        }
+      } else {
+        deliveryPrice = thirdPaidDeliveryProductPrice;
+      }
     }
 
     totalPrice += deliveryPrice;
@@ -590,6 +691,7 @@ class OrderPage extends Component {
                 commentOnChange={this.commentChangeHandler}
                 submitForm={this.submitForm}
                 totalPriceWithoutDelivery={totalPriceWithoutDelivery}
+                catalogFull={catalogFull}
               />
             </main>
             <aside styleName="aside">
@@ -647,6 +749,7 @@ class OrderPage extends Component {
 OrderPage.propTypes = {
   data: PropTypes.shape().isRequired,
   catalog: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  catalogFull: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
@@ -678,19 +781,28 @@ export const query = graphql`
         order_page {
           deliveryWays {
             first {
-              description
               heading
+              description
               price
+              paidDeliveryProductId
+              freeDeliveryProductId
+              minimalFreeDeliverySum
             }
             second {
-              description
               heading
+              description
               price
+              paidDeliveryProductId
+              freeDeliveryProductId
+              minimalFreeDeliverySum
             }
             third {
-              description
               heading
+              description
               price
+              paidDeliveryProductId
+              freeDeliveryProductId
+              minimalFreeDeliverySum
             }
           }
           paymentInstruction

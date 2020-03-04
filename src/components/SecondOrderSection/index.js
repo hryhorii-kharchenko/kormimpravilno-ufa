@@ -26,16 +26,105 @@ function SecondOrderSection({
   commentOnChange,
   submitForm,
   totalPriceWithoutDelivery,
+  catalogFull,
 }) {
   const [commentIsActive, setCommentIsActive] = useState(false);
 
   const { first, second, third } = data.deliveryWays;
   const { paymentInstruction } = data;
+
+  let firstPaidDeliveryProductPrice;
+  let secondPaidDeliveryProductPrice;
+  let thirdPaidDeliveryProductPrice;
+
+  if (first.paidDeliveryProductId) {
+    const product = catalogFull.find(
+      ({ productId }) => productId === first.paidDeliveryProductId
+    );
+    if (product) {
+      firstPaidDeliveryProductPrice = parseInt(product.price.slice(1), 10);
+    }
+  }
+
+  if (second.paidDeliveryProductId) {
+    const product = catalogFull.find(
+      ({ productId }) => productId === second.paidDeliveryProductId
+    );
+    if (product) {
+      secondPaidDeliveryProductPrice = parseInt(product.price.slice(1), 10);
+    }
+  }
+
+  if (third.paidDeliveryProductId) {
+    const product = catalogFull.find(
+      ({ productId }) => productId === third.paidDeliveryProductId
+    );
+    if (product) {
+      thirdPaidDeliveryProductPrice = parseInt(product.price.slice(1), 10);
+    }
+  }
+
+  let deliveryPriceFirst;
+  let deliveryPriceSecond;
+  let deliveryPriceThird;
+
+  if (firstPaidDeliveryProductPrice) {
+    if (first.minimalFreeDeliverySum) {
+      deliveryPriceFirst =
+        totalPriceWithoutDelivery < first.minimalFreeDeliverySum
+          ? `${firstPaidDeliveryProductPrice}р`
+          : '0р';
+    } else {
+      deliveryPriceFirst = `${firstPaidDeliveryProductPrice}р`;
+    }
+  }
+
+  if (secondPaidDeliveryProductPrice) {
+    if (second.minimalFreeDeliverySum) {
+      deliveryPriceSecond =
+        totalPriceWithoutDelivery < second.minimalFreeDeliverySum
+          ? `${secondPaidDeliveryProductPrice}р`
+          : '0р';
+    } else {
+      deliveryPriceSecond = `${secondPaidDeliveryProductPrice}р`;
+    }
+  }
+
+  if (thirdPaidDeliveryProductPrice) {
+    if (third.minimalFreeDeliverySum) {
+      deliveryPriceThird =
+        totalPriceWithoutDelivery < third.minimalFreeDeliverySum
+          ? `${thirdPaidDeliveryProductPrice}р`
+          : '0р';
+    } else {
+      deliveryPriceThird = `${thirdPaidDeliveryProductPrice}р`;
+    }
+  }
+
+  const firstDescription = first.description ? (
+    <p styleName="description">
+      <span styleName="gray">{first.description}</span>
+    </p>
+  ) : null;
+
+  const secondDescription = second.description ? (
+    <p styleName="description">
+      <span styleName="gray">{second.description}</span>
+    </p>
+  ) : null;
+
+  const thirdDescription = third.description ? (
+    <p styleName="description">
+      <span styleName="gray">{third.description}</span>
+    </p>
+  ) : null;
+
   const paymentInstructionHtml = paymentInstruction ? (
     <section styleName="payment-instruction">
       <SanitizeHTML html={paymentInstruction} />
     </section>
   ) : null;
+
   const commentBtnHtml = !commentIsActive ? (
     <button
       type="button"
@@ -77,19 +166,17 @@ function SecondOrderSection({
           {first.heading}
         </div>
         <div styleName="second-row">
-          <p styleName="description">
-            <span styleName="gray">{first.description}</span>
-          </p>
+          {firstDescription}
           <p styleName="price">
             <span styleName="gray">Стоимость:</span>
-            {totalPriceWithoutDelivery < 5000 ? `${first.price}р` : '0р'}
+            {deliveryPriceFirst}
           </p>
         </div>
       </label>
     </div>
   );
 
-  if (second.heading || second.price) {
+  if (second.heading && deliveryPriceSecond) {
     radioHtml.push(
       <div styleName="radio-elem-wrapper" key="second">
         <label htmlFor="second-radio" styleName="radio-label">
@@ -109,12 +196,10 @@ function SecondOrderSection({
             {second.heading}
           </div>
           <div styleName="second-row">
-            <p styleName="description">
-              <span styleName="gray">{second.description}</span>
-            </p>
+            {secondDescription}
             <p styleName="price">
               <span styleName="gray">Стоимость:</span>
-              {`${second.price}р`}
+              {deliveryPriceSecond}
             </p>
           </div>
         </label>
@@ -122,7 +207,7 @@ function SecondOrderSection({
     );
   }
 
-  if (third.heading || third.price) {
+  if (third.heading && deliveryPriceThird) {
     radioHtml.push(
       <div styleName="radio-elem-wrapper" key="third">
         <label htmlFor="third-radio" styleName="radio-label">
@@ -142,12 +227,10 @@ function SecondOrderSection({
             {third.heading}
           </div>
           <div styleName="second-row">
-            <p styleName="description">
-              <span styleName="gray">{third.description}</span>
-            </p>
+            {thirdDescription}
             <p styleName="price">
               <span styleName="gray">Стоимость:</span>
-              {`${third.price}р`}
+              {deliveryPriceThird}
             </p>
           </div>
         </label>
@@ -255,16 +338,25 @@ SecondOrderSection.propTypes = {
         description: PropTypes.string,
         heading: PropTypes.string,
         price: PropTypes.number,
+        paidDeliveryProductId: PropTypes.number,
+        freeDeliveryProductId: PropTypes.number,
+        minimalFreeDeliverySum: PropTypes.number,
       }),
       second: PropTypes.shape({
         description: PropTypes.string,
         heading: PropTypes.string,
         price: PropTypes.number,
+        paidDeliveryProductId: PropTypes.number,
+        freeDeliveryProductId: PropTypes.number,
+        minimalFreeDeliverySum: PropTypes.number,
       }),
       third: PropTypes.shape({
         description: PropTypes.string,
         heading: PropTypes.string,
         price: PropTypes.number,
+        paidDeliveryProductId: PropTypes.number,
+        freeDeliveryProductId: PropTypes.number,
+        minimalFreeDeliverySum: PropTypes.number,
       }),
     }),
     paymentInstruction: PropTypes.string,
@@ -283,6 +375,7 @@ SecondOrderSection.propTypes = {
   commentOnChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
   totalPriceWithoutDelivery: PropTypes.number.isRequired,
+  catalogFull: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 export default SecondOrderSection;

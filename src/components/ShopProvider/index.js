@@ -142,7 +142,7 @@ class ShopProvider extends Component {
         query={graphql`
           query CatalogQuery {
             wpgraphql {
-              products(first: 100) {
+              products(first: 300) {
                 nodes {
                   product_post {
                     productName

@@ -33,7 +33,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { data } = await graphql(`
     query {
       wpgraphql {
-        products(first: 100) {
+        products(first: 300) {
           nodes {
             ... on WPGraphQL_SimpleProduct {
               id
