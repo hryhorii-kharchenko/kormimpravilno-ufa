@@ -16,3 +16,10 @@
   status = 302
   force = true
   query = {OutSum = ":outsum", InvId = ":invid", SignatureValue = ":signaturevalue", isTest=":istest"}
+
+  [[redirects]]
+  from = "/result"
+  to = "https://ufa.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/result?OutSum=:outsum&InvId=:invid&SignatureValue=:signaturevalue"
+  status = 302
+  force = true
+  query = {OutSum = ":outsum", InvId = ":invid", SignatureValue = ":signaturevalue"}
