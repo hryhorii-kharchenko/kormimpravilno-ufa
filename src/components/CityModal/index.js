@@ -13,7 +13,7 @@ function CityModal({ close }) {
       <div styleName="line" />
 
       <p styleName="subheading">
-        Магазин осуществляет доставку только на территории Москвы, Уфы и
+        Магазин осуществляет доставку на территории Москвы, Уфы и
         Санкт-Петербурга.
       </p>
 
@@ -40,7 +40,7 @@ function CityModal({ close }) {
           isTextBlack
           styleName="link"
         >
-          Петербург
+          C. Петербург
         </Button>
       </div>
 

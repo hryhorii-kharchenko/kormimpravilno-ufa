@@ -237,7 +237,7 @@ class OrderPage extends Component {
         )
           .then(response => {
             if (response.ok) return response.text();
-            alert('error response not ok');
+            alert('Ошибка соединения с сервером. Пожалуйста, попробуйте ещё раз.');
             return null;
           })
           .then(url => {
@@ -246,7 +246,7 @@ class OrderPage extends Component {
               const href = url.substring(1, url.length - 1);
               window.location.href = href;
             } else {
-              alert('error not url');
+              alert('Ошибка получения ссылки на оплату. Пожалуйста, попробуйте ещё раз.');
             }
           })
           .catch(error => console.error(error));

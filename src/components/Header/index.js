@@ -41,7 +41,7 @@ function Header({
   ];
   const cityOptions = [
     { value: 'https://msk.kormimpravilno.com', label: 'Москва' },
-    { value: 'https://spb.kormimpravilno.com', label: 'Петербург' },
+    { value: 'https://spb.kormimpravilno.com', label: 'С. Петербург' },
     { value: 'https://ufa.kormimpravilno.com', label: 'Уфа' },
   ];
 
