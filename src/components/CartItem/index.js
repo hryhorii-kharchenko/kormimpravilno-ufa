@@ -14,7 +14,44 @@ function CartItem({
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
   isOrder,
+  isPromoApplied,
+  promoPrice,
 }) {
+  // const totalPrice = (
+  //   <p styleName="total-price">
+  //     <span
+  //       styleName={`total-price-number ${
+  //         isPromoApplied && promoPrice ? 'strike-through' : ''
+  //       }`}
+  //     >
+  //       {`${parseInt(product.price.slice(1), 10) * quantity} руб`}
+  //     </span>
+  //   </p>
+  // );
+  const totalPrice = (
+    <p styleName="total-price">
+      <span
+        styleName={`total-price-number ${
+          isPromoApplied && promoPrice > -1 ? 'promo-price-number' : ''
+        }`}
+      >
+        {`${
+          isPromoApplied && promoPrice > -1
+            ? promoPrice * quantity
+            : parseInt(product.price.slice(1), 10) * quantity
+        } руб`}
+      </span>
+    </p>
+  );
+  const salePrice =
+    isPromoApplied && promoPrice ? (
+      <p styleName="sale-price">
+        <span styleName="sale-price-number">
+          {`${parseInt(product.price.slice(1), 10) * quantity} руб`}
+        </span>
+      </p>
+    ) : null;
+
   if (!isOrder) {
     return (
       <article styleName="CartItem">
@@ -113,6 +150,8 @@ function CartItem({
 
 CartItem.defaultProps = {
   isOrder: false,
+  isPromoApplied: false,
+  promoPrice: -1,
 };
 
 CartItem.propTypes = {
@@ -134,6 +173,8 @@ CartItem.propTypes = {
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
   cartRemoveWholeItemHandler: PropTypes.func.isRequired,
   isOrder: PropTypes.bool,
+  isPromoApplied: PropTypes.bool,
+  promoPrice: PropTypes.number,
 };
 
 export default CartItem;

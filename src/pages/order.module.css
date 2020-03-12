@@ -70,6 +70,10 @@
   color: $black;
 }
 
+.total-price-promo {
+  color: $main;
+}
+
 .submit-btn {
   width: 220px;
   margin: 15px auto 0px;

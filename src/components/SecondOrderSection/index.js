@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import SanitizeHTML from '../SanitizeHTML';
+import Button from '../Button';
 
 import './SecondOrderSection.module.css';
 import tickIcon from '../../images/icons/tick.svg';
@@ -27,6 +28,8 @@ function SecondOrderSection({
   submitForm,
   totalPriceWithoutDelivery,
   catalogFull,
+  promoObj,
+  promoObjOnClick,
 }) {
   const [commentIsActive, setCommentIsActive] = useState(false);
 
@@ -64,12 +67,23 @@ function SecondOrderSection({
     }
   }
 
+  // let isFreeShipping = false;
+  let freeShippingId = -1;
+  if (promoObj.enable_free_shipping && promoObj.free_shipping_id) {
+    if (promoObj.free_shipping_id > 0 && promoObj.free_shipping_id < 4) {
+      // isFreeShipping = true;
+      freeShippingId = Number(promoObj.free_shipping_id);
+    }
+  }
+
   let deliveryPriceFirst;
   let deliveryPriceSecond;
   let deliveryPriceThird;
 
   if (firstPaidDeliveryProductPrice) {
-    if (first.minimalFreeDeliverySum) {
+    if (freeShippingId === 1) {
+      deliveryPriceFirst = `0р`;
+    } else if (first.minimalFreeDeliverySum) {
       deliveryPriceFirst =
         totalPriceWithoutDelivery < first.minimalFreeDeliverySum
           ? `${firstPaidDeliveryProductPrice}р`
@@ -80,7 +94,9 @@ function SecondOrderSection({
   }
 
   if (secondPaidDeliveryProductPrice) {
-    if (second.minimalFreeDeliverySum) {
+    if (freeShippingId === 2) {
+      deliveryPriceFirst = `0р`;
+    } else if (second.minimalFreeDeliverySum) {
       deliveryPriceSecond =
         totalPriceWithoutDelivery < second.minimalFreeDeliverySum
           ? `${secondPaidDeliveryProductPrice}р`
@@ -91,7 +107,9 @@ function SecondOrderSection({
   }
 
   if (thirdPaidDeliveryProductPrice) {
-    if (third.minimalFreeDeliverySum) {
+    if (freeShippingId === 3) {
+      deliveryPriceFirst = `0р`;
+    } else if (third.minimalFreeDeliverySum) {
       deliveryPriceThird =
         totalPriceWithoutDelivery < third.minimalFreeDeliverySum
           ? `${thirdPaidDeliveryProductPrice}р`
@@ -315,6 +333,15 @@ function SecondOrderSection({
             data={promo}
             onChange={promoOnChange}
           />
+          
+          <Button
+            onClick={promoObjOnClick}
+            styleName="promo-btn"
+            isAction
+            isTextBlack
+          >
+            Применить
+          </Button>
         </form>
 
         <div styleName="line-promo" />
@@ -376,6 +403,8 @@ SecondOrderSection.propTypes = {
   submitForm: PropTypes.func.isRequired,
   totalPriceWithoutDelivery: PropTypes.number.isRequired,
   catalogFull: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  promoObj: PropTypes.shape().isRequired,
+  promoObjOnClick: PropTypes.func.isRequired,
 };
 
 export default SecondOrderSection;

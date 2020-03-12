@@ -42,6 +42,7 @@ class OrderPage extends Component {
       // },
       // timeOfDelivery: '',
       promo: { value: '', isError: false, errorMsg: '' },
+      promoObj: {},
       comment: { value: '', isError: false, errorMsg: '' },
     };
 
@@ -62,6 +63,7 @@ class OrderPage extends Component {
     this.addressChangeHandler = this.addressChangeHandler.bind(this);
     // this.postIndexChangeHandler = this.postIndexChangeHandler.bind(this);
     this.promoChangeHandler = this.promoChangeHandler.bind(this);
+    this.promoObjClickHandler = this.promoObjClickHandler.bind(this);
     this.commentChangeHandler = this.commentChangeHandler.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
@@ -90,6 +92,8 @@ class OrderPage extends Component {
         city,
         address,
         delivery,
+        promo,
+        promoObj,
         // postIndex
       } = this.state;
 
@@ -107,12 +111,12 @@ class OrderPage extends Component {
       ) {
         const firstForm = document.getElementById('first-form');
         const secondForm = document.getElementById('second-form');
-        const promoForm = document.getElementById('promo-form');
+        // const promoForm = document.getElementById('promo-form');
         const commentForm = document.getElementById('comment-form');
 
         const firstFormData = new FormData(firstForm);
         const secondFormData = new FormData(secondForm);
-        const promoFormData = new FormData(promoForm);
+        // const promoFormData = new FormData(promoForm);
         const commentFormData = commentForm ? new FormData(commentForm) : null;
 
         const prodList = Object.entries(cart).map(([key, value]) => [
@@ -128,9 +132,9 @@ class OrderPage extends Component {
         Array.from(secondFormData).forEach(([name, value]) => {
           firstFormData.set(name, value);
         });
-        Array.from(promoFormData).forEach(([name, value]) => {
-          firstFormData.set(name, value);
-        });
+        // Array.from(promoFormData).forEach(([name, value]) => {
+        //   firstFormData.set(name, value);
+        // });
 
         if (commentFormData) {
           Array.from(commentFormData).forEach(([name, value]) => {
@@ -145,8 +149,28 @@ class OrderPage extends Component {
           };
         });
 
+        // let isFreeShipping = false;
+        let freeShippingId = -1;
+        if (
+          promoObj.enable_free_shipping &&
+          promoObj.hasOwnProperty('free_shipping_id')
+        ) {
+          if (promoObj.free_shipping_id > 0 && promoObj.free_shipping_id < 4) {
+            // isFreeShipping = true;
+            freeShippingId = Number(promoObj.free_shipping_id);
+          }
+        }
+
         if (delivery.value === 'first') {
-          if (first.minimalFreeDeliverySum && first.freeDeliveryProductId) {
+          if (freeShippingId === 1 && first.freeDeliveryProductId) {
+            lineItems.push({
+              product_id: Number(first.freeDeliveryProductId),
+              quantity: 1,
+            });
+          } else if (
+            first.minimalFreeDeliverySum &&
+            first.freeDeliveryProductId
+          ) {
             if (totalPrice < first.minimalFreeDeliverySum) {
               lineItems.push({
                 product_id: Number(first.paidDeliveryProductId),
@@ -167,7 +191,15 @@ class OrderPage extends Component {
         }
 
         if (delivery.value === 'second') {
-          if (second.minimalFreeDeliverySum && second.freeDeliveryProductId) {
+          if (freeShippingId === 2 && second.freeDeliveryProductId) {
+            lineItems.push({
+              product_id: Number(second.freeDeliveryProductId),
+              quantity: 1,
+            });
+          } else if (
+            second.minimalFreeDeliverySum &&
+            second.freeDeliveryProductId
+          ) {
             if (totalPrice < second.minimalFreeDeliverySum) {
               lineItems.push({
                 product_id: Number(second.paidDeliveryProductId),
@@ -188,7 +220,15 @@ class OrderPage extends Component {
         }
 
         if (delivery.value === 'third' && third.paidDeliveryProductId) {
-          if (third.minimalFreeDeliverySum && third.freeDeliveryProductId) {
+          if (freeShippingId === 3 && third.freeDeliveryProductId) {
+            lineItems.push({
+              product_id: Number(third.freeDeliveryProductId),
+              quantity: 1,
+            });
+          } else if (
+            third.minimalFreeDeliverySum &&
+            third.freeDeliveryProductId
+          ) {
             if (totalPrice < third.minimalFreeDeliverySum) {
               lineItems.push({
                 product_id: Number(third.paidDeliveryProductId),
@@ -214,6 +254,9 @@ class OrderPage extends Component {
         firstFormData.forEach((value, key) => {
           object[key] = value;
         });
+        object.promo = promoObj.hasOwnProperty('code')
+          ? promoObj.code
+          : promo.value;
         const json = JSON.stringify(object);
 
         window.localStorage.setItem(
@@ -297,7 +340,7 @@ class OrderPage extends Component {
   }
 
   validateFullName(value) {
-    const regExp = /^([А-ЯA-Z][а-яa-z]+\s*){2}/;
+    const regExp = /^([А-яA-z]+\s*){2}/;
     let isError = false;
     const regExpRequired = /^.+/;
     let errorMsg = '';
@@ -511,6 +554,38 @@ class OrderPage extends Component {
     }));
   }
 
+  promoObjClickHandler() {
+    const { promo } = this.state;
+
+    fetch(
+      `http://spb-kormimpravilno.loc/wp-json/kormimpravilno/v1/check_promo?promo=${promo.value}`,
+      {
+        method: 'GET',
+      }
+    )
+      .then(response => {
+        if (response.ok) return response.json();
+        alert('Ошибка соединения с сервером. Пожалуйста, повторите запрос.');
+        return null;
+      })
+      .then(json => {
+        if (!json) {
+          this.setState(() => ({
+            promo: { value: 'Промокод не существует', isError: false },
+          }));
+          return;
+        }
+        const newPromoObj = { ...JSON.parse(json) };
+        if (newPromoObj) {
+          this.setState(() => ({
+            promoObj: newPromoObj,
+            promo: { value: 'Промокод применен', isError: false },
+          }));
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
   commentChangeHandler(event) {
     const { value } = event.target;
     const isError = false;
@@ -545,6 +620,7 @@ class OrderPage extends Component {
       address,
       // postIndex,
       promo,
+      promoObj,
       comment,
     } = this.state;
 
@@ -559,16 +635,69 @@ class OrderPage extends Component {
     const order = data.wpgraphql.orderPage.order_page;
     const { first, second, third } = order.deliveryWays;
 
-    const prodList = Object.entries(cart).map(([key, value]) => [
-      catalog.find(elem => elem.id === key).price,
-      value,
-    ]);
+    let prodList = [];
+    if (promoObj.hasOwnProperty('type')) {
+      const promoType = promoObj.type;
+      const productIds = promoObj.product_ids;
+      const excludeProductIds = promoObj.exclude_product_ids;
+      const { amount } = promoObj;
+      prodList = Object.entries(cart).map(([key, value]) => {
+        const product = catalog.find(elem => elem.id === key);
+        let isPromoApplied = false;
+        let promoPrice = parseInt(product.price.slice(1), 10);
+        if (!excludeProductIds.includes(product.productId)) {
+          if (promoType === 'fixed_product') {
+            if (productIds.includes(product.productId)) {
+              isPromoApplied = true;
+              promoPrice -= amount;
+            }
+          }
+
+          if (promoType === 'percent') {
+            if (productIds.length > 0) {
+              if (productIds.includes(product.productId)) {
+                isPromoApplied = true;
+                promoPrice -= (promoPrice * amount) / 100;
+              }
+            }
+          }
+        }
+        if (isPromoApplied) {
+          return [promoPrice, value];
+        }
+        return [parseInt(product.price.slice(1), 10), value];
+      });
+    } else {
+      prodList = Object.entries(cart).map(([key, value]) => [
+        parseInt(catalog.find(elem => elem.id === key).price.slice(1), 10),
+        value,
+      ]);
+    }
 
     let totalPrice = prodList.reduce(
-      (prev, [price, quantity]) =>
-        prev + parseInt(price.slice(1), 10) * quantity,
+      (prev, [price, quantity]) => prev + price * quantity,
       0
     );
+
+    let isPromoApplied = false;
+    if (promoObj.hasOwnProperty('type')) {
+      const promoType = promoObj.type;
+      const productIds = promoObj.product_ids;
+      // const excludeProductIds = promoObj.exclude_product_ids;
+      const { amount } = promoObj;
+
+      if (promoType === 'fixed_cart') {
+        isPromoApplied = true;
+        totalPrice -= amount;
+      }
+
+      if (promoType === 'percent') {
+        if (productIds.length <= 0) {
+          isPromoApplied = true;
+          totalPrice -= (totalPrice * amount) / 100;
+        }
+      }
+    }
 
     const totalPriceWithoutDelivery = totalPrice;
 
@@ -603,10 +732,24 @@ class OrderPage extends Component {
       }
     }
 
+    // let isFreeShipping = false;
+    let freeShippingId = -1;
+    if (promoObj.enable_free_shipping && promoObj.free_shipping_id) {
+      if (promoObj.free_shipping_id > 0 && promoObj.free_shipping_id < 4) {
+        // isFreeShipping = true;
+        freeShippingId = Number(promoObj.free_shipping_id);
+      }
+    }
+
     let deliveryPrice;
     if (delivery.value === 'first' && firstPaidDeliveryProductPrice) {
-      if (first.minimalFreeDeliverySum && first.freeDeliveryProductId) {
-        if (totalPrice < first.minimalFreeDeliverySum) {
+      if (
+        (freeShippingId === 1 || first.minimalFreeDeliverySum) &&
+        first.freeDeliveryProductId
+      ) {
+        if (freeShippingId === 1) {
+          deliveryPrice = 0;
+        } else if (totalPrice < first.minimalFreeDeliverySum) {
           deliveryPrice = firstPaidDeliveryProductPrice;
         } else {
           deliveryPrice = 0;
@@ -616,8 +759,13 @@ class OrderPage extends Component {
       }
     }
     if (delivery.value === 'second' && secondPaidDeliveryProductPrice) {
-      if (second.minimalFreeDeliverySum && second.freeDeliveryProductId) {
-        if (totalPrice < second.minimalFreeDeliverySum) {
+      if (
+        (freeShippingId === 2 || second.minimalFreeDeliverySum) &&
+        second.freeDeliveryProductId
+      ) {
+        if (freeShippingId === 2) {
+          deliveryPrice = 0;
+        } else if (totalPrice < second.minimalFreeDeliverySum) {
           deliveryPrice = secondPaidDeliveryProductPrice;
         } else {
           deliveryPrice = 0;
@@ -627,8 +775,13 @@ class OrderPage extends Component {
       }
     }
     if (delivery.value === 'third' && thirdPaidDeliveryProductPrice) {
-      if (third.minimalFreeDeliverySum && third.freeDeliveryProductId) {
-        if (totalPrice < third.minimalFreeDeliverySum) {
+      if (
+        (freeShippingId === 3 || third.minimalFreeDeliverySum) &&
+        third.freeDeliveryProductId
+      ) {
+        if (freeShippingId === 3) {
+          deliveryPrice = 0;
+        } else if (totalPrice < third.minimalFreeDeliverySum) {
           deliveryPrice = thirdPaidDeliveryProductPrice;
         } else {
           deliveryPrice = 0;
@@ -692,6 +845,8 @@ class OrderPage extends Component {
                 submitForm={this.submitForm}
                 totalPriceWithoutDelivery={totalPriceWithoutDelivery}
                 catalogFull={catalogFull}
+                promoObj={promoObj}
+                promoObjOnClick={this.promoObjClickHandler}
               />
             </main>
             <aside styleName="aside">
@@ -704,6 +859,7 @@ class OrderPage extends Component {
                     cartRemoveOneStackHandler={cartRemoveOneStackHandler}
                     cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
                     isOrder
+                    promoObj={promoObj}
                   />
                 </div>
                 <div
@@ -720,7 +876,11 @@ class OrderPage extends Component {
                 </div>
                 <p styleName="total">
                   Итого:
-                  <span styleName="total-price">
+                  <span
+                    styleName={`total-price${
+                      isPromoApplied ? ' total-price-promo' : ''
+                    }`}
+                  >
                     {isFirstSectionActive
                       ? totalPriceWithoutDeliveryStr
                       : totalPriceStr}
