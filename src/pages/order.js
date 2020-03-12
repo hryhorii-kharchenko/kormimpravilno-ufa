@@ -558,7 +558,7 @@ class OrderPage extends Component {
     const { promo } = this.state;
 
     fetch(
-      `http://spb-kormimpravilno.loc/wp-json/kormimpravilno/v1/check_promo?promo=${promo.value}`,
+      `http://msk.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/check_promo?promo=${promo.value}`,
       {
         method: 'GET',
       }
