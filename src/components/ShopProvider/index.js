@@ -147,6 +147,7 @@ class ShopProvider extends Component {
                   product_post {
                     productName
                     posterId
+                    defaultSortingId
                     composition
                     weight
                     cooking

@@ -1,4 +1,5 @@
 .MainShopSection {
+  min-height: 50vh;
   padding: 0px 0px 100px;
   position: relative;
   z-index: 0;

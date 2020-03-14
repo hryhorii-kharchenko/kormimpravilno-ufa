@@ -24,6 +24,17 @@ class ShopPage extends Component {
       ],
       allSortFunc: [
         (a, b) => {
+          const aId = a.product_post.defaultSortingId;
+          const bId = b.product_post.defaultSortingId;
+          if (aId && bId) {
+            return aId - bId;
+          }
+          if (aId) {
+            return -1;
+          }
+          if (bId) {
+            return 1;
+          }
           return b.productId - a.productId;
         },
         (a, b) => {
@@ -60,42 +71,22 @@ class ShopPage extends Component {
       currentCategory: 0,
       possibleCategory: [
         { value: 0, label: 'Все товары', slug: '' },
-        { value: 1, label: 'Сырники и вареники', slug: 'syrniki' },
-        { value: 2, label: 'Конфеты', slug: 'konfety' },
-        { value: 3, label: 'Пельмени', slug: 'pelmeni' },
-        { value: 4, label: 'Рубленные полуфабрикаты', slug: 'rublennye' },
-        { value: 5, label: 'Сосиски', slug: 'sosiski' },
-      ],
-      allFilterFunc: [
-        () => {
-          return true;
-        },
-        elem => {
-          const { possibleCategory } = this.state;
-          return elem.categories.nodes[0].slug === possibleCategory[1].slug;
-        },
-        elem => {
-          const { possibleCategory } = this.state;
-          return elem.categories.nodes[0].slug === possibleCategory[2].slug;
-        },
-        elem => {
-          const { possibleCategory } = this.state;
-          return elem.categories.nodes[0].slug === possibleCategory[3].slug;
-        },
-        elem => {
-          const { possibleCategory } = this.state;
-          return elem.categories.nodes[0].slug === possibleCategory[4].slug;
-        },
-        elem => {
-          const { possibleCategory } = this.state;
-          return elem.categories.nodes[0].slug === possibleCategory[5].slug;
-        },
+        { value: 1, label: 'Рубленые полуфабрикаты', slug: 'rublennye' },
+        { value: 2, label: 'Пельмени и вареники', slug: 'pelmeni' },
+        { value: 3, label: 'Выпечка', slug: 'vypechka' },
+        { value: 4, label: 'Конфеты, йогурт', slug: 'konfety' },
+        { value: 5, label: 'Фарш функциональный', slug: 'farsh' },
+        { value: 6, label: 'Сертификаты, книги', slug: 'books' },
+        { value: 7, label: 'Сыры, шоколад, вода', slug: 'cheese' },
+        { value: 8, label: 'Упаковка', slug: 'package' },
+        { value: 9, label: 'Иные товары', slug: 'other' },
       ],
       // localCatalog: [...props.catalog],
       isCategoryPickerOpen: false,
       isSortPickerOpen: false,
     };
 
+    this.allFilterFunc = this.allFilterFunc.bind(this);
     this.sortChangeHandler = this.sortChangeHandler.bind(this);
     this.categoryChangeHandler = this.categoryChangeHandler.bind(this);
     this.categoryPickerOpenHandler = this.categoryPickerOpenHandler.bind(this);
@@ -104,6 +95,17 @@ class ShopPage extends Component {
     );
     this.sortPickerOpenHandler = this.sortPickerOpenHandler.bind(this);
     this.sortPickerCloseHandler = this.sortPickerCloseHandler.bind(this);
+  }
+
+  allFilterFunc(id) {
+    if (id === 0) {
+      return () => true;
+    }
+
+    return elem => {
+      const { possibleCategory } = this.state;
+      return elem.categories.nodes[0].slug === possibleCategory[id].slug;
+    };
   }
 
   categoryPickerOpenHandler() {
@@ -171,13 +173,13 @@ class ShopPage extends Component {
       possibleCategory,
       isCategoryPickerOpen,
       // localCatalog,
-      allFilterFunc,
+      // allFilterFunc,
       allSortFunc,
     } = this.state;
 
     const universal = data.wpgraphql.universalPage.universal_page;
 
-    const filterFunc = allFilterFunc[currentCategory];
+    const filterFunc = this.allFilterFunc(currentCategory);
     const sortFunc = allSortFunc[currentSort];
     const newCatalog = [...catalog].filter(filterFunc).sort(sortFunc);
 

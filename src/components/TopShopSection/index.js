@@ -33,7 +33,7 @@ function TopShopSection({
             pathname={pathname}
           />
           <div styleName="sorting-wrapper">
-            {/* <Sorting
+            <Sorting
               text="Категория"
               currentSort={currentCategory}
               possibleSort={possibleCategory}
@@ -44,7 +44,7 @@ function TopShopSection({
               styleName="category"
             />
 
-            <div styleName="divider" /> */}
+            <div styleName="divider" />
 
             <Sorting
               text="Сортировать"
