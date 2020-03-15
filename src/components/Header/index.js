@@ -40,9 +40,12 @@ function Header({
     { title: 'О нас', url: '/about' },
   ];
   const cityOptions = [
-    { value: 'https://msk.kormimpravilno.com', label: 'Москва' },
-    { value: 'https://spb.kormimpravilno.com', label: 'С. Петербург' },
-    { value: 'https://ufa.kormimpravilno.com', label: 'Уфа' },
+    { value: 'https://msk.kormimpravilno.com?saveCity=true', label: 'Москва' },
+    {
+      value: 'https://spb.kormimpravilno.com?saveCity=true',
+      label: 'С. Петербург',
+    },
+    { value: 'https://kormimpravilno.com?saveCity=true', label: 'Уфа' },
   ];
 
   const mobileMenuInitialFocusId = 'initial-focus-menu-modal';

@@ -27,7 +27,7 @@ function CityModal({ close }) {
           Москва
         </Button>
         <Button
-          href="https://ufa.kormimpravilno.com/?saveCity=true"
+          href="https://kormimpravilno.com/?saveCity=true"
           isExternal
           isTextBlack
           styleName="link"
