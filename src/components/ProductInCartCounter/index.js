@@ -8,13 +8,17 @@ function ProductInCartCounter({ quantity, addOnClick, removeOnClick }) {
   if (quantity === 1) {
     return (
       <div styleName="ProductInCartCounter">
-        <button styleName="remove disabled" type="button" disabled>
-          -
-        </button>
+        <div className="btn-wrapper">
+          <button styleName="remove disabled" type="button" disabled>
+            -
+          </button>
+        </div>
         <span styleName="counter">{quantity}</span>
-        <button styleName="add" type="button" onClick={() => addOnClick()}>
-          +
-        </button>
+        <div className="btn-wrapper">
+          <button styleName="add" type="button" onClick={() => addOnClick()}>
+            +
+          </button>
+        </div>
       </div>
     );
   }

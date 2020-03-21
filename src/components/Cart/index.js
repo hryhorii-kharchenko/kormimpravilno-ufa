@@ -18,13 +18,18 @@ function Cart({
   cartRemoveOneStackHandler,
   cartRemoveWholeItemHandler,
 }) {
+  const isCartEmpty = Object.keys(cart).length < 1;
+  const scrollbarStyle = isCartEmpty
+    ? { width: '100%', height: '0px' }
+    : { width: '100%', height: '300px' };
+
   return (
     <div styleName="Cart">
       <h2 styleName="heading">Ваша корзина</h2>
       <div styleName="line" />
 
       <Scrollbar
-        style={{ width: '100%', height: '300px' }}
+        style={scrollbarStyle}
         styleName="scrollbar"
         noScrollX
         noDefaultStyles
