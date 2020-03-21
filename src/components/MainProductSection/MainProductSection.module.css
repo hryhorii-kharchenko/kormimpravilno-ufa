@@ -80,11 +80,8 @@
   align-items: center;
 }
 
-.cart-modificators-wrapper:first-child {
-  margin-right: 15px;
-}
-
 .cart-btn {
+  margin-left: 15px;
   max-width: 182px;
   min-width: 182px;
 }
