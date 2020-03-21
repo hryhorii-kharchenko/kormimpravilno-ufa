@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Scrollbar from 'react-scrollbars-custom';
+
 import CartList from '../CartList';
 import Button from '../Button';
 
@@ -21,14 +23,21 @@ function Cart({
       <h2 styleName="heading">Ваша корзина</h2>
       <div styleName="line" />
 
-      <CartList
-        cart={cart}
-        catalog={catalog}
-        addToCartBtnHandler={addToCartBtnHandler}
-        cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-        cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
-        styleName="cart-list"
-      />
+      <Scrollbar
+        style={{ width: '100%', height: '300px' }}
+        styleName="scrollbar"
+        noScrollX
+        noDefaultStyles
+      >
+        <CartList
+          cart={cart}
+          catalog={catalog}
+          addToCartBtnHandler={addToCartBtnHandler}
+          cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+          cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+          styleName="cart-list"
+        />
+      </Scrollbar>
 
       <div styleName="complete-price-wrapper">
         <p styleName="complete-price">

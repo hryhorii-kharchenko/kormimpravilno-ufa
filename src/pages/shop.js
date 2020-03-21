@@ -71,15 +71,16 @@ class ShopPage extends Component {
       currentCategory: 0,
       possibleCategory: [
         { value: 0, label: 'Все товары', slug: '' },
-        { value: 1, label: 'Рубленые полуфабрикаты', slug: 'rublennye' },
+        { value: 1, label: 'Мясные продукты', slug: 'rublennye' },
         { value: 2, label: 'Пельмени и вареники', slug: 'pelmeni' },
         { value: 3, label: 'Выпечка', slug: 'vypechka' },
-        { value: 4, label: 'Конфеты, йогурт', slug: 'konfety' },
-        { value: 5, label: 'Фарш функциональный', slug: 'farsh' },
+        { value: 4, label: 'Конфеты', slug: 'konfety' },
+        // { value: 5, label: 'Фарш функциональный', slug: 'farsh' },
         { value: 6, label: 'Сертификаты, книги', slug: 'books' },
-        { value: 7, label: 'Сыры, шоколад, вода', slug: 'cheese' },
-        { value: 8, label: 'Упаковка', slug: 'package' },
-        { value: 9, label: 'Иные товары', slug: 'other' },
+        // { value: 7, label: 'Сыры, шоколад, вода', slug: 'cheese' },
+        // { value: 8, label: 'Упаковка', slug: 'package' },
+        { value: 9, label: 'Балаклея', slug: 'other' },
+        { value: 10, label: 'Чай', slug: 'tea' },
       ],
       // localCatalog: [...props.catalog],
       isCategoryPickerOpen: false,
@@ -98,13 +99,15 @@ class ShopPage extends Component {
   }
 
   allFilterFunc(id) {
+    const { possibleCategory } = this.state;
+    const category = possibleCategory.find(elem => elem.value === id);
+
     if (id === 0) {
       return () => true;
     }
 
     return elem => {
-      const { possibleCategory } = this.state;
-      return elem.categories.nodes[0].slug === possibleCategory[id].slug;
+      return elem.categories.nodes[0].slug === category.slug;
     };
   }
 

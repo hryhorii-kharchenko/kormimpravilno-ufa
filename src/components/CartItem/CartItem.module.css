@@ -10,7 +10,11 @@
 
 .cross-btn {
   width: 12px;
+  max-width: 12px;
+  min-width: 12px;
   height: 12px;
+  max-height: 12px;
+  min-height: 12px;
   margin-right: 16px;
   border: 0;
   padding: 0;
@@ -29,7 +33,7 @@
 
 .cross-img {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .product-wrapper {

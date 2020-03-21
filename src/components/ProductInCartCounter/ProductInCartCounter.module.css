@@ -1,5 +1,7 @@
 .ProductInCartCounter {
-  width: 109px;
+  max-width: 115px;
+  min-width: 115px;
+  width: 115px;
   height: 41px;
   padding: 0px 8px;
   border-radius: 22.5px;
@@ -13,6 +15,7 @@
 .remove {
   max-width: 25px;
   min-width: 25px;
+  width: 25px;
   height: 25px;
   border: 0;
   border-radius: 50%;
@@ -48,6 +51,7 @@
 .add {
   max-width: 25px;
   min-width: 25px;
+  width: 25px;
   height: 25px;
   border: 0;
   border-radius: 50%;

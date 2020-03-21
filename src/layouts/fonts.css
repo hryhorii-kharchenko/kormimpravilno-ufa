@@ -32,3 +32,59 @@ strong {
   font-size: 14px;
   line-height: 1.5;
 }
+
+.cart-btn-expanded.cart-btn-expanded {
+  width: 50px;
+  height: 50px;
+}
+
+.ScrollbarsCustom-Wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 10px;
+  overflow: hidden;
+}
+
+.ScrollbarsCustom-Scroller {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  overflow: hidden scroll;
+  padding-right: 20px;
+  margin-right: -21px;
+}
+
+.ScrollbarsCustom-Content {
+  box-sizing: border-box;
+  padding: 0.05px;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.ScrollbarsCustom-Track.ScrollbarsCustom-TrackY {
+  width: 1px;
+  overflow: visible;
+
+  position: absolute;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  user-select: none;
+  height: calc(100% - 20px);
+  top: 10px;
+  right: 0px;
+}
+
+.ScrollbarsCustom-Thumb.ScrollbarsCustom-ThumbY {
+  width: 3px;
+  position: relative;
+  left: -1px;
+  background: $main;
+
+  touch-action: none;
+  cursor: pointer;
+  border-radius: 4px;
+}

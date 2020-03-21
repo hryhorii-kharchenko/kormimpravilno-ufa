@@ -12,17 +12,24 @@
 
 @media screen and (max-width: 1220px) {
   .Logo {
-    position: static;
-    transform: none;
+    width: 135px;
+    top: 50%;
+    transform: translate(-50%, -40%);
+    /* position: static;
+    transform: none; */
+  }
+
+  .logo-img {
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 380px) {
   .Logo {
-    width: 170px;
+    /* width: 170px; */
   }
 
   .logo-img {
-    width: 100%;
+    /* width: 100%; */
   }
 }

@@ -62,12 +62,12 @@ function Header({
     >
       <div id="mobile-menu-modal" styleName="mobile-menu-modal">
         <Menu items={menuItems} firstItemId={mobileMenuInitialFocusId} />
-        <CityPicker
+        {/* <CityPicker
           links={cityOptions}
           current={city}
           isPickerActive={isPickerActive}
           setIsPickerActive={setIsPickerActive}
-        />
+        /> */}
         <Button
           href={`tel:${phone}`}
           isTextBlack
@@ -81,12 +81,12 @@ function Header({
           <Button href={instaLink} target="_blank" isCircle isExternal>
             <InstaIcon styleName="insta-img" />
           </Button>
-          <Button onClick={openCart} isCircle isAction styleName="cart-btn">
+          {/* <Button onClick={openCart} isCircle isAction styleName="cart-btn">
             <div styleName="cart-icon-wrapper">
               <CartIcon styleName="cart-img" />
             </div>
             {cardCounterHtml}
-          </Button>
+          </Button> */}
         </div>
       </div>
     </AriaModal>
@@ -152,8 +152,6 @@ function Header({
   return (
     <Headroom style={{ zIndex: 100 }}>
       <header styleName="Header">
-        <Logo />
-
         <button
           type="button"
           onClick={() => setIsMobileMenuActive(true)}
@@ -161,6 +159,15 @@ function Header({
         >
           {burgerContentHtml}
         </button>
+
+        <Logo />
+
+        <CityPicker
+          links={cityOptions}
+          current={city}
+          isPickerActive={isPickerActive}
+          setIsPickerActive={setIsPickerActive}
+        />
       </header>
       {mobileMenuModal}
     </Headroom>

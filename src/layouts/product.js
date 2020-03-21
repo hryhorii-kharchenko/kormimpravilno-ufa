@@ -34,6 +34,16 @@ function ProductLayout({
 
   const avatar = imageFull;
 
+  function openCartDesktopOnly() {
+    if (window.innerWidth > 800) {
+      openCart();
+    } else {
+      const cartBtn = document.getElementById('mobile-cart-btn');
+      cartBtn.classList.add('cart-btn-expanded');
+      setTimeout(() => cartBtn.classList.remove('cart-btn-expanded'), 200);
+    }
+  }
+
   return (
     <Layout
       data={universal}
@@ -63,13 +73,13 @@ function ProductLayout({
         cart={cart}
         addToCartOnClick={addToCartBtnHandler}
         removeOneStackFromCartOnClick={cartRemoveOneStackHandler}
-        openCart={openCart}
+        openCart={openCartDesktopOnly}
       />
       <SimilarProductSection
         similar={similar}
         catalog={catalog}
         addToCartBtnHandler={addToCartBtnHandler}
-        openCart={openCart}
+        openCart={openCartDesktopOnly}
       />
     </Layout>
   );
@@ -92,7 +102,7 @@ ProductLayout.propTypes = {
   cart: PropTypes.shape().isRequired,
   addToCartBtnHandler: PropTypes.func.isRequired,
   cartRemoveOneStackHandler: PropTypes.func.isRequired,
-  cartRemoveWholeItemHandler: PropTypes.func.isRequired,
+  // cartRemoveWholeItemHandler: PropTypes.func.isRequired,
   openCart: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,

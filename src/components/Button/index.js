@@ -8,6 +8,7 @@ function Button({
   children,
   href,
   target,
+  id,
   className,
   onClick,
   isTextBlack,
@@ -49,6 +50,7 @@ function Button({
       <button
         onClick={onClick}
         type="button"
+        id={id}
         styleName={btnStyles.join(' ')}
         className={className}
         style={style}
@@ -76,6 +78,7 @@ Button.defaultProps = {
   href: null,
   target: '_self',
   width: null,
+  id: null,
   className: null,
   onClick: null,
   isTextBlack: false,
@@ -90,6 +93,7 @@ Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
   href: PropTypes.string,
   target: PropTypes.string,
+  id: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
   isTextBlack: PropTypes.bool,

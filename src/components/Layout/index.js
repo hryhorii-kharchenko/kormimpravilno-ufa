@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Header from '../Header';
 import Footer from '../Footer';
+import CartButton from '../CartButton';
 
 function Layout({
   data,
@@ -29,6 +30,7 @@ function Layout({
       />
 
       <main>{children}</main>
+      <CartButton cart={cart} openCart={openCart} />
 
       <Footer
         copyright={data.copyright}

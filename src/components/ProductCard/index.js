@@ -35,6 +35,16 @@ function ProductCard({
     </p>
   );
 
+  function openCartDesktopOnly() {
+    if (window.innerWidth > 800) {
+      openCart();
+    } else {
+      const cartBtn = document.getElementById('mobile-cart-btn');
+      cartBtn.classList.add('cart-btn-expanded');
+      setTimeout(() => cartBtn.classList.remove('cart-btn-expanded'), 200);
+    }
+  }
+
   if (isShop) {
     return (
       <article styleName="ProductCard shop-ProductCard" style={style}>
@@ -60,7 +70,7 @@ function ProductCard({
               styleName="cart-btn shop-cart-btn"
               onClick={() => {
                 onClick(id);
-                openCart();
+                openCartDesktopOnly();
               }}
             >
               <CartIcon styleName="cart-btn-img" />
@@ -112,7 +122,7 @@ function ProductCard({
               styleName="cart-btn shop-cart-btn"
               onClick={() => {
                 onClick(id);
-                openCart();
+                openCartDesktopOnly();
               }}
             >
               <CartIcon styleName="cart-btn-img" />
@@ -157,7 +167,7 @@ function ProductCard({
             styleName="cart-btn"
             onClick={() => {
               onClick(id);
-              openCart();
+              openCartDesktopOnly();
             }}
           >
             <CartIcon styleName="cart-btn-img" />
