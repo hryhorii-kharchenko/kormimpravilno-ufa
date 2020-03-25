@@ -14,55 +14,66 @@ function CartList({
   className,
   isOrder,
   promoObj,
+  totalPrice,
 }) {
-  if (promoObj.hasOwnProperty('type') && isOrder) {
-    const promoType = promoObj.type;
-    const productIds = promoObj.product_ids;
-    const excludeProductIds = promoObj.exclude_product_ids;
-    const { amount } = promoObj;
+  if (
+    promoObj.hasOwnProperty('maximum_amount') &&
+    promoObj.hasOwnProperty('minimum_amount')
+  ) {
+    if (
+      (totalPrice < promoObj.maximum_amount || promoObj.maximum_amount < 1) &&
+      totalPrice >= promoObj.minimum_amount
+    ) {
+      if (promoObj.hasOwnProperty('type') && isOrder) {
+        const promoType = promoObj.type;
+        const productIds = promoObj.product_ids;
+        const excludeProductIds = promoObj.exclude_product_ids;
+        const { amount } = promoObj;
 
-    const cartList = Object.entries(cart).map(([key, value]) => {
-      const product = catalog.find(elem => elem.id === key);
+        const cartList = Object.entries(cart).map(([key, value]) => {
+          const product = catalog.find(elem => elem.id === key);
 
-      let isPromoApplied = false;
-      let promoPrice = parseInt(product.price.slice(1), 10);
-      if (!excludeProductIds.includes(product.productId)) {
-        if (promoType === 'fixed_product') {
-          if (productIds.includes(product.productId)) {
-            isPromoApplied = true;
-            promoPrice -= amount;
-          }
-        }
+          let isPromoApplied = false;
+          let promoPrice = parseInt(product.price.slice(1), 10);
+          if (!excludeProductIds.includes(product.productId)) {
+            if (promoType === 'fixed_product') {
+              if (productIds.includes(product.productId)) {
+                isPromoApplied = true;
+                promoPrice -= amount;
+              }
+            }
 
-        if (promoType === 'percent') {
-          if (productIds.length > 0) {
-            if (productIds.includes(product.productId)) {
-              isPromoApplied = true;
-              promoPrice -= (promoPrice * amount) / 100;
+            if (promoType === 'percent') {
+              if (productIds.length > 0) {
+                if (productIds.includes(product.productId)) {
+                  isPromoApplied = true;
+                  promoPrice -= (promoPrice * amount) / 100;
+                }
+              }
             }
           }
-        }
-      }
-      return (
-        <CartItem
-          product={product}
-          quantity={value}
-          addToCartBtnHandler={addToCartBtnHandler}
-          cartRemoveOneStackHandler={cartRemoveOneStackHandler}
-          cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
-          key={product.id}
-          isOrder={isOrder}
-          isPromoApplied={isPromoApplied}
-          promoPrice={promoPrice}
-        />
-      );
-    });
+          return (
+            <CartItem
+              product={product}
+              quantity={value}
+              addToCartBtnHandler={addToCartBtnHandler}
+              cartRemoveOneStackHandler={cartRemoveOneStackHandler}
+              cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
+              key={product.id}
+              isOrder={isOrder}
+              isPromoApplied={isPromoApplied}
+              promoPrice={promoPrice}
+            />
+          );
+        });
 
-    return (
-      <section styleName="CartList" className={className}>
-        {cartList}
-      </section>
-    );
+        return (
+          <section styleName="CartList" className={className}>
+            {cartList}
+          </section>
+        );
+      }
+    }
   }
 
   const cartList = Object.entries(cart).map(([key, value]) => {

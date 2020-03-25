@@ -24,6 +24,12 @@
   }
 }
 
+@media screen and (max-width: 400px) {
+  .Logo {
+    width: 115px;
+  }
+}
+
 @media screen and (max-width: 380px) {
   .Logo {
     /* width: 170px; */

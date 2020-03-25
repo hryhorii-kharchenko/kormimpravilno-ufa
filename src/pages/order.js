@@ -280,16 +280,23 @@ class OrderPage extends Component {
         )
           .then(response => {
             if (response.ok) return response.text();
-            alert('Ошибка соединения с сервером. Пожалуйста, попробуйте ещё раз.');
+            alert(
+              'Ошибка соединения с сервером. Пожалуйста, попробуйте ещё раз.'
+            );
             return null;
           })
           .then(url => {
             if (/http/.test(url)) {
               // window.sessionStorage.clear('cart');
-              const href = url.substring(1, url.length - 1);
+              const href = url
+                .substring(1, url.length - 1)
+                .replace('new\\', 'new')
+                .replace('ru\\', 'ru');
               window.location.href = href;
             } else {
-              alert('Ошибка получения ссылки на оплату. Пожалуйста, попробуйте ещё раз.');
+              alert(
+                'Ошибка получения ссылки на оплату. Пожалуйста, попробуйте ещё раз.'
+              );
             }
           })
           .catch(error => console.error(error));
@@ -679,28 +686,6 @@ class OrderPage extends Component {
       0
     );
 
-    let isPromoApplied = false;
-    if (promoObj.hasOwnProperty('type')) {
-      const promoType = promoObj.type;
-      const productIds = promoObj.product_ids;
-      // const excludeProductIds = promoObj.exclude_product_ids;
-      const { amount } = promoObj;
-
-      if (promoType === 'fixed_cart') {
-        isPromoApplied = true;
-        totalPrice -= amount;
-      }
-
-      if (promoType === 'percent') {
-        if (productIds.length <= 0) {
-          isPromoApplied = true;
-          totalPrice -= (totalPrice * amount) / 100;
-        }
-      }
-    }
-
-    const totalPriceWithoutDelivery = totalPrice;
-
     let firstPaidDeliveryProductPrice;
     let secondPaidDeliveryProductPrice;
     let thirdPaidDeliveryProductPrice;
@@ -791,11 +776,45 @@ class OrderPage extends Component {
       }
     }
 
+    const totalPriceWithoutDeliveryAndPromo = totalPrice;
+    const totalPriceWithoutPromo = totalPrice + deliveryPrice;
+
+    let isPromoApplied = false;
+    if (
+      promoObj.hasOwnProperty('maximum_amount') &&
+      promoObj.hasOwnProperty('minimum_amount')
+    ) {
+      if (
+        (totalPrice + deliveryPrice < promoObj.maximum_amount ||
+          promoObj.maximum_amount < 1) &&
+        totalPrice + deliveryPrice >= promoObj.minimum_amount
+      ) {
+        if (promoObj.hasOwnProperty('type')) {
+          const promoType = promoObj.type;
+          const productIds = promoObj.product_ids;
+          // const excludeProductIds = promoObj.exclude_product_ids;
+          const { amount } = promoObj;
+
+          if (promoType === 'fixed_cart') {
+            isPromoApplied = true;
+            totalPrice -= amount;
+          }
+
+          if (promoType === 'percent') {
+            if (productIds.length <= 0) {
+              isPromoApplied = true;
+              totalPrice -= (totalPrice * amount) / 100;
+            }
+          }
+        }
+      }
+    }
+
     totalPrice += deliveryPrice;
 
     const deliveryPriceStr = `${deliveryPrice} руб`;
     const totalPriceStr = `${totalPrice} руб`;
-    const totalPriceWithoutDeliveryStr = `${totalPriceWithoutDelivery} руб`;
+    const totalPriceWithoutDeliveryAndPromoStr = `${totalPriceWithoutDeliveryAndPromo} руб`;
 
     return (
       <Layout
@@ -843,7 +862,7 @@ class OrderPage extends Component {
                 comment={comment}
                 commentOnChange={this.commentChangeHandler}
                 submitForm={this.submitForm}
-                totalPriceWithoutDelivery={totalPriceWithoutDelivery}
+                totalPriceWithoutDelivery={totalPriceWithoutDeliveryAndPromo}
                 catalogFull={catalogFull}
                 promoObj={promoObj}
                 promoObjOnClick={this.promoObjClickHandler}
@@ -860,6 +879,7 @@ class OrderPage extends Component {
                     cartRemoveWholeItemHandler={cartRemoveWholeItemHandler}
                     isOrder
                     promoObj={promoObj}
+                    totalPrice={totalPriceWithoutPromo}
                   />
                 </div>
                 <div
@@ -882,7 +902,7 @@ class OrderPage extends Component {
                     }`}
                   >
                     {isFirstSectionActive
-                      ? totalPriceWithoutDeliveryStr
+                      ? totalPriceWithoutDeliveryAndPromoStr
                       : totalPriceStr}
                   </span>
                 </p>
