@@ -9,6 +9,7 @@ import lscache from 'lscache';
 import CatalogProvider from '../CatalogProvider';
 import Cart from '../Cart';
 import CityModal from '../CityModal';
+import BottomNotice from '../BottomNotice';
 
 import './ShopProvider.module.css';
 
@@ -17,8 +18,20 @@ class ShopProvider extends Component {
     super(props);
 
     let cart = [];
+    let isBottomNoticeActive = true;
+
     if (typeof window !== 'undefined') {
       cart = JSON.parse(lscache.get('cart')) || [];
+    }
+
+    if (typeof window !== 'undefined') {
+      isBottomNoticeActive = JSON.parse(
+        window.sessionStorage.getItem('isBottomNoticeActive')
+      );
+
+      if (isBottomNoticeActive !== false) {
+        isBottomNoticeActive = true;
+      }
     }
 
     this.state = {
@@ -26,6 +39,7 @@ class ShopProvider extends Component {
       shopId: 3,
       isCartActive: false,
       isCityModalActive: false,
+      isBottomNoticeActive,
     };
 
     this.openCart = this.openCart.bind(this);
@@ -38,6 +52,7 @@ class ShopProvider extends Component {
     this.openCityModal = this.openCityModal.bind(this);
     this.closeCityModal = this.closeCityModal.bind(this);
     this.clearCart = this.clearCart.bind(this);
+    this.closeBottomNotice = this.closeBottomNotice.bind(this);
   }
 
   openCart() {
@@ -119,9 +134,20 @@ class ShopProvider extends Component {
     this.setState({ isCityModalActive: false });
   }
 
+  closeBottomNotice() {
+    this.setState({ isBottomNoticeActive: false });
+    window.sessionStorage.setItem('isBottomNoticeActive', false);
+  }
+
   render() {
     const { children } = this.props;
-    const { cart, shopId, isCartActive, isCityModalActive } = this.state;
+    const {
+      cart,
+      shopId,
+      isCartActive,
+      isCityModalActive,
+      isBottomNoticeActive,
+    } = this.state;
     const {
       openCart,
       closeCart,
@@ -340,6 +366,12 @@ class ShopProvider extends Component {
             </AriaModal>
           ) : null;
 
+          const bottomNotice = isBottomNoticeActive ? (
+            <BottomNotice closeNotice={this.closeBottomNotice}>
+              Время на обработку заказов увеличено до 2-х дней.
+            </BottomNotice>
+          ) : null;
+
           return (
             <>
               <CatalogProvider
@@ -369,6 +401,7 @@ class ShopProvider extends Component {
               </CatalogProvider>
               {cartModal}
               {cityModal}
+              {bottomNotice}
             </>
           );
         }}
