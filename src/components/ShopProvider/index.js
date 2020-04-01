@@ -18,7 +18,7 @@ class ShopProvider extends Component {
     super(props);
 
     let cart = [];
-    let isBottomNoticeActive = true;
+    let isBottomNoticeActive = false;
 
     if (typeof window !== 'undefined') {
       cart = JSON.parse(lscache.get('cart')) || [];
