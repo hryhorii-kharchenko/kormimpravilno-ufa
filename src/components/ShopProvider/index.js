@@ -24,15 +24,15 @@ class ShopProvider extends Component {
       cart = JSON.parse(lscache.get('cart')) || [];
     }
 
-    if (typeof window !== 'undefined') {
-      isBottomNoticeActive = JSON.parse(
-        window.sessionStorage.getItem('isBottomNoticeActive')
-      );
+    // if (typeof window !== 'undefined') {
+    //   isBottomNoticeActive = JSON.parse(
+    //     window.sessionStorage.getItem('isBottomNoticeActive')
+    //   );
 
-      if (isBottomNoticeActive !== false) {
-        isBottomNoticeActive = true;
-      }
-    }
+    //   if (isBottomNoticeActive !== false) {
+    //     isBottomNoticeActive = true;
+    //   }
+    // }
 
     this.state = {
       cart,
