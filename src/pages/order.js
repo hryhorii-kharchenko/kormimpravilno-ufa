@@ -272,8 +272,8 @@ class OrderPage extends Component {
         );
 
         fetch(
-          'https://ufa.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/order',
-          // 'https://ufa.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/order-tinkoff',
+          // 'https://ufa.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/order',
+          'https://ufa.wpkormimpravilno.ru/wp-json/kormimpravilno/v1/order-tinkoff',
           {
             method: 'POST',
             body: json,
