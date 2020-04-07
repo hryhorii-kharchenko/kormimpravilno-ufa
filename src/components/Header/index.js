@@ -46,6 +46,7 @@ function Header({
       label: 'С. Петербург',
     },
     { value: 'https://kormimpravilno.com/?saveCity=true', label: 'Уфа' },
+    { value: 'https://kzn.kormimpravilno.com/?saveCity=true', label: 'Казань' },
   ];
 
   const mobileMenuInitialFocusId = 'initial-focus-menu-modal';

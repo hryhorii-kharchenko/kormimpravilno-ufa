@@ -13,8 +13,8 @@ function CityModal({ close }) {
       <div styleName="line" />
 
       <p styleName="subheading">
-        Магазин осуществляет доставку на территории Москвы, Уфы и
-        Санкт-Петербурга.
+        Магазин осуществляет доставку на территории Москвы, Уфы,
+        Санкт-Петербурга и Казани.
       </p>
 
       <div styleName="link-wrapper">
@@ -41,6 +41,14 @@ function CityModal({ close }) {
           styleName="link"
         >
           C. Петербург
+        </Button>
+        <Button
+          href="https://kzn.kormimpravilno.com/?saveCity=true"
+          isExternal
+          isTextBlack
+          styleName="link"
+        >
+          Казань
         </Button>
       </div>
 
