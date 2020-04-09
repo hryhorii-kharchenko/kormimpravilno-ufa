@@ -287,6 +287,8 @@ export const query = graphql`
         main_page {
           bannerBtnRecipes
           bannerBtnStore
+          bannerBtnRecomendedText
+          bannerBtnRecomendedLink
           bannerHeading {
             fieldGroupName
             firstLine

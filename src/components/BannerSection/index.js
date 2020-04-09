@@ -29,12 +29,24 @@ function BannerSection({ data, bgImg }) {
 
           <p styleName="subtitle">{data.bannerSubheading}</p>
 
-          <Wrapper justifyContent="flex-start" flexWrap="wrap">
+          <Wrapper
+            justifyContent="flex-start"
+            flexWrap="wrap"
+            marginTop="-15px"
+          >
             <Button href="/shop" isFilled styleName="bannerBtn">
               {data.bannerBtnStore}
             </Button>
             <Button href="/#recipes" styleName="bannerBtn">
               {data.bannerBtnRecipes}
+            </Button>
+            <Button
+              isExternal
+              target="_blank"
+              href={data.bannerBtnRecomendedLink}
+              styleName="bannerBtn longBannerBtn"
+            >
+              {data.bannerBtnRecomendedText}
             </Button>
           </Wrapper>
         </div>
@@ -56,6 +68,8 @@ BannerSection.propTypes = {
     bannerSubheading: PropTypes.string,
     bannerBtnStore: PropTypes.string,
     bannerBtnRecipes: PropTypes.string,
+    bannerBtnRecomendedText: PropTypes.string,
+    bannerBtnRecomendedLink: PropTypes.string,
   }).isRequired,
   bgImg: PropTypes.shape({
     childImageSharp: PropTypes.shape({

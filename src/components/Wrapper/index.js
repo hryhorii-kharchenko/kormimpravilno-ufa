@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 function Wrapper({
   className,
+  marginTop,
   display,
   children,
   maxWidth,
@@ -13,7 +14,7 @@ function Wrapper({
   flexDirection,
 }) {
   const styles = {
-    className,
+    marginTop,
     display,
     maxWidth,
     justifyContent,
@@ -32,6 +33,7 @@ function Wrapper({
 
 Wrapper.propTypes = {
   className: PropTypes.string,
+  marginTop: PropTypes.string,
   display: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
   maxWidth: PropTypes.string,
@@ -44,6 +46,7 @@ Wrapper.propTypes = {
 
 Wrapper.defaultProps = {
   className: '',
+  marginTop: 'initial',
   display: 'flex',
   maxWidth: 'initial',
   justifyContent: 'center',
