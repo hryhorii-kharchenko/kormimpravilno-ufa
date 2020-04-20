@@ -110,6 +110,23 @@ export const query = graphql`
           contactsPhone
           contactsSubheading
           contactsMap
+          contactsShops {
+            address1
+            address2
+            address3
+            address4
+            address5
+            workingHours1
+            workingHours2
+            workingHours3
+            workingHours4
+            workingHours5
+            map1
+            map2
+            map3
+            map4
+            map5
+          }
           pageTitle
           weText
           weTitle
