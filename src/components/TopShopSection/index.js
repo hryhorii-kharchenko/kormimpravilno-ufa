@@ -26,6 +26,19 @@ function TopShopSection({
   return (
     <section styleName="TopShopSection" id="top">
       <ContentWrapper>
+        <div
+          style={{
+            textAlign: 'center',
+            background: '#37b23a',
+            color: '#fff',
+            padding: '10px 0px',
+            fontWeight: '600',
+            borderRadius: '10px',
+            marginBottom: '25px',
+          }}
+        >
+          Доставка день в день
+        </div>
         <div styleName="content-wrapper">
           <SecondaryBanner
             pageTitle={pageTitle}

@@ -348,7 +348,7 @@ class OrderPage extends Component {
   }
 
   validateFullName(value) {
-    const regExp = /^([А-яA-z]+\s*){2}/;
+    const regExp = /^([А-яA-z]{2,})\s+([А-яA-z]{2,})/;
     let isError = false;
     const regExpRequired = /^.+/;
     let errorMsg = '';

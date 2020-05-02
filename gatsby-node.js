@@ -1,5 +1,6 @@
 const path = require(`path`);
 const fetch = require('node-fetch');
+const fs = require('fs');
 
 const {
   createRemoteFileNode,
@@ -265,15 +266,21 @@ exports.sourceNodes = async ({
 }) => {
   const { createNode } = actions;
 
+  const token = fs.readFileSync('./token_insta.txt', {
+    encoding: 'utf8',
+    flag: 'r',
+  });
+  console.log(token);
+
   const response = await fetch(
-    `https://graph.instagram.com/me/media?fields=id,permalink,media_url,thumbnail_url&access_token=IGQVJYVTFqenVQcEh6Q05aN1FIN2haaThTY01uaTRTVTV6N1F6elhSMF95QmFrU21FOHVnR1VtTlB1bUNQbGxkSjVPWHVIMFdfZAWhCMnZAZAMnh3alQzTm1VVEo5b2lKbW5TMk1tOTdR`,
+    `https://graph.instagram.com/me/media?fields=id,permalink,media_url,thumbnail_url&access_token=${token}`,
     {
       method: 'GET',
     }
   );
 
   if (!response.ok) {
-    console.log('insta response bad');
+    console.log('Instagram: Response bad');
     return;
   }
 
