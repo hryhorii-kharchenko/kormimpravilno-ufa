@@ -47,6 +47,10 @@ function Header({
     },
     { value: 'https://kormimpravilno.com/?saveCity=true', label: 'Уфа' },
     { value: 'https://kzn.kormimpravilno.com/?saveCity=true', label: 'Казань' },
+    {
+      value: 'https://ekb.kormimpravilno.com/?saveCity=true',
+      label: 'Екатеринбург',
+    },
   ];
 
   const mobileMenuInitialFocusId = 'initial-focus-menu-modal';

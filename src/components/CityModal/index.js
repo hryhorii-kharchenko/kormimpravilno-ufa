@@ -50,6 +50,14 @@ function CityModal({ close }) {
         >
           Казань
         </Button>
+        <Button
+          href="https://ekb.kormimpravilno.com/?saveCity=true"
+          isExternal
+          isTextBlack
+          styleName="link"
+        >
+          Екатеринбург
+        </Button>
       </div>
 
       <button type="button" onClick={close} styleName="cross-btn">
