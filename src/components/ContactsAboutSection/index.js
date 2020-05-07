@@ -24,6 +24,11 @@ function ContactsAboutSection({ data }) {
   const shops = [];
   const maps = [];
 
+  let shopNumber = 0;
+  for (let i = 1; contactsShops[`address${i}`]; i += 1) {
+    shopNumber += 1;
+  }
+
   if (contactsShops.address1) {
     if (contactsShops.workingHours1) {
       shops.push(
@@ -350,10 +355,19 @@ function ContactsAboutSection({ data }) {
   }
 
   let scrollbarStyle = { width: '100%', height: '473px' };
+  const singleShopCardHeightOnMobile = 144;
+  const maxShopSectionHeightOnMobile = 350;
+  const shopSectionHeightOnMobile =
+    singleShopCardHeightOnMobile * shopNumber > maxShopSectionHeightOnMobile
+      ? maxShopSectionHeightOnMobile
+      : singleShopCardHeightOnMobile * shopNumber;
 
   if (typeof window !== 'undefined') {
     if (window.innerWidth <= 950) {
-      scrollbarStyle = { width: '100%', height: '350px' };
+      scrollbarStyle = {
+        width: '100%',
+        height: `${shopSectionHeightOnMobile}px`,
+      };
     }
   }
 
@@ -362,8 +376,8 @@ function ContactsAboutSection({ data }) {
       <ContentWrapper>
         <SectionHeading text={data.contactsHeading} />
 
-        <div styleName="wrapper">
-          <div styleName="text-wrapper">
+        <div styleName={`wrapper ${shopNumber < 1 ? 'no-shops' : ''}`}>
+          <div styleName="text-wrapper" style={scrollbarStyle}>
             <Scrollbar
               style={scrollbarStyle}
               // styleName="scrollbar"

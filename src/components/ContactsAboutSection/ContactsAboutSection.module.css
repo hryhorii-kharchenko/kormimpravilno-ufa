@@ -26,12 +26,16 @@
   z-index: 1;
 }
 
+.no-shops {
+  display: none;
+}
+
 .text-wrapper {
   max-width: 465px;
   min-width: 280px;
   width: 100%;
-  max-height: 473px;
-  min-height: 473px;
+  /* max-height: 473px; */
+  /* min-height: 473px; */
   /* padding: 24px; */
   box-sizing: border-box;
   box-shadow: 0 11px 24px 0 rgba(0, 0, 0, 0.13);
@@ -222,8 +226,8 @@
 
   .text-wrapper {
     max-width: initial;
-    max-height: 350px;
-    min-height: 350px;
+    /* max-height: 350px; */
+    /* min-height: 350px; */
   }
 
   .map-wrapper {

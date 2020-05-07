@@ -22,6 +22,22 @@ class OrderPage extends Component {
       formData = JSON.parse(window.localStorage.getItem('orderFormData')) || {};
     }
 
+    const { cart, catalogFull, data } = props;
+    let isDelivery = false;
+
+    const order = data.wpgraphql.shopPage.shop_page;
+    const giftCertificateArr = order.giftCertificateId
+      .split(/ +/)
+      .map(
+        giftId => catalogFull.find(elem => elem.productId === Number(giftId)).id
+      );
+
+    Object.keys(cart).forEach(key => {
+      if (!giftCertificateArr.includes(key)) {
+        isDelivery = true;
+      }
+    });
+
     this.state = {
       isFirstSectionActive: true,
       fullName: {
@@ -29,19 +45,38 @@ class OrderPage extends Component {
         isError: false,
         errorMsg: '',
       },
-      phone: { value: formData.phone || '', isError: false, errorMsg: '' },
-      email: { value: formData.email || '', isError: false, errorMsg: '' },
-      isSubscribeActive: { value: true, isError: false, errorMsg: '' },
-      delivery: { value: 'first', isError: false, errorMsg: '' },
-      city: { value: formData.city || '', isError: false, errorMsg: '' },
-      address: { value: formData.address || '', isError: false, errorMsg: '' },
-      // postIndex: {
-      //   value: formData.postIndex || '',
-      //   isError: false,
-      //   errorMsg: '',
-      // },
-      // timeOfDelivery: '',
+      phone: {
+        value: formData.phone || '',
+        isError: false,
+        errorMsg: '',
+      },
+      email: {
+        value: formData.email || '',
+        isError: false,
+        errorMsg: '',
+      },
+      isSubscribeActive: {
+        value: true,
+        isError: false,
+        errorMsg: '',
+      },
+      delivery: {
+        value: isDelivery ? 'first' : '',
+        isError: false,
+        errorMsg: '',
+      },
+      city: {
+        value: formData.city || '',
+        isError: false,
+        errorMsg: '',
+      },
+      address: {
+        value: formData.address || '',
+        isError: false,
+        errorMsg: '',
+      },
       promo: { value: '', isError: false, errorMsg: '' },
+      promoLabel: 'Промокод',
       promoObj: {},
       comment: { value: '', isError: false, errorMsg: '' },
     };
@@ -63,6 +98,7 @@ class OrderPage extends Component {
     this.addressChangeHandler = this.addressChangeHandler.bind(this);
     // this.postIndexChangeHandler = this.postIndexChangeHandler.bind(this);
     this.promoChangeHandler = this.promoChangeHandler.bind(this);
+    this.promoClearHandler = this.promoClearHandler.bind(this);
     this.promoObjClickHandler = this.promoObjClickHandler.bind(this);
     this.commentChangeHandler = this.commentChangeHandler.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -71,6 +107,33 @@ class OrderPage extends Component {
   componentDidMount() {
     const { closeCart } = this.props;
     closeCart();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  static getDerivedStateFromProps(props, state) {
+    const { cart, catalogFull, data } = props;
+    let isDelivery = false;
+
+    const order = data.wpgraphql.shopPage.shop_page;
+    const giftCertificateArr = order.giftCertificateId
+      .split(/ +/)
+      .map(
+        giftId => catalogFull.find(elem => elem.productId === Number(giftId)).id
+      );
+
+    Object.keys(cart).forEach(key => {
+      if (!giftCertificateArr.includes(key)) {
+        isDelivery = true;
+      }
+    });
+
+    return {
+      delivery: {
+        value: isDelivery ? state.delivery.value : '',
+        isError: false,
+        errorMsg: '',
+      },
+    };
   }
 
   submitForm(e) {
@@ -562,6 +625,25 @@ class OrderPage extends Component {
     }));
   }
 
+  promoClearHandler() {
+    const value = '';
+    // const regExp = /^(\d{6})/;
+    const isError = false;
+
+    // if (!regExp.test(value)) {
+    //   isError = true;
+    // }
+
+    this.setState(() => ({
+      promo: {
+        value,
+        isError,
+      },
+      promoObj: {},
+      promoLabel: 'Промокод',
+    }));
+  }
+
   promoObjClickHandler() {
     const { promo } = this.state;
 
@@ -579,7 +661,8 @@ class OrderPage extends Component {
       .then(json => {
         if (!json) {
           this.setState(() => ({
-            promo: { value: 'Промокод не существует', isError: false },
+            promo: { isError: true },
+            promoLabel: 'Промокод не существует',
           }));
           return;
         }
@@ -587,7 +670,7 @@ class OrderPage extends Component {
         if (newPromoObj) {
           this.setState(() => ({
             promoObj: newPromoObj,
-            promo: { value: 'Промокод применен', isError: false },
+            promoLabel: 'Промокод применен',
           }));
         }
       })
@@ -628,6 +711,7 @@ class OrderPage extends Component {
       address,
       // postIndex,
       promo,
+      promoLabel,
       promoObj,
       comment,
     } = this.state;
@@ -727,7 +811,7 @@ class OrderPage extends Component {
       }
     }
 
-    let deliveryPrice;
+    let deliveryPrice = 0;
     if (delivery.value === 'first' && firstPaidDeliveryProductPrice) {
       if (
         (freeShippingId === 1 || first.minimalFreeDeliverySum) &&
@@ -812,6 +896,7 @@ class OrderPage extends Component {
     }
 
     totalPrice += deliveryPrice;
+    totalPrice = totalPrice < 0 ? 0 : totalPrice;
 
     const deliveryPriceStr = `${deliveryPrice} руб`;
     const totalPriceStr = `${totalPrice} руб`;
@@ -860,6 +945,7 @@ class OrderPage extends Component {
                 // postIndexOnChange={this.postIndexChangeHandler}
                 promo={promo}
                 promoOnChange={this.promoChangeHandler}
+                promoClear={this.promoClearHandler}
                 comment={comment}
                 commentOnChange={this.commentChangeHandler}
                 submitForm={this.submitForm}
@@ -867,6 +953,7 @@ class OrderPage extends Component {
                 catalogFull={catalogFull}
                 promoObj={promoObj}
                 promoObjOnClick={this.promoObjClickHandler}
+                promoLabel={promoLabel}
               />
             </main>
             <aside styleName="aside">
@@ -956,6 +1043,11 @@ export const query = graphql`
           ooo
           phone
           city
+        }
+      }
+      shopPage: page(id: "cGFnZTo5") {
+        shop_page {
+          giftCertificateId
         }
       }
       orderPage: page(id: "cGFnZTo0NjI=") {

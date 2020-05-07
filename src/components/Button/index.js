@@ -16,6 +16,7 @@ function Button({
   isFilled,
   isExternal,
   isAction,
+  isCancel,
   style,
 }) {
   const btnStyles = ['Button'];
@@ -32,6 +33,10 @@ function Button({
   if (isFilled) {
     btnStyles.push('filled');
   }
+
+  // if (isCancel) {
+  //   btnStyles.push(' cancel');
+  // }
 
   if (isExternal) {
     element = (

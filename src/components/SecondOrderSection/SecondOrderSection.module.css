@@ -76,9 +76,10 @@
 }
 
 .form {
+  position: relative;
 }
 
-.promo-form {
+.promo-clear {
 }
 
 .promo-btn {

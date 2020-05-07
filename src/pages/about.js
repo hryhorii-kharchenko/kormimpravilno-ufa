@@ -102,14 +102,11 @@ export const query = graphql`
       }
       aboutPage: page(id: "cGFnZToyMw==") {
         about_page {
-          contactsAddress
           contactsAgreement
           contactsEmail
           contactsHeading
           contactsOferta
           contactsPhone
-          contactsSubheading
-          contactsMap
           contactsShops {
             address1
             address2

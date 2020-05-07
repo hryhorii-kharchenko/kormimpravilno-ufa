@@ -71,3 +71,12 @@
   box-shadow: 0 9px 34px 0 rgba(55, 168, 54, 0.49);
   background-color: $mainHover;
 }
+
+.cancel {
+  border: 2px solid red;
+}
+
+.cancel:hover {
+  box-shadow: 0 6px 14px 0 rgba(red, 0.38);
+  background-color: red;
+}

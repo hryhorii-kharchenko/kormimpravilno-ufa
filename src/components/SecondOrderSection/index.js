@@ -23,6 +23,7 @@ function SecondOrderSection({
   // postIndexOnChange,
   promo,
   promoOnChange,
+  promoClear,
   comment,
   commentOnChange,
   submitForm,
@@ -30,7 +31,11 @@ function SecondOrderSection({
   catalogFull,
   promoObj,
   promoObjOnClick,
+  promoLabel,
 }) {
+  const isPromoApplied =
+    !(Object.keys(promoObj).length === 0 &&
+    promoObj.constructor === Object);
   const [commentIsActive, setCommentIsActive] = useState(false);
 
   const { first, second, third } = data.deliveryWays;
@@ -177,6 +182,7 @@ function SecondOrderSection({
             checked={delivery.value === 'first'}
             onChange={deliveryOnChange}
             styleName="radio-btn"
+            disabled={delivery.value === ''}
           />
           <div styleName="real-radio">
             <div styleName="real-radio-circle" />
@@ -207,6 +213,7 @@ function SecondOrderSection({
               checked={delivery.value === 'second'}
               onChange={deliveryOnChange}
               styleName="radio-btn"
+              disabled={delivery.value === ''}
             />
             <div styleName="real-radio">
               <div styleName="real-radio-circle" />
@@ -238,6 +245,7 @@ function SecondOrderSection({
               checked={delivery.value === 'third'}
               onChange={deliveryOnChange}
               styleName="radio-btn"
+              disabled={delivery.value === ''}
             />
             <div styleName="real-radio">
               <div styleName="real-radio-circle" />
@@ -325,22 +333,22 @@ function SecondOrderSection({
 
         {paymentInstructionHtml}
 
-        <h3 styleName="subheading-promo">Есть промокод? Получите скидку</h3>
+        {/* <h3 styleName="subheading-promo">Есть промокод? Получите скидку</h3> */}
         <form id="promo-form" onSubmit={submitForm} styleName="form">
           <Input
-            text="Промокод"
+            text={promoLabel}
             name="promo"
             data={promo}
             onChange={promoOnChange}
           />
-          
           <Button
-            onClick={promoObjOnClick}
+            onClick={isPromoApplied ? promoClear : promoObjOnClick}
             styleName="promo-btn"
             isAction
             isTextBlack
+            isCancel={isPromoApplied}
           >
-            Применить
+            {isPromoApplied ? 'Отменить' : 'Применить'}
           </Button>
         </form>
 
@@ -398,6 +406,7 @@ SecondOrderSection.propTypes = {
   // postIndexOnChange: PropTypes.func.isRequired,
   promo: PropTypes.shape().isRequired,
   promoOnChange: PropTypes.func.isRequired,
+  promoClear: PropTypes.func.isRequired,
   comment: PropTypes.shape().isRequired,
   commentOnChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
@@ -405,6 +414,7 @@ SecondOrderSection.propTypes = {
   catalogFull: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   promoObj: PropTypes.shape().isRequired,
   promoObjOnClick: PropTypes.func.isRequired,
+  promoLabel: PropTypes.string.isRequired,
 };
 
 export default SecondOrderSection;
