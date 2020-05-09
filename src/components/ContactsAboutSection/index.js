@@ -355,7 +355,7 @@ function ContactsAboutSection({ data }) {
   }
 
   let scrollbarStyle = { width: '100%', height: '473px' };
-  const singleShopCardHeightOnMobile = 144;
+  const singleShopCardHeightOnMobile = 157;
   const maxShopSectionHeightOnMobile = 350;
   const shopSectionHeightOnMobile =
     singleShopCardHeightOnMobile * shopNumber > maxShopSectionHeightOnMobile
