@@ -25,7 +25,9 @@ function ProductCard({
   const compositionHtml = (
     <p styleName="composition">
       <strong>Состав: </strong>
-      {composition}
+      {composition && composition.length > 150
+        ? `${composition.slice(0, 149)}...`
+        : composition}
     </p>
   );
   const weightHtml = (
