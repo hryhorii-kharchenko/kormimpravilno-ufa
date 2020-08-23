@@ -1,5 +1,7 @@
-kormimpravilno.com (changed by the customer) - KormimPravilno - React e-commerce web app; powered by headless Woocommerce backend  
-Original view link: kormimpravilno.grigoriy.site
+# KormimPravilno
+
+[kormimpravilno.com](https://kormimpravilno.com) (changed by the customer) - KormimPravilno - React e-commerce web app; powered by headless Woocommerce backend  
+Original view link: [kormimpravilno.grigoriy.site](https://kormimpravilno.grigoriy.site)
 
 Work done:
 
@@ -18,8 +20,8 @@ Back-end: PHP, Headless WordPress, Woocommerce
 
 ---
 
-kormimpravilno.com (изменён клиентом) - КормимПравильно - интернет-магазин на React; back-end - headless Woocommerce  
-Ссылка для просмотра оригинала: kormimpravilno.grigoriy.site
+[kormimpravilno.com](https://kormimpravilno.com) (изменён клиентом) - КормимПравильно - интернет-магазин на React; back-end - headless Woocommerce  
+Ссылка для просмотра оригинала: [kormimpravilno.grigoriy.site](https://kormimpravilno.grigoriy.site)
 
 Выполненная работа:
 
